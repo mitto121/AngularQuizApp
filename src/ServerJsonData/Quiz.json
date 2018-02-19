@@ -1,0 +1,123 @@
+{
+    "Quizes": [
+        {
+            "id": 1,
+            "name": "MVC",
+            "description": "MVC Quiz (contains  mvc, web API,Entity Framework etc.)",
+            "duration": 60,
+            "questions":[]
+        },
+        {
+            "id": 2,
+            "name": "C# and .Net Framework",
+            "description": "C# and .Net Quiz (contains C#, .Net Framework, Linq, etc.)",
+            "duration": 45,
+            "questions": [
+                {
+                    "id": 1010,
+                    "name": "Which of the following assemblies can be stored in Global Assembly Cache?",                    
+                    "options": [
+                        {
+                            "id": 1055,
+                            "questionId": 1010,
+                            "name": "Private Assemblies",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1056,
+                            "questionId": 1010,
+                            "name": "Friend Assemblies",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1057,
+                            "questionId": 1010,
+                            "name": "Public Assemblies",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1058,
+                            "questionId": 1010,
+                            "name": "Shared Assemblies",
+                            "isAnswer": true
+                        }
+                    ]
+                },
+                {
+                    "id": 1016,
+                    "name": "Which of the following is NOT a .NET Exception class?",                   
+                    "options": [
+                        {
+                            "id": 1055,
+                            "questionId": 1010,
+                            "name": "Exception",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1056,
+                            "questionId": 1010,
+                            "name": "StackMemoryException",
+                            "isAnswer": true
+                        },
+                        {
+                            "id": 1057,
+                            "questionId": 1010,
+                            "name": "DivideByZeroException",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1058,
+                            "questionId": 1010,
+                            "name": "InvalidOperationException",
+                            "isAnswer": false
+                        }
+                    ]
+                },
+                {
+                    "id": 1017,
+                    "name": "In C#.NET if we do not catch the exception thrown at runtime then which of the following will catch it?",                   
+                    "options": [
+                        {
+                            "id": 1055,
+                            "questionId": 1010,
+                            "name": "Compiler",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1056,
+                            "questionId": 1010,
+                            "name": "CLR",
+                            "isAnswer": true
+                        },
+                        {
+                            "id": 1057,
+                            "questionId": 1010,
+                            "name": "Linker",
+                            "isAnswer": false
+                        },
+                        {
+                            "id": 1058,
+                            "questionId": 1010,
+                            "name": "Operating system",
+                            "isAnswer": false
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "name": "Angular",
+            "description": "Angular Literal Quiz (Contains TypeScript,JavaScript and Angular)",
+            "duration": 30,
+            "questions":[]
+        },
+        {
+            "id": 4,
+            "name": "JavaScript Introduction",
+            "description": "Learn JavaScript, a Web development programming language, to add interactivity to your Web pages, and become an expert Web developer.",
+            "duration": 30,
+            "questions":[]
+        }
+    ]
+}

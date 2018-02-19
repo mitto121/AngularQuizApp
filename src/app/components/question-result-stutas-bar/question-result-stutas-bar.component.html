@@ -1,0 +1,9 @@
+<div class="row" >
+    <div class="col-md-10">           
+      <p class="alert {{isCorrectAnswer()?'alert-success':'alert-danger'}} ">Your answer is {{isCorrectAnswer()?'correct':'wrong'}}.</p>
+      <p class="panel panel-primary alert alert-success" *ngIf='viewCorrectAnswer'>Correct answer is <b>{{answer}}</b></p>
+    </div>
+    <div class="col-md-2" *ngIf='!isCorrectAnswer()' >
+      <button [id]="question.id" type="button"  class="btn btn-default active" (click)='showCorrectAnswer();'>Show Answer</button>
+    </div>
+</div>

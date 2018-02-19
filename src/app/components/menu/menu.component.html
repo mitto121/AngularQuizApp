@@ -1,0 +1,17 @@
+<div class="row">
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <a class="navbar-brand" ng-disabled="true"> {{title}} !!</a>
+            </div>
+            <ul class="nav navbar-nav navbar-right" *ngIf='!AuthenticateUser'>
+                <li routerLinkActive="active">
+                  <a routerLink='login'>Log In</a>
+                </li>
+                <li routerLinkActive="active">
+                  <a routerLink='signup'>Sign Up</a>
+                </li>
+              </ul>
+        </div>
+    </nav>
+</div>

@@ -1,0 +1,5 @@
+.active{
+    opacity: 100 !important;
+    z-index: 1000 !important;
+    pointer-events:visible;
+}

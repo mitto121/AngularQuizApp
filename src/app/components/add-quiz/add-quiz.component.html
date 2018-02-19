@@ -1,0 +1,36 @@
+<div class="row">
+  <div class="col-md-3">
+    <label for="name">Name</label>
+  </div>
+  <div class="col-md-5">
+    <div class="form-group">
+      <input id="name" type="text" class="form-control" placeholder="Enter Quiz Name">
+    </div>
+  </div>
+</div>
+<div class="row">
+    <div class="col-md-3">
+      <label for="description">Description (minutes)</label>
+    </div>
+    <div class="col-md-5">
+        <div class="form-group">
+         <textarea id="description" class="form-control" col="80" row="25"></textarea>
+        </div>
+      </div>
+  </div>
+<div class="row">
+    <div class="col-md-3">
+      <label for="duration">Duration</label>
+    </div>
+    <div class="col-md-5">
+      <div class="form-group">
+        <input type="number" id="duration" class="form-control" placeholder="Enter Duration">
+      </div>
+    </div>
+  </div>
+
+  <div class="row">
+    <div class="col-md-offset-5">
+      <button class="btn btn-primary" (click)="addQuiz();"; >Save</button>     
+    </div>
+  </div>

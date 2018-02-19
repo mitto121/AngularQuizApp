@@ -1,0 +1,78 @@
+<div class="container" *ngIf='!showResult'>
+<div [ngClass]="{'submittedForm':quiz.hasAttempt}" >
+  <div class="row" *ngIf="questions && questions.length">
+    <div class="col-md-3 reviewPanel">
+      <div class="row">
+        <div class="col-sm-3" *ngFor="let question of questions; let index = index;">
+          <div [class]="applyNavStyle(question.isAttempt,index)" (click)="setCurrentPage(index)">
+            <h4>{{index + 1}}</h4>
+          </div>
+        </div>
+      </div>
+
+      <div class="row">
+        <button class="btn btn-success controlbtn" (click)="submitTest();">Submit</button>
+      </div>
+    </div>
+    <div class="col-md-9">
+      <div class="row">
+        <div class="col-md-offset-2 col-md-8">
+          <h2>{{quiz.name}}</h2>
+        </div>
+        <div class="col-md-2" style="padding-top:3%" >
+          <span>Duration :{{quiz.duration}}</span>
+          <div class="badge badge-info">Question {{PageIndex+1}} of {{questions.length}}.</div>          
+        </div>
+      </div>
+      <hr/>
+      <div *ngIf="questions" class="row">
+        <div *ngFor="let question of questions;let index = index;">
+          <div *ngIf='showCurrentPage(index)'>
+            <app-question [question]='question' [questionNumber]='index+1'  ></app-question>
+          </div>
+        </div>
+        <hr/>
+        <div class="row">
+          <div class="col-md-offset-4 col-sm-8 col-md-6">
+            <button class="btn btn-primary" [disabled]='PageIndex==0' (click)='pageNavigation("Previous")'>Previous</button> &nbsp;&nbsp;
+            <button class="btn btn-primary" [disabled]='PageIndex==(noOfQuestions-1)' (click)='pageNavigation("Next")'>Next</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+      <button class="btn btnResult" *ngIf='quiz.hasAttempt' (click)="showQuizResult();">View Result</button>
+  </div>
+</div>
+</div>
+
+
+<app-modal-window modalTitle="Alert !!" (onCloseModal)="closeModal($event)" [showModal]='questions && questions.length<1' [hideCloseBtn]='false' >
+    <div>
+        <span>Questions are not available...</span>
+        <br/>
+        <span>Please try after some time</span>
+      </div> 
+      <div class="row">
+          <div class="col-md-12">
+              <button class="btn btnResult" routerLink='/dashboard' ><< Back >></button>
+        </div>
+      </div>
+</app-modal-window>
+
+<app-modal-window modalTitle="success !!" (onCloseModal)="closeModal($event)" [showModal]='showModal' [hideCloseBtn]='false' >
+    <div>
+        <span>Test has been successfully submitted.</span>
+     </div> 
+     <div class="row">
+        <div class="col-md-12">
+            <button class="btn btnResult" *ngIf='showModal' (click)="showQuizResult();">View Result</button>
+      </div>
+    </div>
+</app-modal-window>
+
+
+<app-quiz-result *ngIf='showResult'  [questions]='quiz.questions' [testName]='quiz.name'></app-quiz-result>

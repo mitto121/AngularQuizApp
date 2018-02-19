@@ -1,0 +1,18 @@
+.option {
+    font-size: 20px;
+    padding: 10px;
+    margin: 3px;
+}
+.option label {
+    font-weight: normal;
+}
+.option label {
+    cursor: pointer
+}
+.options input[type=radio] {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    height: 18px;
+    width: 20px;
+}
+

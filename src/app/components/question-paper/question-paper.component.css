@@ -1,0 +1,52 @@
+.reviewPanel{
+    background-color: #fcfbfa !important;    
+    border: 1px solid rgb(100, 100, 100);       
+    min-height: 400px;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 15px ; 
+    
+}
+
+.answered {
+    background: linear-gradient(to top,  #9c9e9f 0%,#9c9e9f 50%,#f6f6f6 50%,#f6f6f6 100%);
+    border: 1px solid #04232f;
+    margin: 8px -7px;
+    padding: 6px;
+}
+.answered:hover{
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 5px 5px ; 
+    cursor:pointer;   
+}
+.not-answered {
+    background-color: #f3fbfd;
+    border: 1px solid #04232f;
+    margin: 8px -7px;
+    padding: 6px;
+}
+.not-answered:hover{
+    box-shadow: rgba(20, 20, 20, 0.979) 0px 5px 8px ; 
+    cursor:pointer;   
+}
+
+.highlight{
+    border: 2px solid rgb(245, 221, 6);
+}
+.controlbtn{
+ position: relative;
+ margin-top :280px;
+ margin-left:88px;
+}
+
+.submittedForm {
+    background-color: rgb(247, 253, 251);
+    padding-left: 5%;    
+    z-index: 1000;
+    opacity: .80; 
+    filter: alpha(opacity=40);
+    pointer-events: none; 
+}
+.btnResult{
+    position: relative;
+    margin-top :10px;
+    margin-left:47%; 
+}
+
