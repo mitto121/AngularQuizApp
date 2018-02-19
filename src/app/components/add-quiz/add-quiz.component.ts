@@ -12,7 +12,6 @@ export class AddQuizComponent implements OnInit {
   ngOnInit() {
   }
   addQuiz()
-  {
-    
+  {    
   }
 }
