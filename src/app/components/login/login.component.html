@@ -2,15 +2,19 @@
     <div class="card card-container">
         <img id="profile-img" class="profile-img-card" src="//ssl.gstatic.com/accounts/ui/avatar_2x.png" />
         <p id="profile-name" class="profile-name-card"></p>
-        <form class="form-signin">
+        <form class="form-signin" [formGroup]="loginForm"  >
             <span id="reauth-email" class="reauth-email"></span>
-            <input type="email" id="inputEmail" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" id="inputPassword" class="form-control" placeholder="Password" required>
-            
-            <button class="btn btn-lg btn-primary btn-block btn-signin" type="submit" (click)='logInUser()' >Sign in</button>
+            <input type="text" id="userName" name="userName" class="form-control" formControlName="userName" placeholder="User Name">
+            <show-validation-error [control]="loginForm.controls.user_Name" ></show-validation-error>
+
+            <input type="password" id="inputPassword"  name="password"  class="form-control" formControlName="password" placeholder="Password">
+            <show-validation-error [control]="loginForm.controls.password" ></show-validation-error>
+            <label style="color:red">{{loginStatusMsg}}</label>
+            <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="userLogIn(loginForm)" >Sign in</button>
         </form>
         <a routerLink='/signup' class="forgot-password">
             don't have account?
         </a>
     </div>
 </div>
+

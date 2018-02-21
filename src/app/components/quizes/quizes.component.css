@@ -2,3 +2,13 @@
     background-color: rgb(193, 201, 199);
     font-weight: bold;
 }
+
+tbody tr:hover{
+ background-color: rgba(245, 239, 153, 0.979);
+}
+input[type=checkbox] {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    height: 18px;
+    width: 20px;
+}

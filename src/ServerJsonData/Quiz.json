@@ -119,5 +119,27 @@
             "duration": 30,
             "questions":[]
         }
-    ]
+    ],
+    "userAuthentication":[{
+        "id":1,
+        "firstName":"Abc",
+        "lastName":"last",
+        "email":"abc@gmail.com",
+        "userName":"admin",
+        "password":"admin",
+        "isActive":1,
+        "role":"admin",
+        "token":"fakeToken"
+    },
+    {
+        "id":1,
+        "firstName":"fn",
+        "lastName":"ln",
+        "email":"fn@gmail.com",
+        "userName":"user",
+        "password":"user",
+        "isActive":1,
+        "role":"user",
+        "token":"fakeToken1"
+    }]
 }

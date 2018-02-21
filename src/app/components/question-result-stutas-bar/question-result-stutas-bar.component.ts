@@ -9,26 +9,25 @@ import { Iquestion } from '../../models/iquestion';
 export class QuestionResultStutasBarComponent implements OnInit {
 
 
-  answer:string;
-  viewCorrectAnswer:boolean;
+  answer: string;
+  viewCorrectAnswer: boolean;
   @Input()
-  question:Iquestion
+  question: Iquestion;
 
   constructor() { }
 
   ngOnInit() {
   }
   isCorrectAnswer(): boolean {
-    return this.question.options.every((x)=>x.isAnswer==x.isSelected);
+    return this.question.options.every((x) => x.isAnswer == x.isSelected);
    }
- 
-   showCorrectAnswer()
-   {
-     let buttonId=this.question.id.toString();
-     let name=document.getElementById(buttonId).innerText;
-     this.answer=this.question.options.find(x=>x.isAnswer).name;
-     this.viewCorrectAnswer=!this.viewCorrectAnswer;
-     name= this.viewCorrectAnswer?'Hide Answer':'Show Answer';
-     document.getElementById(buttonId).innerHTML=name;
+
+   showCorrectAnswer() {
+     const buttonId = this.question.id.toString();
+     let name = document.getElementById(buttonId).innerText;
+     this.answer = this.question.options.find(x => x.isAnswer).name;
+     this.viewCorrectAnswer = !this.viewCorrectAnswer;
+     name = this.viewCorrectAnswer ? 'Hide Answer' : 'Show Answer';
+     document.getElementById(buttonId).innerHTML = name;
    }
 }

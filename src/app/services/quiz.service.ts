@@ -10,28 +10,28 @@ import { Iquestion } from '../models/iquestion';
 
 @Injectable()
 export class QuizService {
-  
+
   constructor(private http: Http) { }
 
-  getQuizes():Observable<QuizMaster[]> {
-    return this.http.get("http://localhost:3000/quizes")
+  getQuizes(): Observable<QuizMaster[]> {
+    return this.http.get('http://localhost:3000/quizes')
     .map(res => res.json())
     .catch(this.handleError);
   }
 
-  getQuizById(id:number):Observable<QuizMaster> {
-    return this.http.get("http://localhost:3000/quizes?id="+id)
-    .map(res => res.json())    
+  getQuizById(id: number): Observable<QuizMaster> {
+    return this.http.get('http://localhost:3000/quizes?id=' + id)
+    .map(res => res.json())
     .catch(this.handleError);
   }
 
-  submitTest(quiz:QuizMaster) {
-    // return this.http.post("http://localhost:3000/submitTest",{'quiz':quiz})   
+  submitTest(quiz: QuizMaster) {
+    // return this.http.post("http://localhost:3000/submitTest",{'quiz':quiz})
     // .catch(this.handleError);
     return null;
   }
 
-  handleError(error: Response){    
-    return Observable.throw(error); 
+  handleError(error: Response) {
+    return Observable.throw(error);
   }
 }

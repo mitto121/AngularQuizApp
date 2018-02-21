@@ -9,25 +9,28 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ModalWindowComponent implements OnInit {
 
   @Input()
-  modalTitle:string;
+  modalTitle: string;
 
   @Input()
-  showModal:boolean;
+  showModal: boolean;
 
   @Input()
-  hideCloseBtn:boolean=true;
+  hideCloseBtn = true;
 
   @Output() onCloseModal: EventEmitter<any> = new EventEmitter();
-  
+
   constructor() { }
 
   ngOnInit() {
-    
+
   }
 
-  closeModal()
+  closeModal() {
+    this.onCloseModal.emit();
+    this.showModal = false;
+  }
+  SubmitCloseModal(asd)
   {
-    this.onCloseModal.emit(); 
-    this.showModal=false;
-  }   
+    console.log('aasdas');
+  }
 }

@@ -1,4 +1,4 @@
-import { Component,Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { Iquestion } from '../../models/iquestion';
 
 @Component({
@@ -7,19 +7,19 @@ import { Iquestion } from '../../models/iquestion';
   styleUrls: ['./quiz-result.component.css']
 })
 export class QuizResultComponent implements OnInit {
-  
-  @Input()
-  testName:string;
-  
-  @Input()
-  questions:Iquestion[];  
 
-  
+  @Input()
+  testName: string;
+
+  @Input()
+  questions: Iquestion[];
+
+
   constructor() { }
 
   ngOnInit() {
   }
 
-  
+
 
 }

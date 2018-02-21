@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit} from '@angular/core';
+import {Location} from '@angular/common';
 
 @Component({
   selector: 'app-add-quiz',
@@ -7,11 +8,15 @@ import { Component, OnInit } from '@angular/core';
 })
 export class AddQuizComponent implements OnInit {
 
-  constructor() { }
+  constructor(private _location:Location) { }
 
   ngOnInit() {
   }
-  addQuiz()
-  {    
+
+  addQuiz() {
+   this._location.back();
   }
+
 }
+  
+

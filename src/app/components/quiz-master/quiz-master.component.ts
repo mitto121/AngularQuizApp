@@ -9,17 +9,17 @@ import { Iquestion } from '../../models/iquestion';
   styleUrls: ['./quiz-master.component.css']
 })
 export class QuizMasterComponent implements OnInit {
-  quizes:QuizMaster[]; 
-  statusMessage:string='loading...';
+  quizes: QuizMaster[];
+  statusMessage = 'loading...';
 
-  constructor(private _quiz:QuizService) { }
+  constructor(private _quiz: QuizService) { }
 
   ngOnInit() {
 
     this._quiz.getQuizes()
     .subscribe(
-      (res)=>this.quizes=res,
-      (error) =>  this.statusMessage = error);   
+      (res) => this.quizes = res,
+      (error) =>  this.statusMessage = error);
   }
 
 }

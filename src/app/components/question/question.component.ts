@@ -9,24 +9,24 @@ import { Ioption } from '../../models/ioption';
 })
 export class QuestionComponent implements OnInit {
 
-  
+
   @Input()
   question: Iquestion;
 
   @Input()
   questionNumber: number;
 
-  
+
 
   constructor() { }
 
   ngOnInit() {
-  }  
+  }
 
   onSelect(option: Ioption) {
     this.question.options.forEach((x) => { x.isSelected = (x.id == option.id); });
     this.question.isAttempt = true;
   }
-  
+
 
 }

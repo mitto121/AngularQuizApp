@@ -7,11 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   welcomeMessage = 'Welcome to Quiz Master';
-  isAuthenticateUser:boolean=false;
-  
-  constructor(){
-    let user= localStorage.getItem('user');
-    this.isAuthenticateUser=user?true:false;  
+  isAuthenticateUser = false;
+
+  constructor() {
+    const user = localStorage.getItem('user');
+    this.isAuthenticateUser = user ? true : false;
   }
- 
+
 }
