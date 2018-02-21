@@ -1,6 +1,8 @@
 import { Component, OnInit, Output } from '@angular/core';
+import { Router } from '@angular/router'
 import { QuizMaster } from '../../models/quiz-master';
 import { QuizService } from '../../services/quiz.service';
+
 
 @Component({
   selector: 'app-quizes',
@@ -14,7 +16,8 @@ export class QuizesComponent implements OnInit {
   selectedQuizId:number;
   showModal:boolean;
 
-  constructor(private _quiz: QuizService) {
+  constructor(private _quiz: QuizService,
+              private _router:Router) {
 
   }
 
@@ -43,7 +46,7 @@ export class QuizesComponent implements OnInit {
      }
      else
      {
-       console.log('set question paper of quiz '+this.selectedQuizId);
+       this._router.navigate(['/setQuestionPaper',this.selectedQuizId]);
      }
   }
   

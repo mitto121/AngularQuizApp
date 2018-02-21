@@ -24,6 +24,7 @@ import { ShowValidationErrorComponent } from './components/show-validation-error
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticateUserService } from './services/authenticate-user.service';
+import { QuestionPaperAdminViewComponent } from './components/question-paper-admin-view/question-paper-admin-view.component';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -33,6 +34,7 @@ const route: Route[] = [
   { path: 'quiz/:id', component: QuestionPaperComponent, canActivate: [AuthGuardService] },
   { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService] },
   { path: 'addNewQuiz', component: AddQuizComponent, canActivate: [AuthGuardService] },
+  { path: 'setQuestionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },  
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -54,6 +56,7 @@ const route: Route[] = [
     ModalWindowComponent,
     AddQuizComponent,
     ShowValidationErrorComponent,
+    QuestionPaperAdminViewComponent,
   ],
   imports: [
     BrowserModule,
