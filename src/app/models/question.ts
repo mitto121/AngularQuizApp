@@ -6,5 +6,5 @@ export class Question {
     QuizId: number;
     options: Ioption[];
     isAttempt: boolean;
-
+    isActive:boolean;
 }

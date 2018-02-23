@@ -1,4 +1,4 @@
-export interface Option {
+export class Option {
     id: number;
     name: string;
     questionId: number;

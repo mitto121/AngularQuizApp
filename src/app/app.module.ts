@@ -25,6 +25,9 @@ import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticateUserService } from './services/authenticate-user.service';
 import { QuestionPaperAdminViewComponent } from './components/question-paper-admin-view/question-paper-admin-view.component';
+import { CreateQuestionComponent } from './components/create-question/create-question.component';
+import { createQuery } from '@angular/core/src/view/query';
+import { DisplayDirective } from './shared/display.directive';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +38,7 @@ const route: Route[] = [
   { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService] },
   { path: 'addNewQuiz', component: AddQuizComponent, canActivate: [AuthGuardService] },
   { path: 'setQuestionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },  
+  { path: 'createQuestion/:id', component: CreateQuestionComponent, canActivate: [AuthGuardService] },  
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -57,6 +61,8 @@ const route: Route[] = [
     AddQuizComponent,
     ShowValidationErrorComponent,
     QuestionPaperAdminViewComponent,
+    CreateQuestionComponent,
+    DisplayDirective,
   ],
   imports: [
     BrowserModule,

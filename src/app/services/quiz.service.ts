@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Http } from '@angular/http';
+import { Http} from '@angular/http';
 import { Observable } from 'rxjs/Rx';
 import 'rxjs/add/operator/map';
 import { QuizMaster } from '../models/quiz-master';
@@ -10,8 +10,9 @@ import { Iquestion } from '../models/iquestion';
 
 @Injectable()
 export class QuizService {
-
-  constructor(private http: Http) { }
+ 
+  constructor(private http: Http) {   
+   }
 
   getQuizes(): Observable<QuizMaster[]> {
     return this.http.get('http://localhost:3000/quizes')
@@ -30,6 +31,15 @@ export class QuizService {
     // .catch(this.handleError);
     return null;
   }
+
+  removeQuestion(id:number):Observable<boolean> 
+  {    
+    return this.http.delete('http://localhost:3000/removeQuestion?id='+id)
+     .map(res=>res.ok)
+     .catch(this.handleError)
+  }
+    
+  
 
   handleError(error: Response) {
     return Observable.throw(error);

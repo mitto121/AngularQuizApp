@@ -15,7 +15,8 @@
             "questions": [
                 {
                     "id": 1010,
-                    "name": "Which of the following assemblies can be stored in Global Assembly Cache?",                    
+                    "name": "Which of the following assemblies can be stored in Global Assembly Cache?",
+                    "isActive":1,                    
                     "options": [
                         {
                             "id": 1055,
@@ -46,6 +47,7 @@
                 {
                     "id": 1016,
                     "name": "Which of the following is NOT a .NET Exception class?",                   
+                    "isActive":1,                    
                     "options": [
                         {
                             "id": 1055,
@@ -76,6 +78,7 @@
                 {
                     "id": 1017,
                     "name": "In C#.NET if we do not catch the exception thrown at runtime then which of the following will catch it?",                   
+                    "isActive":0,                    
                     "options": [
                         {
                             "id": 1055,

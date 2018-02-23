@@ -1,3 +1,36 @@
-<p>
-  question-paper-admin-view works!
-</p>
+<div class="container">
+  <div class="row">
+    <div class="col-md-12">
+      <div class="card card-container">
+          <div class="row card-header">
+              <div class="col-md-10">
+                <h3>{{quiz.name}}</h3>
+              </div>  
+              <div class="col-md-2">
+                <button class="btn btn-default" [routerLink]='["/createQuestion",quiz.id]' >Create Question </button>                             
+              </div>                     
+            </div>
+        <div class="row">
+          <div *ngFor="let question of quiz.questions;let index = index;">
+            <div class="panel"  *ngIf="question.isActive" >
+              <div class="panel-header">
+                <div class="col-md-12">
+                  <button type="button" class="close" (click)="removeQuestion(question.id);" >
+                    <span aria-hidden="true">&times;</span>
+                  </button>                
+                </div>
+              </div>
+              <div class="panel-body">
+                <app-question [question]='question' [questionNumber]='index+1'></app-question>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> 
+
+  </div>
+
+</div>
+
+
