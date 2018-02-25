@@ -58,7 +58,7 @@ export class LoginComponent implements OnInit {
           this._router.navigateByUrl('/quizes');
         }
         else{
-          this._router.navigateByUrl('/dashboard');
+          this._router.navigateByUrl('/adminDashboard');
         }          
     }
     else

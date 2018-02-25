@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, Output,EventEmitter, OnInit } from '@angular/core';
 import { Iquestion } from '../../models/iquestion';
 import { Ioption } from '../../models/ioption';
 
@@ -16,6 +16,7 @@ export class QuestionComponent implements OnInit {
   @Input()
   questionNumber: number;
 
+  @Output() onSelect:EventEmitter<Iquestion>=new EventEmitter();
 
 
   constructor() { }
@@ -23,9 +24,9 @@ export class QuestionComponent implements OnInit {
   ngOnInit() {
   }
 
-  onSelect(option: Ioption) {
-    this.question.options.forEach((x) => { x.isSelected = (x.id == option.id); });
-    this.question.isAttempt = true;
+  selectAnswer(option: Ioption) {      
+    this.question.options.forEach((x) => { x.isSelected = (x.code == option.code); });   
+    this.onSelect.emit(this.question);
   }
 
 

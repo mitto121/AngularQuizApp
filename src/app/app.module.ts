@@ -28,6 +28,7 @@ import { QuestionPaperAdminViewComponent } from './components/question-paper-adm
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
 import { createQuery } from '@angular/core/src/view/query';
 import { DisplayDirective } from './shared/display.directive';
+import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -35,6 +36,7 @@ const route: Route[] = [
   { path: 'signup', component: SignUpComponent },
   { path: 'dashboard', component: QuizMasterComponent, canActivate: [AuthGuardService] },
   { path: 'quiz/:id', component: QuestionPaperComponent, canActivate: [AuthGuardService] },
+  { path: 'adminDashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService] },  
   { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService] },
   { path: 'addNewQuiz', component: AddQuizComponent, canActivate: [AuthGuardService] },
   { path: 'setQuestionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },  
@@ -63,6 +65,7 @@ const route: Route[] = [
     QuestionPaperAdminViewComponent,
     CreateQuestionComponent,
     DisplayDirective,
+    AdminDashboardComponent,
   ],
   imports: [
     BrowserModule,

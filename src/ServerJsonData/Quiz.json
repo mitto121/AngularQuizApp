@@ -19,25 +19,29 @@
                     "isActive":1,                    
                     "options": [
                         {
-                            "id": 1055,
+                            "id":1,
+                            "code": 1055,
                             "questionId": 1010,
                             "name": "Private Assemblies",
                             "isAnswer": false
                         },
                         {
-                            "id": 1056,
+                            "id":2,
+                            "code": 1056,
                             "questionId": 1010,
                             "name": "Friend Assemblies",
                             "isAnswer": false
                         },
                         {
-                            "id": 1057,
+                            "id":3,
+                            "code": 1057,
                             "questionId": 1010,
                             "name": "Public Assemblies",
                             "isAnswer": false
                         },
                         {
-                            "id": 1058,
+                            "id":4,
+                            "code": 1058,
                             "questionId": 1010,
                             "name": "Shared Assemblies",
                             "isAnswer": true
@@ -50,25 +54,29 @@
                     "isActive":1,                    
                     "options": [
                         {
-                            "id": 1055,
+                            "id":5,
+                            "code": 1055,
                             "questionId": 1010,
                             "name": "Exception",
                             "isAnswer": false
                         },
                         {
-                            "id": 1056,
+                            "id":6,
+                            "code": 1056,
                             "questionId": 1010,
                             "name": "StackMemoryException",
                             "isAnswer": true
                         },
                         {
-                            "id": 1057,
+                            "id":7,
+                            "code": 1057,
                             "questionId": 1010,
                             "name": "DivideByZeroException",
                             "isAnswer": false
                         },
                         {
-                            "id": 1058,
+                            "id":8,
+                            "code": 1058,
                             "questionId": 1010,
                             "name": "InvalidOperationException",
                             "isAnswer": false
@@ -81,25 +89,29 @@
                     "isActive":0,                    
                     "options": [
                         {
-                            "id": 1055,
+                            "id":9,
+                            "code": 1055,
                             "questionId": 1010,
                             "name": "Compiler",
                             "isAnswer": false
                         },
                         {
-                            "id": 1056,
+                            "id":10,
+                            "code": 1056,
                             "questionId": 1010,
                             "name": "CLR",
                             "isAnswer": true
                         },
                         {
-                            "id": 1057,
+                            "id":11,
+                            "code": 1057,
                             "questionId": 1010,
                             "name": "Linker",
                             "isAnswer": false
                         },
                         {
-                            "id": 1058,
+                            "id":12,
+                            "code": 1058,
                             "questionId": 1010,
                             "name": "Operating system",
                             "isAnswer": false

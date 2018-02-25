@@ -28,7 +28,7 @@
       <div *ngIf="questions" class="row">
         <div *ngFor="let question of questions;let index = index;">
           <div *ngIf='showCurrentPage(index)'>
-            <app-question [question]='question' [questionNumber]='index+1'  ></app-question>
+            <app-question [question]='question' [questionNumber]='index+1' (onSelect)='selectedAnswer($event)' ></app-question>
           </div>
         </div>
         <hr/>
@@ -40,11 +40,6 @@
         </div>
       </div>
     </div>
-  </div>
-</div>
-<div class="row">
-  <div class="col-md-12">
-      <button class="btn btnResult" *ngIf='quiz.hasAttempt' (click)="showQuizResult();">View Result</button>
   </div>
 </div>
 </div>
