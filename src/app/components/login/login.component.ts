@@ -51,14 +51,15 @@ export class LoginComponent implements OnInit {
     debugger;
     if(userAccount && userAccount.token)
     {
-        this.loginStatusMsg="Login failed !!";      
+        this.loginStatusMsg="Login failed !!"; 
+        localStorage.clear();             
         localStorage.setItem("user", JSON.stringify(userAccount));
         if(userAccount.role && userAccount.role.toLowerCase()=='admin')
         {
-          this._router.navigateByUrl('/quizes');
+          this._router.navigateByUrl('/adminDashboard');
         }
         else{
-          this._router.navigateByUrl('/adminDashboard');
+          this._router.navigateByUrl('/dashboard');
         }          
     }
     else

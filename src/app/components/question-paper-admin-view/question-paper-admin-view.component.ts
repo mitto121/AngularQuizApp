@@ -30,9 +30,12 @@ export class QuestionPaperAdminViewComponent implements OnInit {
 
   removeQuestion(questionId) {
     if (confirm("are you sure to remove this question ?")) {
-      let isSucess: boolean;
-      // this._quizService.removeQuestion(questionId)
-      //   .subscribe(res => res);
+      
+       this._quizService.removeQuestion(questionId)
+       .subscribe(
+         res => res,
+         error=> console.error(error)        
+      );
      
     }
   }

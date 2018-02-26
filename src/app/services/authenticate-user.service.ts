@@ -4,6 +4,7 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/map';
 import { UserAccount } from '../models/user-account';
 import { promise } from 'protractor';
+import { CommonUtility } from '../shared/common-utility';
 @Injectable()
 export class AuthenticateUserService {
   
@@ -12,14 +13,11 @@ export class AuthenticateUserService {
 
 
     login(username: string, password: string):Promise<UserAccount> {
-        return this._http.get('http://localhost:3000/userAuthentication?userName='+username+'&password='+password)
+        return this._http.get(CommonUtility.baseApiUrl+'userAuthentication?userName='+username+'&password='+password)
             .map(user =>user.json())
             .toPromise()            
             .catch(err=>console.error(err));            
     }
-
-    logout() {
-        localStorage.removeItem('authUser');
-    }   
+  
 
 }

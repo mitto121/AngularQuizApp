@@ -26,9 +26,10 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticateUserService } from './services/authenticate-user.service';
 import { QuestionPaperAdminViewComponent } from './components/question-paper-admin-view/question-paper-admin-view.component';
 import { CreateQuestionComponent } from './components/create-question/create-question.component';
-import { createQuery } from '@angular/core/src/view/query';
 import { DisplayDirective } from './shared/display.directive';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
+import { QuestionService } from './services/question-service.service';
+import { QuestionListComponent } from './components/question-list/question-list.component';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -40,7 +41,8 @@ const route: Route[] = [
   { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService] },
   { path: 'addNewQuiz', component: AddQuizComponent, canActivate: [AuthGuardService] },
   { path: 'setQuestionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },  
-  { path: 'createQuestion/:id', component: CreateQuestionComponent, canActivate: [AuthGuardService] },  
+  { path: 'createQuestion/:id', component: CreateQuestionComponent, canActivate: [AuthGuardService] }, 
+  {path:'questionlist',component:QuestionListComponent,CanActivate:[AuthGuardService] }, 
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -66,15 +68,17 @@ const route: Route[] = [
     CreateQuestionComponent,
     DisplayDirective,
     AdminDashboardComponent,
+    QuestionListComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
+    HttpModule,    
     RouterModule.forRoot(route)
   ],
   providers: [QuizService,
+    QuestionService,
     AuthService,
     AuthGuardService,
     AuthenticateUserService
