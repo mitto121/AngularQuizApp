@@ -88,9 +88,17 @@ export class CreateQuestionComponent implements OnInit {
 
     this._questionService.CreateQuestion(this.question)
       .subscribe(
-        res => this._location.back(),
+        res => {
+          if(res)
+          {
+            this._location.back();
+          }
+          else
+          {
+            alert('Failed !! something is wrong ,please try agin');
+          }
+        },
         error => console.error(error)
       );
-      this._location.back();
   }
 }

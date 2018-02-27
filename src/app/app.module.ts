@@ -2,6 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import { HttpClientModule } from '@angular/common/http';
 import { Route, RouterModule, CanActivate } from '@angular/router';
 
 import { AppComponent } from './app.component';
@@ -30,6 +31,7 @@ import { DisplayDirective } from './shared/display.directive';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { QuestionService } from './services/question-service.service';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import { UserAccountService } from './services/user-account.service';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -42,7 +44,7 @@ const route: Route[] = [
   { path: 'addNewQuiz', component: AddQuizComponent, canActivate: [AuthGuardService] },
   { path: 'setQuestionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },  
   { path: 'createQuestion/:id', component: CreateQuestionComponent, canActivate: [AuthGuardService] }, 
-  {path:'questionlist',component:QuestionListComponent,CanActivate:[AuthGuardService] }, 
+  { path:'questionlist',component:QuestionListComponent,canActivate:[AuthGuardService] }, 
   { path: '**', component: PageNotFoundComponent }
 ];
 
@@ -74,14 +76,16 @@ const route: Route[] = [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,    
+    HttpModule, 
+    HttpClientModule,   
     RouterModule.forRoot(route)
   ],
   providers: [QuizService,
     QuestionService,
     AuthService,
     AuthGuardService,
-    AuthenticateUserService
+    AuthenticateUserService, 
+    UserAccountService   
   ],
   bootstrap: [AppComponent]
 })

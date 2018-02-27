@@ -14,6 +14,7 @@ export class AddQuizComponent implements OnInit {
   }
 
   addQuiz() {
+    
    this._location.back();
   }
 

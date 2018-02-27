@@ -9,7 +9,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ModalWindowComponent implements OnInit {
 
   @Input()
-  modalTitle: string;
+  modalTitle: string='Alert !!';
 
   @Input()
   showModal: boolean;

@@ -36,7 +36,7 @@ export class QuestionPaperComponent implements OnInit {
     this._quizService.getQuizById(this.quizId)
       .subscribe(
       (res) => {
-        this.quiz = res[0];
+        this.quiz = res;
         this.questions = this.quiz.questions;
         this.noOfQuestions = this.questions.length;
       },

@@ -8,5 +8,6 @@ export class UserAccount {
     confirmPassword: string;
     isActive: boolean;
     role:string;
-    token:any;    
+    isAdmin:boolean;
+    authToken:any;    
 }

@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { UserAccount } from '../../models/user-account';
 import { FormGroup, FormControl, Validators , NgForm } from '@angular/forms';
 import { AuthenticateUserService } from '../../services/authenticate-user.service';
+import { ApiResponse } from '../../models/api-response';
 
 
 
@@ -39,22 +40,21 @@ export class LoginComponent implements OnInit {
      let password=this.loginForm.controls['password'].value;
 
      this._authenticateUserService.login(userName,password)
-                   .then((res)=>  this.authenticateUser(res[0]));      
+                   .then((res)=>  this.authenticateUser(res));      
      
     } else {
        this.validateAllFormFields(this.loginForm);
     }
   }
 
-  authenticateUser(userAccount:UserAccount)
+  authenticateUser(response:ApiResponse<UserAccount>)
   {
     debugger;
-    if(userAccount && userAccount.token)
+    if(response && response.isSucceeded)
     {
-        this.loginStatusMsg="Login failed !!"; 
-        localStorage.clear();             
-        localStorage.setItem("user", JSON.stringify(userAccount));
-        if(userAccount.role && userAccount.role.toLowerCase()=='admin')
+        localStorage.clear();                     
+        localStorage.setItem("token", JSON.stringify(response.result.authToken));
+        if(response.result && response.result.isAdmin)
         {
           this._router.navigateByUrl('/adminDashboard');
         }
@@ -64,7 +64,7 @@ export class LoginComponent implements OnInit {
     }
     else
     {
-        this.loginStatusMsg="Login failed !!";
+        this.loginStatusMsg=response.displayMessage;
     }
   }
 

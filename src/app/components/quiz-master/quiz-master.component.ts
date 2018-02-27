@@ -18,7 +18,7 @@ export class QuizMasterComponent implements OnInit {
 
     this._quiz.getQuizes()
     .subscribe(
-      (res) => this.quizes = res,
+      (res) => this.quizes = res.result,
       (error) =>  this.statusMessage = error);
   }
 

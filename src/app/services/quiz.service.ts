@@ -7,6 +7,7 @@ import { error } from 'selenium-webdriver';
 import { Response } from '@angular/http/src/static_response';
 import { Iquestion } from '../models/iquestion';
 import { CommonUtility } from '../shared/common-utility';
+import { ApiResponse } from '../models/api-response';
 
 
 @Injectable()
@@ -15,14 +16,14 @@ export class QuizService {
   constructor(private http: Http) {   
    }
 
-  getQuizes(): Observable<QuizMaster[]> {
-    return this.http.get(CommonUtility.baseApiUrl+'quizes')
+  getQuizes(): Observable<ApiResponse<QuizMaster[]>> {
+    return this.http.get(CommonUtility.baseApiUrl+'Quiz/Quizes')
     .map(res => res.json())
     .catch(this.handleError);
   }
 
   getQuizById(id: number): Observable<QuizMaster> {
-    return this.http.get(CommonUtility.baseApiUrl+'quizes?id=' + id)
+    return this.http.get(CommonUtility.baseApiUrl+'Quiz/Quize/'+id)
     .map(res => res.json())
     .catch(this.handleError);
   }
@@ -39,9 +40,9 @@ export class QuizService {
      .catch(this.handleError)
   }
     
-  
-
   handleError(error: Response) {
     return Observable.throw(error);
   }
+
+ 
 }

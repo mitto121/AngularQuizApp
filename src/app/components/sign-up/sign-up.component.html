@@ -71,5 +71,16 @@
       </fieldset>
     </form>
 
+    <app-modal-window   [showModal]='showModal' [hideCloseBtn]='true' >
+        <div>
+            <span [ngStyle]='{color:isSucceed?"green":"red"}'>{{statusMessage}}</span>
+         </div> 
+         <div class="row">
+            <div class="col-md-offset-5 col-md-7">
+                <button class="btn btn-primary" *ngIf='isSucceed' routerLink='/login' >Back to login page</button>
+                <button class="btn btn-primary" (click)='closeModal();' >Close</button>
+          </div>
+        </div>
+    </app-modal-window>
   </div>
 </div>

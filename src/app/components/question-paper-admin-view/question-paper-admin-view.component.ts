@@ -22,7 +22,7 @@ export class QuestionPaperAdminViewComponent implements OnInit {
     this.quizId = this._activatedRoute.snapshot.params['id'];
 
     this._quizService.getQuizById(this.quizId).subscribe(
-      (res) => this.quiz = res[0],
+      (res) => this.quiz = res,
       (error) => console.error(error)
     );
 
