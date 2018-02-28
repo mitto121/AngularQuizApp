@@ -11,10 +11,11 @@ import { QuizService } from '../../services/quiz.service';
 })
 export class QuizesComponent implements OnInit {
 
-  quizes: QuizMaster[];
+  quizes: QuizMaster[]; 
   filterValue: string;
   selectedQuizId:number;
   showModal:boolean;
+  editMode:boolean;
 
   constructor(private _quiz: QuizService,
               private _router:Router) {
@@ -25,19 +26,35 @@ export class QuizesComponent implements OnInit {
     this._quiz.getQuizes()
       .subscribe(
         (res) =>this.quizes = res.result,
-        (error) => console.error(error));
+        (error) => console.error(error)      
+      );
   }
 
   removeQuiz(id: number) {
     if (confirm("Are you sure to delete ")) {
-      console.log("Implement delete functionality here");
+      this._quiz.removeQuiz(id).subscribe(
+        res=>{
+          if(res)
+          {
+            this.quizes.find(x=>x.id==id).isActive=false;            
+          }
+        },
+        error=>console.error(error)  
+      );
     }
   }
 
   editQuiz(id: number) {
-      console.log("Implement Edit functionality here");
+    this.quizes.find(x=>x.id==id).actionMode='EDIT';   
   }
-
+  cancelUpdateQuiz(id: number) { 
+    this.quizes.find(x=>x.id==id).actionMode='VIEW';   
+  }
+  onUpdateQuiz(quiz:QuizMaster)
+  {
+    this.quizes.find(x=>x.id==quiz.id).actionMode='VIEW';  
+    
+  }
   setQuestionPaper()
   {
      if(!this.selectedQuizId)

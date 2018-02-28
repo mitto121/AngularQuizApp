@@ -1,10 +1,29 @@
 <div class="row">
+  <div class="col-md-2">
+    <label class="form-label">Select Quiz :</label>
+  </div>
   <div class="col-md-4">
-    <div class="form-group">
-      <label>Select Quiz :</label>
-      <select>
-        <option *ngFor='let option of quizes' value="option.id"  >{{option.name}}</option>
-      </select>
+    <select class="form-control" (change)="onChange($event.target.value)" >
+      <option *ngFor='let quiz of quizes' [value]="quiz.id">{{quiz.name}}</option>
+    </select>
+  </div>
+  <div class="col-md-offset-4 col-md-2">
+      <button class="btn btn-default" [routerLink]='["/createQuestion",selectedQuizId]' >Create Question </button>                             
+  </div>
+</div>
+<div class="card card-container" >
+  <div class="row"  >
+    <div *ngFor="let question of questions;let index = index;">
+      <div class="panel" *ngIf="question.isActive">
+        <div class="panel-body">
+          <app-question [question]='question' [questionNumber]='index+1'></app-question>
+        </div>
+      </div>
     </div>
+  </div>
+  <div class="row"  >
+  <div class="col-md-12">
+    <label *ngIf="!questions.length">No result found !!</label>
+  </div>
   </div>
 </div>

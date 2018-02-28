@@ -13,10 +13,9 @@ export class UserAccountService {
 
   public createUser(user): Observable<ApiResponse<boolean>> {
     
-    let options=CommonUtility.getRequestOptions(RequestMethod.Post);    
-    let body = CommonUtility.serializeObj(user);
+    let options=CommonUtility.getRequestOptions();  
 
-    return this.http.post(CommonUtility.baseApiUrl + "UserAccount/CreateUser",body, options)
+    return this.http.post(CommonUtility.baseApiUrl + "UserAccount/CreateUser", JSON.stringify(user), options)
       .map(res => res.json())
       .catch(CommonUtility.handleError);
   }

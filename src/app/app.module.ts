@@ -32,6 +32,7 @@ import { AdminDashboardComponent } from './components/admin-dashboard/admin-dash
 import { QuestionService } from './services/question-service.service';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { UserAccountService } from './services/user-account.service';
+import { CreateQuizTestComponent } from './components/create-quiz-test/create-quiz-test.component';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -71,6 +72,7 @@ const route: Route[] = [
     DisplayDirective,
     AdminDashboardComponent,
     QuestionListComponent,
+    CreateQuizTestComponent,
   ],
   imports: [
     BrowserModule,

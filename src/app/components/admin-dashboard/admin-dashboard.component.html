@@ -17,7 +17,6 @@
 				<li ><a routerLink='/quizes'>Quizes<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span></a></li>
 				<li ><a >Exam<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span></a></li>
 				<li ><a routerLink='/questionlist' >Questions<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span></a></li>
-				<li ><a >Profile<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-user"></span></a></li>
 				<li class="dropdown">
 					<a  class="dropdown-toggle" data-toggle="dropdown">Settings <span class="caret"></span><span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-cog"></span></a>
 					<ul class="dropdown-menu forAnimate" role="menu">
@@ -25,7 +24,7 @@
 					
 					</ul>
         </li>
-				<li ><a >Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon"></span></a></li>
+				<li ><a (click)='onLogout()' >Logout<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon"></span></a></li>
 			</ul>
 		</div>
 	</div>
@@ -42,19 +41,9 @@
              Click to view Quiz list
             </div>
           </div>
-        </div>
+        </div>      
         <div class="col-lg-3 col-md-3">
-            <div class="panel panel-primary" >
-              <div class="panel-heading">
-                  <h3 class="panel-title">Exam</h3>       
-              </div>
-              <div class="panel-body">
-               Click to view Exam list
-              </div>
-            </div>
-          </div>
-        <div class="col-lg-3 col-md-3">
-            <div class="panel panel-primary" >
+            <div class="panel panel-primary"  routerLink="/questionlist">
               <div class="panel-heading">
                   <h3 class="panel-title">Questions</h3>       
               </div>

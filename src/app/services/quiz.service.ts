@@ -28,17 +28,32 @@ export class QuizService {
     .catch(this.handleError);
   }
 
+  createQuiz(quiz:QuizMaster):Observable<ApiResponse<QuizMaster>>
+  {
+    let options=CommonUtility.getRequestOptions();
+    
+    return this.http.post(CommonUtility.baseApiUrl+"Quiz/AddQuiz",JSON.stringify(quiz),options )
+                    .map(res=>res.json())
+                    .catch(error=>CommonUtility.handleError(error));
+  }
+
+  removeQuiz(id:number)
+  {
+    debugger;
+    let options=CommonUtility.getRequestOptions();
+    
+    return this.http.delete(CommonUtility.baseApiUrl+"Quiz/RemoveQuiz?Id="+id, options )
+                    .map(res=>res.json())
+                    .catch(error=>CommonUtility.handleError(error));
+  }
+
   submitTest(quiz: QuizMaster) {
    return this.http.post(CommonUtility.baseApiUrl+"submitTest",{'quiz':quiz})
          .catch(this.handleError);
   }
 
-  removeQuestion(id:number):Observable<boolean> 
-  {    
-    return this.http.delete(CommonUtility.baseApiUrl+'removeQuestion?id='+id)
-     .map(res=>res.ok)
-     .catch(this.handleError)
-  }
+ 
+  
     
   handleError(error: Response) {
     return Observable.throw(error);

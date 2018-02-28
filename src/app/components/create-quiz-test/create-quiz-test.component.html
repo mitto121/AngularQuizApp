@@ -1,0 +1,61 @@
+<div class="panel">
+  <form class="form-horizontal" [formGroup]="createExamForm">
+    <div class="row">
+      <fieldset>       
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="code">Code</label>
+          <div class="col-md-5">
+            <input id="code" name="Name" type="text" formControlName="Code" placeholder="Enter exam code" class="form-control input-md">
+            <show-validation-error [control]="createExamForm.controls.Code"></show-validation-error>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="AvailableFrom">Available From</label>
+          <div class="col-md-5">
+            <input id="AvailableFrom" name="AvailableFrom" type="date" formControlName="Available_From" class="form-control input-md">
+            <show-validation-error [control]="createExamForm.controls.Available_From"></show-validation-error>
+          </div>
+        </div>
+
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="Duration">Duration</label>
+          <div class="col-md-5">
+            <input id="Duration" name="Duration" type="number" formControlName="Duration" placeholder="Enter Duration" class="form-control input-md">
+            <show-validation-error [control]="createExamForm.controls.Duration"></show-validation-error>
+          </div>
+        </div>
+
+        <!-- Password input-->
+        <div class="form-group">
+          <label class="col-md-4 control-label" for="PassingPercentage">Passing Percentage </label>
+          <div class="col-md-5">
+            <input id="PassingPercentage" name="PassingPercentage" type="number" formControlName="Passing_Percentage" placeholder="passing percentage"
+              class="form-control input-md">
+            <show-validation-error [control]="createExamForm.controls.Passing_Percentage"></show-validation-error>
+          </div>
+        </div>
+
+        <div class="form-group">
+            <label class="col-md-4 control-label" for="PassingPercentage">No of Questions</label>
+            <div class="col-md-5">
+             <label class="control-label" *ngIf='totalQuestions'> {{totalQuestions}} </label>
+            </div>
+          </div>
+
+        <!-- Button -->
+        <div class="form-group">
+          <div class="col-md-offset-4 col-md-4">
+            <button class="btn btn-primary" (click)='createExam();' >Submit</button>
+            <button class="btn btn-primary" (click)='resetForm();' >Reset</button>
+          </div>
+        </div>
+
+      </fieldset>
+    </div>
+  </form>
+</div>

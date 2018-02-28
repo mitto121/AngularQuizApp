@@ -1,15 +1,15 @@
 <div class="panel panel-default">
   <div class="panel-heading">Add New Quiz</div>
   <div class="panel-body">
-    <form  >
+    <form class="form-horizontal" [formGroup]="createQuizForm" >
       <div class="row">
         <div class="col-md-3">
           <label for="name">Name</label>
         </div>
         <div class="col-md-5">
           <div class="form-group">
-            <input id="name" type="text" class="form-control" placeholder="Enter Quiz Name">
-            <!-- <show-validation-error [control]="addQuizForm.controls.password" ></show-validation-error>       -->
+            <input id="name" type="text" class="form-control" formControlName="Name" placeholder="Enter Quiz Name">
+            <show-validation-error [control]="createQuizForm.controls.Name" ></show-validation-error>
           </div>
         </div>
       </div>
@@ -19,23 +19,14 @@
         </div>
         <div class="col-md-5">
           <div class="form-group">
-            <textarea id="description" class="form-control" placeholder="Enter description" col="80" row="25"></textarea>
-
+            <textarea id="description" class="form-control" formControlName="Description" placeholder="Enter description" col="80" row="25"></textarea>
+            <show-validation-error [control]="createQuizForm.controls.Description" ></show-validation-error>
           </div>
         </div>
-      </div>
+      </div>    
       <div class="row">
-        <div class="col-md-3">
-          <label for="duration">Duration (minutes)</label>
-        </div>
-        <div class="col-md-5">
-          <div class="form-group">
-            <input type="number" id="duration" class="form-control" placeholder="Enter Duration">
-
-          </div>
-        </div>
-      </div>
-
+        <span>{{statusMessage}}</span>
+     </div>
       <div class="row">
         <div class="col-md-offset-5">
           <button type="submit" class="btn btn-primary" (click)="addQuiz();">Save</button>

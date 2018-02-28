@@ -1,23 +1,25 @@
 <div class="container">
+
   <div class="row">
     <div class="col-md-12">
       <div class="card card-container">
-          <div class="row card-header">
-              <div class="col-md-10">
-                <h3>{{quiz.name}}</h3>
-              </div>  
-              <div class="col-md-2">
-                <button class="btn btn-default" [routerLink]='["/createQuestion",quiz.id]' >Create Question </button>                             
-              </div>                     
-            </div>
+        <div class="row card-header">
+          <div class="col-md-8">
+            <h3>{{quiz.name}}</h3>
+          </div>
+          <div class="col-md-4">
+              <button *ngIf='quiz.questions.length' class="btn btn-default  pull-right" (click)="showExamForm();" >Create Quiz Exam </button>
+              <button class="btn btn-default  pull-right" [routerLink]='["/createQuestion",quiz.id]'>Create Question </button>
+          </div>
+        </div>
         <div class="row">
           <div *ngFor="let question of quiz.questions;let index = index;">
-            <div class="panel"  *ngIf="question.isActive" >
+            <div class="panel" *ngIf="question.isActive">
               <div class="panel-header">
                 <div class="col-md-12">
-                  <button type="button" class="close" (click)="removeQuestion(question.id);" >
+                  <button type="button" class="close" (click)="removeQuestion(question.id);">
                     <span aria-hidden="true">&times;</span>
-                  </button>                
+                  </button>
                 </div>
               </div>
               <div class="panel-body">
@@ -26,11 +28,20 @@
             </div>
           </div>
         </div>
+        <div class="row" *ngIf='!quiz.questions.length'>
+          <div class="col-md-offset-5 col-md-7">
+            <label class="form-label">Questions not found !!</label>
+          </div>
+        </div>
       </div>
-    </div> 
+    </div>
 
   </div>
 
 </div>
 
-
+<app-modal-window #modal modalTitle="Create Exam" (onCloseModal)="closeModal($event)" [showModal]='showExamCreationWindow'>
+  <div>  
+    <app-create-quiz-test (onsubmit)="createExam($event);" [totalQuestions]='quiz.questions.length' > </app-create-quiz-test>
+  </div>
+</app-modal-window>

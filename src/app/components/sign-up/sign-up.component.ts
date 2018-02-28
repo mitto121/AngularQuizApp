@@ -3,6 +3,8 @@ import { FormGroup, FormControl, Validators, AbstractControl } from '@angular/fo
 import { UserAccount } from '../../models/user-account';
 import { UserAccountService } from '../../services/user-account.service';
 import { Router } from '@angular/router';
+import { CommonUtility } from '../../shared/common-utility';
+
 
 @Component({
   selector: 'app-sign-up',
@@ -54,21 +56,12 @@ export class SignUpComponent implements OnInit {
 
     }
     else {
-      this.validateAllFormFields(this.signUpForm)
+      CommonUtility.validateAllFormFields(this.signUpForm);
     }
 
   }
 
-  validateAllFormFields(formGroup: FormGroup) {
-    Object.keys(formGroup.controls).forEach(field => {
-      const control = formGroup.get(field);
-      if (control instanceof FormControl) {
-        control.markAsTouched({ onlySelf: true });
-      } else if (control instanceof FormGroup) {
-        this.validateAllFormFields(control);
-      }
-    });
-  }
+ 
   closeModal()
   {
     this.showModal=false;  

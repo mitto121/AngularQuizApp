@@ -9,28 +9,24 @@ import { HttpHeaders, HttpClient } from '@angular/common/http';
 @Injectable()
 export class QuestionService {
 
-  constructor(private http:HttpClient) { }
+  constructor(private http:Http) { }
 
   public CreateQuestion(question:Iquestion)
-  {
-  debugger;
-    let requestOptions=CommonUtility.getRequestOptions(RequestMethod.Post);
-    let body = CommonUtility.serializeObj(question);
-    body+= CommonUtility.serializeObj(question.options);
-
-    let  httpOptions = {
-      headers: new HttpHeaders({
-        'Content-Type':  'application/json',
-        'Authorization': 'my-auth-token'
-      })
-    };
-
-    console.log(body);
-    let options = new RequestOptions({   headers: new Headers({ 'Content-Type': 'application/json; charset=utf-8' }) });
-
-    return this.http.post(CommonUtility.baseApiUrl+"Question/CreateQuestion", (question),httpOptions)
+  {    
+    let options = CommonUtility.getRequestOptions();
+         
+    return this.http.post(CommonUtility.baseApiUrl+"Question/CreateQuestion", JSON.stringify(question), options )
     .map(res=>res)
     .catch(CommonUtility.handleError);
+  }
+
+  removeQuestion(id:number):Observable<boolean> 
+  {    
+    let options = CommonUtility.getRequestOptions();
+    
+    return this.http.delete(CommonUtility.baseApiUrl+'Question/RemoveQuestion?questionId='+id,options)
+     .map(res=>res)
+     .catch(CommonUtility.handleError)
   }
 
 }

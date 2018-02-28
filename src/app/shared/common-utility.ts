@@ -1,6 +1,7 @@
 import { Observable } from "rxjs/Observable";
 
 import { Http, RequestOptions, RequestMethod, Headers } from '@angular/http';
+import { FormGroup, FormControl } from "@angular/forms";
 
 
 export class CommonUtility {
@@ -11,21 +12,20 @@ export class CommonUtility {
     return Observable.throw(error);
   }
 
-  static serializeObj(obj) {
-    let serializeBody: string = '&';
-    var result = [];
-    for (var property in obj) {      
-        result.push(encodeURIComponent(property) + "=" + encodeURIComponent(obj[property]));      
-    }
-
-    serializeBody += result.join("&");
-
-    return serializeBody;
+   static getRequestOptions()  {
+    return new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json; charset=utf-8' }) }); 
+  }
+  
+  static validateAllFormFields(formGroup: FormGroup) {
+    Object.keys(formGroup.controls).forEach(field => {
+      const control = formGroup.get(field);
+      if (control instanceof FormControl) {
+        control.markAsTouched({ onlySelf: true });
+      } else if (control instanceof FormGroup) {
+        this.validateAllFormFields(control);
+      }
+    });
   }
 
-  static getRequestOptions(methodType:RequestMethod)
-  {
-    return new RequestOptions({ method: methodType, headers: new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8' }) });
-  }
   
 }
