@@ -1,15 +1,18 @@
-<div class="panel panel-default">
-  <div class="panel-heading">Add New Quiz</div>
-  <div class="panel-body">
-    <form class="form-horizontal" [formGroup]="createQuizForm" >
+<div class="panel panel-default ">
+    <div class="panel-heading">
+        <h3 class="panel-title">Quiz Master</h3>       
+    </div>
+  <div class="panel-body containerWindow">
+
+    <form class="form-horizontal" [formGroup]="quizMasterForm">
       <div class="row">
         <div class="col-md-3">
           <label for="name">Name</label>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="form-group">
-            <input id="name" type="text" class="form-control" formControlName="Name" placeholder="Enter Quiz Name">
-            <show-validation-error [control]="createQuizForm.controls.Name" ></show-validation-error>
+            <input id="name" type="text" class="form-control" formControlName="Name" placeholder="Enter Quiz Name"  [attr.disabled]='(quizId)' >
+            <show-validation-error [control]="quizMasterForm.controls.Name"></show-validation-error>
           </div>
         </div>
       </div>
@@ -17,19 +20,42 @@
         <div class="col-md-3">
           <label for="description">Description</label>
         </div>
-        <div class="col-md-5">
+        <div class="col-md-6">
           <div class="form-group">
             <textarea id="description" class="form-control" formControlName="Description" placeholder="Enter description" col="80" row="25"></textarea>
-            <show-validation-error [control]="createQuizForm.controls.Description" ></show-validation-error>
+            <show-validation-error [control]="quizMasterForm.controls.Description"></show-validation-error>
           </div>
         </div>
-      </div>    
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="duration">Duration</label>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input id="duration" type="number" class="form-control" formControlName="Duration" placeholder="Enter duration">
+            <show-validation-error [control]="quizMasterForm.controls.Duration"></show-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="passingPercentage">Passing Percentage</label>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input id="passingPercentage" type="number" class="form-control" formControlName="Passing_Percentage"  placeholder="Enter passing percentage">
+            <show-validation-error [control]="quizMasterForm.controls.Passing_Percentage"></show-validation-error>
+          </div>
+        </div>
+      </div>
       <div class="row">
         <span>{{statusMessage}}</span>
-     </div>
+      </div>
       <div class="row">
         <div class="col-md-offset-5">
-          <button type="submit" class="btn btn-primary" (click)="addQuiz();">Save</button>
+          <button type="submit" class="btn btn-primary" (click)="onSubmit();">Save</button>
+          <button  class="btn btn-primary" (click)="onCancel();">Cancel</button>
         </div>
       </div>
     </form>

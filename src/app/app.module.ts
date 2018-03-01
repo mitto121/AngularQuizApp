@@ -40,12 +40,15 @@ const route: Route[] = [
   { path: 'signup', component: SignUpComponent },
   { path: 'dashboard', component: QuizMasterComponent, canActivate: [AuthGuardService] },
   { path: 'quiz/:id', component: QuestionPaperComponent, canActivate: [AuthGuardService] },
-  { path: 'adminDashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService] },  
-  { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService] },
-  { path: 'addNewQuiz', component: AddQuizComponent, canActivate: [AuthGuardService] },
+  { path: 'adminDashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService],children:[
+    { path: 'quizes', component: QuizesComponent,outlet:"admin"}, 
+    { path: '', redirectTo:'quizes', pathMatch:'full' },
+    { path:'questions',component:QuestionListComponent,outlet:"admin" }
+  ] },  
+  { path: 'quizMaster', component: AddQuizComponent,canActivate: [AuthGuardService] },   
+  { path: 'quizMaster/:id', component: AddQuizComponent, canActivate: [AuthGuardService] },
   { path: 'setQuestionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },  
   { path: 'createQuestion/:id', component: CreateQuestionComponent, canActivate: [AuthGuardService] }, 
-  { path:'questionlist',component:QuestionListComponent,canActivate:[AuthGuardService] }, 
   { path: '**', component: PageNotFoundComponent }
 ];
 

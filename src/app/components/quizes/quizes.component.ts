@@ -15,7 +15,7 @@ export class QuizesComponent implements OnInit {
   filterValue: string;
   selectedQuizId:number;
   showModal:boolean;
-  editMode:boolean;
+
 
   constructor(private _quiz: QuizService,
               private _router:Router) {
@@ -44,29 +44,18 @@ export class QuizesComponent implements OnInit {
     }
   }
 
-  editQuiz(id: number) {
-    this.quizes.find(x=>x.id==id).actionMode='EDIT';   
-  }
-  cancelUpdateQuiz(id: number) { 
-    this.quizes.find(x=>x.id==id).actionMode='VIEW';   
-  }
-  onUpdateQuiz(quiz:QuizMaster)
-  {
-    this.quizes.find(x=>x.id==quiz.id).actionMode='VIEW';  
-    
-  }
+  
   setQuestionPaper()
   {
      if(!this.selectedQuizId)
      {
-       this.showModal=true;
+      this.showModal=true;
      }
      else
      {
        this._router.navigate(['/setQuestionPaper',this.selectedQuizId]);
      }
   }
-  
   closeModal(){
     this.showModal=false;
   }

@@ -8,7 +8,7 @@
             <h3>{{quiz.name}}</h3>
           </div>
           <div class="col-md-4">
-              <button *ngIf='quiz.questions.length' class="btn btn-default  pull-right" (click)="showExamForm();" >Create Quiz Exam </button>
+              <!-- <button *ngIf='quiz.questions.length' class="btn btn-default  pull-right" (click)="showExamForm();" >Create Quiz Exam </button> -->
               <button class="btn btn-default  pull-right" [routerLink]='["/createQuestion",quiz.id]'>Create Question </button>
           </div>
         </div>
@@ -28,7 +28,7 @@
             </div>
           </div>
         </div>
-        <div class="row" *ngIf='!quiz.questions.length'>
+        <div class="row" *ngIf='quiz.questions && !quiz.questions.length'>
           <div class="col-md-offset-5 col-md-7">
             <label class="form-label">Questions not found !!</label>
           </div>

@@ -11,10 +11,13 @@ export class AdminDashboardComponent implements OnInit {
   constructor(private _router:Router) { }
 
   ngOnInit() {
+   
   }
   onLogout()
   {
     localStorage.clear();
     this._router.navigateByUrl('/login')
   }
+
+ 
 }

@@ -36,7 +36,14 @@ export class QuizService {
                     .map(res=>res.json())
                     .catch(error=>CommonUtility.handleError(error));
   }
-
+  updateQuiz(quiz:QuizMaster):Observable<ApiResponse<QuizMaster>>
+  {
+    let options=CommonUtility.getRequestOptions();
+    
+    return this.http.post(CommonUtility.baseApiUrl+"Quiz/UpdateQuiz",JSON.stringify(quiz),options )
+                    .map(res=>res.json())
+                    .catch(error=>CommonUtility.handleError(error));
+  }
   removeQuiz(id:number)
   {
     debugger;
