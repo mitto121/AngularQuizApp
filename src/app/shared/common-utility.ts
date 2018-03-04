@@ -2,6 +2,7 @@ import { Observable } from "rxjs/Observable";
 
 import { Http, RequestOptions, RequestMethod, Headers } from '@angular/http';
 import { FormGroup, FormControl } from "@angular/forms";
+import { userInfo } from "os";
 
 
 export class CommonUtility {
@@ -12,10 +13,10 @@ export class CommonUtility {
     return Observable.throw(error);
   }
 
-   static getRequestOptions()  {
-    return new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json; charset=utf-8' }) }); 
+  static getRequestOptions() {
+    return new RequestOptions({ headers: new Headers({ 'Content-Type': 'application/json; charset=utf-8' }) });
   }
-  
+
   static validateAllFormFields(formGroup: FormGroup) {
     Object.keys(formGroup.controls).forEach(field => {
       const control = formGroup.get(field);
@@ -27,5 +28,14 @@ export class CommonUtility {
     });
   }
 
-  
+
+  static getAuthUserId() {
+    var userId: number;
+    let user = localStorage.getItem("user");
+    if (user) {
+      userId = JSON.parse(user).id;
+    }
+    return userId;
+  }
+
 }

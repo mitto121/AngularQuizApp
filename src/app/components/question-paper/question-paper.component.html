@@ -1,4 +1,4 @@
-<div class="container" *ngIf='!showResult'>
+<div class="container" >
 <div [ngClass]="{'submittedForm':quiz.hasAttempt}" >
   <div class="row" *ngIf="questions && questions.length">
     <div class="col-md-3 reviewPanel">
@@ -63,10 +63,8 @@
      </div> 
      <div class="row">
         <div class="col-md-12">
-            <button class="btn btnResult" *ngIf='showModal' (click)="showQuizResult();">View Result</button>
+            <button class="btn btnResult" [routerLink]="['/quizResult',quizId]" >View Result</button>
       </div>
     </div>
 </app-modal-window>
 
-
-<app-quiz-result *ngIf='showResult'  [questions]='quiz.questions' [testName]='quiz.name'></app-quiz-result>

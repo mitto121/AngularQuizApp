@@ -5,5 +5,5 @@ export class Option {
     questionId: number;
     quizId: number;
     isSelected: boolean;
-    isAnswer: boolean;
+    isAnswer: boolean;    
 }

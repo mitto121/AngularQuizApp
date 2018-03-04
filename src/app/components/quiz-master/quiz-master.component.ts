@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { QuizMaster } from '../../models/quiz-master';
 import { QuizService } from '../../services/quiz.service';
 import { Iquestion } from '../../models/iquestion';
+import { Router } from '@angular/router';
+import { CommonUtility } from '../../shared/common-utility';
 
 @Component({
   selector: 'app-quiz-master',
@@ -12,7 +14,8 @@ export class QuizMasterComponent implements OnInit {
   quizes: QuizMaster[];
   statusMessage = 'loading...';
 
-  constructor(private _quiz: QuizService) { }
+  constructor(private _quiz: QuizService,
+              private _router:Router) { }
 
   ngOnInit() {
 
@@ -21,5 +24,7 @@ export class QuizMasterComponent implements OnInit {
       (res) => this.quizes = res.result,
       (error) =>  this.statusMessage = error);
   }
+
+  
 
 }

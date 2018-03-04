@@ -6,6 +6,7 @@ import { Iquestion } from '../../models/iquestion';
 import { QuizMaster } from '../../models/quiz-master';
 import { Observable } from 'rxjs/Observable';
 import { Ioption } from '../../models/ioption';
+import { CommonUtility } from '../../shared/common-utility';
 
 
 @Component({
@@ -16,8 +17,7 @@ import { Ioption } from '../../models/ioption';
 export class QuestionPaperComponent implements OnInit {
   quizId: number;
   quiz: QuizMaster;
-  questions: Iquestion[];
-  showResult: boolean;
+  questions: Iquestion[];  
   showModal: boolean;
   noOfQuestions: number;
   PageIndex = 0;
@@ -72,24 +72,21 @@ export class QuestionPaperComponent implements OnInit {
 
   submitTest() {
     this.quiz.hasAttempt = true;
-    this.showModal = true;
-   
-    // this._quizService.submitTest(this.quiz)
-    // .toPromise().then()
-    // .catch(error=>this.handleError);
-    console.log(this.quiz);
+    
+    this._quizService.submitTest(this.quiz)
+                      .subscribe(res=>this.showModal=res,
+                       error=>console.log(error) 
+                      );
+ 
   }
 
   handleError(error: any) {
     console.log(error);
   }
 
-  showQuizResult() {
-    this.showModal = false;
-    this.showResult = true;
-  }
+
   closeModal(isShow) {
-    console.log('asd');
+    this.showModal=isShow;
   }
 
   selectedAnswer(question: Iquestion) {

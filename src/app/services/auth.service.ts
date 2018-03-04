@@ -7,8 +7,8 @@ export class AuthService {
   constructor() { }
 
   public isAuthenticated(): boolean {
-    const authtoken =localStorage.getItem("token");
-    if(authtoken) 
+    const user =localStorage.getItem("user");
+    if(user && JSON.parse(user).authToken) 
     {
        return true; 
     }

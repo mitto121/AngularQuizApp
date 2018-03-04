@@ -49,11 +49,10 @@ export class LoginComponent implements OnInit {
 
   authenticateUser(response:ApiResponse<UserAccount>)
   {
-    debugger;
     if(response && response.isSucceeded)
     {
-        localStorage.clear();                     
-        localStorage.setItem("token", JSON.stringify(response.result.authToken));
+        localStorage.clear(); 
+        localStorage.setItem("user", JSON.stringify(response.result));
         if(response.result && response.result.isAdmin)
         {
           this._router.navigateByUrl('/adminDashboard');

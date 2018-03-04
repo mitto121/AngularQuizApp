@@ -6,7 +6,7 @@
 <hr/>
 <div class="row">
   <div class="col-lg-3 col-md-3" *ngFor="let quiz of quizes">
-    <div class="panel panel-primary" [routerLink]="['/quiz',quiz.id]">
+    <div class="panel panel-primary" [routerLink]="['/startQuiz',quiz.id]">
       <div class="panel-heading">
           <h3 class="panel-title">{{quiz.name}}</h3>       
       </div>
@@ -16,3 +16,4 @@
     </div>
   </div>
 </div>
+

@@ -6,11 +6,18 @@
         </div>
     </div>    
     <div class="panel panel-primary">
-        <div style="padding-left:40%">  
-            <h2>{{testName}}</h2>
+        <div class="row">
+            <div class="col-md-offset-1 col-md-8">
+                    <h2>{{quizResult.name}}</h2>
+            </div>
+            <div class="col-md-3">
+              <label class="form-label">Durations: {{quizResult.duration}} minutes</label>  
+              <label class="form-label" *ngIf="quizResult.questions && quizResult.questions.length">Total Questions: {{quizResult.questions.length}}</label>
+              
+            </div>  
         </div>
       <hr/>    
-  <div *ngFor="let question of questions;let index = index;">
+  <div *ngFor="let question of quizResult.questions;let index = index;">
     <div>
       <app-question [question]='question' [questionNumber]='index+1' ></app-question>
       <app-question-result-stutas-bar [question]='question'></app-question-result-stutas-bar>

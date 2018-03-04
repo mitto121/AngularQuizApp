@@ -33,13 +33,16 @@ import { QuestionService } from './services/question-service.service';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { UserAccountService } from './services/user-account.service';
 import { CreateQuizTestComponent } from './components/create-quiz-test/create-quiz-test.component';
+import { StartQuizComponent } from './components/start-quiz/start-quiz.component';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
   { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'signup', component: SignUpComponent },
   { path: 'dashboard', component: QuizMasterComponent, canActivate: [AuthGuardService] },
+  { path: 'startQuiz/:id', component: StartQuizComponent, canActivate: [AuthGuardService] },
   { path: 'quiz/:id', component: QuestionPaperComponent, canActivate: [AuthGuardService] },
+  { path: 'quizResult/:id', component: QuizResultComponent, canActivate: [AuthGuardService] },
   { path: 'adminDashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService],children:[
     { path: 'quizes', component: QuizesComponent,outlet:"admin"}, 
     { path: '', redirectTo:'quizes', pathMatch:'full' },
@@ -76,6 +79,7 @@ const route: Route[] = [
     AdminDashboardComponent,
     QuestionListComponent,
     CreateQuizTestComponent,
+    StartQuizComponent,
   ],
   imports: [
     BrowserModule,
