@@ -53,7 +53,7 @@ export class QuizesComponent implements OnInit {
      }
      else
      {
-       this._router.navigate(['/setQuestionPaper',this.selectedQuizId]);
+       this._router.navigate(['/questionPaper',this.selectedQuizId]);
      }
   }
   closeModal(){

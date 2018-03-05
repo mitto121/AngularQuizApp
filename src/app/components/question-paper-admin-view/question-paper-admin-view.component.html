@@ -8,8 +8,7 @@
             <h3>{{quiz.name}}</h3>
           </div>
           <div class="col-md-4">
-              <!-- <button *ngIf='quiz.questions.length' class="btn btn-default  pull-right" (click)="showExamForm();" >Create Quiz Exam </button> -->
-              <button class="btn btn-default  pull-right" [routerLink]='["/createQuestion",quiz.id]'>Create Question </button>
+              <button class="btn btn-default  pull-right" [routerLink]='["/questionMaster/Create",quiz.id]'>Create Question </button>
           </div>
         </div>
         <div class="row">
@@ -40,8 +39,5 @@
 
 </div>
 
-<app-modal-window #modal modalTitle="Create Exam" (onCloseModal)="closeModal($event)" [showModal]='showExamCreationWindow'>
-  <div>  
-    <app-create-quiz-test (onsubmit)="createExam($event);" [totalQuestions]='quiz.questions.length' > </app-create-quiz-test>
-  </div>
-</app-modal-window>
+
+

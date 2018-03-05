@@ -11,18 +11,17 @@
         <div class="row">
           <div class="col-md-12">
             <label class="form-label">{{quiz.description}}</label>
-          </div>
+          </div>          
         </div>
         <div class="row">
           <div class="col-md-8" >
             <span *ngIf="!hasAttempt">click 'Start Quiz' button to Start Test</span>           
-            <span *ngIf="hasAttempt" >You have already attempt this quiz.</span>
+            <span *ngIf="hasAttempt" style="color:red" >You have already attempt this quiz.</span>
           </div>
         </div>
         <div class="row">
           <div class="col-md-offset-5">
               <button *ngIf="!hasAttempt" class="btn btn-primary" [routerLink]="['/quiz',quizId]"  >Start Quiz</button>
-              <button *ngIf="hasAttempt" class="btn btn-primary" [routerLink]="['/quizResult',quizId]">View Result</button>              
           </div>
         </div>
       </div>

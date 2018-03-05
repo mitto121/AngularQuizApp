@@ -1,18 +1,22 @@
-<!-- <div class="row">
+<div class="row">
     <nav class="navbar navbar-inverse">
         <div class="container-fluid">
             <div class="navbar-header">
                 <a class="navbar-brand" ng-disabled="true"> {{title}} !!</a>
             </div>
-            <ul  class="nav navbar-nav navbar-right" *ngIf='isLoggedIn$'  >
+            <ul class="nav navbar-nav navbar-right" *ngIf='!_authService.isLoggedIn'>
                 <li routerLinkActive="active">
-                  <a routerLink='login'>Log In</a>
+                    <a routerLink='login'>Log In</a>
                 </li>
                 <li routerLinkActive="active">
-                  <a routerLink='signup'>Sign Up</a>
+                    <a routerLink='signup'>Sign Up</a>
                 </li>
-              </ul>
-              
+            </ul>
+            <ul class="nav navbar-nav navbar-right" *ngIf='_authService.isLoggedIn'>
+                <li routerLinkActive="active">
+                    <a (click)="logOut();">Log Out</a>
+                </li>
+            </ul>
         </div>
     </nav>
-</div> -->
+</div>

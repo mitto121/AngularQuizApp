@@ -3,27 +3,66 @@
     <label class="form-label">Select Quiz :</label>
   </div>
   <div class="col-md-4">
-    <select class="form-control" (change)="onChange($event.target.value)" >
+    <select class="form-control" (change)="onChange($event.target.value)">
       <option *ngFor='let quiz of quizes' [value]="quiz.id">{{quiz.name}}</option>
     </select>
   </div>
-  <div class="col-md-offset-4 col-md-2">
-      <button class="btn btn-default" [routerLink]='["/createQuestion",selectedQuizId]' >Create Question </button>                             
+  <div class="col-md-3">
+    <input type="text" class="form-control" id="filterValue" placeholder="Search" [ngModel]='filterValue' (ngModelChange)='filterValue=$event'
+    />
+  </div>
+  <div class="col-md-3">
+    <button class="btn btn-primary pull-right" [routerLink]='["/questionMaster/Create",selectedQuizId]'>Create Question </button>
   </div>
 </div>
-<div class="card card-container" >
-  <div class="row"  >
-    <div *ngFor="let question of questions;let index = index;">
-      <div class="panel" *ngIf="question.isActive">
-        <div class="panel-body">
-          <app-question [question]='question' [questionNumber]='index+1'></app-question>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="row"  >
-  <div class="col-md-12">
-    <label *ngIf="questions && !questions.length">No result found !!</label>
-  </div>
-  </div>
+<hr/>
+<h4>Questions list</h4>
+
+<div class="table-responsive">
+  <table class="table table-striped table-bordered">
+    <thead class="bodyHead">
+      <tr>
+        <th width="7%">Question No.</th>
+        <th width="80%">Question</th>
+        <th colspan="3"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor='let question of questions|questionFilter:filterValue;let index=index;' [ngStyle]="{'background-color':question.isActive?'':'#c1c1c1'}">
+        <td>
+          {{index+1}}
+        </td>
+        <td>
+          <span>{{question.name}}</span>
+        </td>
+        <td>
+          <p data-placement="top" data-toggle="tooltip" title="View">
+            <button class="btn btn-primary btn-xs" data-title="View" data-toggle="modal" [routerLink]="['/question',question.id,'VIEW']">
+              <span class="glyphicon glyphicon-eye-open"></span>
+            </button>
+          </p>
+        </td>
+        <td>
+          <p *ngIf="question.isActive" data-placement="top" data-toggle="tooltip" title="Edit">
+            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" [routerLink]="['/question',question.id,'EDIT']">
+              <span class="glyphicon glyphicon-pencil"></span>
+            </button>
+          </p>
+          <p *ngIf="!question.isActive" data-placement="top" data-toggle="tooltip" title="Add to Quiz">
+            <button class="btn btn-primary btn-xs" data-title="Add" data-toggle="modal" (click)="activateQuestionsInQuiz(question.id);">
+              <span class="glyphicon glyphicon-plus"></span>
+            </button>
+          </p>
+        </td>
+        <td>
+          <p data-placement="top" data-toggle="tooltip" title="Delete" *ngIf="question.isActive">
+            <button class="btn btn-danger btn-xs" data-title="Delete" data-toggle="modal" (click)="removeQuestions(question.id);">
+              <span class="glyphicon glyphicon-trash"></span>
+            </button>
+          </p>
+        </td>
+
+      </tr>
+    </tbody>
+  </table>
 </div>

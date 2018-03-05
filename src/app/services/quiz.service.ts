@@ -13,8 +13,7 @@ import { ApiResponse } from '../models/api-response';
 @Injectable()
 export class QuizService {
   userId:number;
-  constructor(private http: Http) {   
-    this.userId=CommonUtility.getAuthUserId();
+  constructor(private http: Http) {       
    }
 
   getQuizes(): Observable<ApiResponse<QuizMaster[]>> {
@@ -41,7 +40,7 @@ export class QuizService {
   {
     let options=CommonUtility.getRequestOptions();
     
-    return this.http.post(CommonUtility.baseApiUrl+"Quiz/UpdateQuiz",JSON.stringify(quiz),options )
+    return this.http.put(CommonUtility.baseApiUrl+"Quiz/UpdateQuiz",JSON.stringify(quiz),options )
                     .map(res=>res.json())
                     .catch(error=>CommonUtility.handleError(error));
   }
@@ -58,11 +57,15 @@ export class QuizService {
 
   CheckQuizHasAttemptedOrNot(quizId:number):Observable<boolean>
   {
+    this.userId=CommonUtility.getAuthUserId();
+
     return this.http.get(CommonUtility.baseApiUrl+"Quiz/CheckQuizHasAttempted/"+quizId+"/"+this.userId)
     .map(res=>res.json())
     .catch(err=>CommonUtility.handleError(err));
   }
   submitTest(quiz: QuizMaster) {
+    this.userId=CommonUtility.getAuthUserId();
+
     let options=CommonUtility.getRequestOptions();
     
    return this.http.post(CommonUtility.baseApiUrl+"Quiz/SubmitQuiz/"+this.userId,JSON.stringify(quiz),options)
@@ -72,6 +75,8 @@ export class QuizService {
 
  getQuizResult(quizId:Number):Observable<QuizMaster>
  {
+  this.userId=CommonUtility.getAuthUserId();
+  
    return this.http.get(CommonUtility.baseApiUrl+"Quiz/QuizResult/"+quizId+"/"+this.userId)
    .map(res=>res.json())
    .catch(err=>CommonUtility.handleError(err));   

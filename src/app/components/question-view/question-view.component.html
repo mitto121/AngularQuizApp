@@ -1,0 +1,29 @@
+<div class="panel" *ngIf="question">
+  <div class="panel-body">
+    <h4>
+      <span  *ngIf='!isEditable' [innerHTML]="question.name"></span>
+      <textarea  class="form-control" *ngIf='isEditable' [ngModel]='question.name' ></textarea>
+    </h4>
+    <div class="row text-left options">
+      <div class="col-md-6" *ngFor="let option of question.options">
+            <div class="row">
+              <div class="col-md-1">
+                <input [id]="option.id" type="radio" [value]="option.code" [checked]="option.isAnswer" (change)="selectAnswer(option);" [disabled]='!isEditable' />
+              </div>
+              <div class="col-md-11 form-group">
+                <span *ngIf='!isEditable'> {{option.name}}</span>
+                <textarea  class="form-control" *ngIf='isEditable' [ngModel]='option.name' ></textarea>
+              </div>
+            </div>   
+      </div>
+    </div>
+  </div>
+  <div class="panel-footer">
+    <div class="row">
+      <div class="col-md-offset-5">
+          <button  class="btn btn-primary" *ngIf='isEditable' (click)="onSubmit();">Save</button>        
+        <button class="btn btn-primary" (click)="onCancel();">Cancel</button>
+      </div>
+    </div>
+  </div>
+</div>

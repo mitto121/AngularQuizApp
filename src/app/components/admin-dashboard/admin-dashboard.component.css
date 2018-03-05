@@ -79,6 +79,7 @@ nav.sidebar, .main{
         border: 0;
         -webkit-box-shadow: none;
         box-shadow: none;
+        
     }
 
     /*allows nav box to use 100% width*/

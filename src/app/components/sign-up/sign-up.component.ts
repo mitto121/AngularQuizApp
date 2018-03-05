@@ -72,15 +72,18 @@ export class SignUpComponent implements OnInit {
     }
   }
   
-  passwordConfirming(c: FormControl): { isNotEqual: boolean } {
+  passwordConfirming(c: FormControl): { isNotEqual: boolean } {    
     if (c.parent) {
+      console.log(c.parent.value['password']);
       if (c.parent.value['password'] !== c.value) {
-        c.setErrors({ MatchPassword: true })
+        c.setErrors({ MatchPassword: false })
       } else {
         return null
       }
     }
-
-    return null;
+    else
+    {
+      return null;
+    }   
   }
 }

@@ -19,7 +19,7 @@ export class LoginComponent implements OnInit {
 
   constructor(private _router: Router,
               private _authenticateUserService:AuthenticateUserService ) { 
-                this.loginStatusMsg="";
+                this.loginStatusMsg="";                
                }
 
   ngOnInit() {

@@ -43,6 +43,6 @@ export class StartQuizComponent implements OnInit {
   closeModal() {
     this._location.back();
   }
-
+  
 
 }

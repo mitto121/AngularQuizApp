@@ -1,19 +1,63 @@
-<div class="row">
-  <div class="col-md-6">
-    <h3>Angular Quiz Application</h3>
-  </div>  
-</div>
-<hr/>
-<div class="row">
-  <div class="col-lg-3 col-md-3" *ngFor="let quiz of quizes">
-    <div class="panel panel-primary" [routerLink]="['/startQuiz',quiz.id]">
-      <div class="panel-heading">
-          <h3 class="panel-title">{{quiz.name}}</h3>       
-      </div>
-      <div class="panel-body">
-        {{quiz.description}}      
-      </div>
+<div class="panel panel-default ">
+    <div class="panel-heading">
+        <h3 class="panel-title">Quiz Master</h3>       
     </div>
+  <div class="panel-body containerWindow">
+
+    <form class="form-horizontal" [formGroup]="quizMasterForm">
+      <div class="row">
+        <div class="col-md-3">
+          <label for="name">Name</label>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input id="name" type="text" class="form-control" formControlName="Name" placeholder="Enter Quiz Name"  [attr.disabled]='(quizId)' >
+            <show-validation-error [control]="quizMasterForm.controls.Name"></show-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="description">Description</label>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <textarea id="description" class="form-control" formControlName="Description" placeholder="Enter description" col="80" row="25"></textarea>
+            <show-validation-error [control]="quizMasterForm.controls.Description"></show-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="duration">Duration</label>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input id="duration" type="number" class="form-control" formControlName="Duration" placeholder="Enter duration">
+            <show-validation-error [control]="quizMasterForm.controls.Duration"></show-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <div class="col-md-3">
+          <label for="passingPercentage">Passing Percentage</label>
+        </div>
+        <div class="col-md-6">
+          <div class="form-group">
+            <input id="passingPercentage" type="number" class="form-control" formControlName="Passing_Percentage"  placeholder="Enter passing percentage">
+            <show-validation-error [control]="quizMasterForm.controls.Passing_Percentage"></show-validation-error>
+          </div>
+        </div>
+      </div>
+      <div class="row">
+        <span>{{statusMessage}}</span>
+      </div>
+      <div class="row">
+        <div class="col-md-offset-5">
+          <button type="submit" class="btn btn-primary" (click)="onSubmit();">Save</button>
+          <button  class="btn btn-primary" (click)="onCancel();">Cancel</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
-

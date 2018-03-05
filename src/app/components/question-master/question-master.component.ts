@@ -10,11 +10,11 @@ import { QuestionService } from '../../services/question-service.service';
 
 
 @Component({
-  selector: 'app-create-question',
-  templateUrl: './create-question.component.html',
-  styleUrls: ['./create-question.component.css']
+  selector: 'app-question-master',
+  templateUrl: './question-master.component.html',
+  styleUrls: ['./question-master.component.css']
 })
-export class CreateQuestionComponent implements OnInit {
+export class QuestionMasterComponent implements OnInit {
   quizId: number;
   question: Iquestion;
   isAddOptionEnable: boolean;
@@ -100,5 +100,9 @@ export class CreateQuestionComponent implements OnInit {
         },
         error => console.error(error)
       );
+  }
+  closeModal(isdisplay)
+  {
+    this.showQuestionModal=isdisplay;
   }
 }

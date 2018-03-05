@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { QuizMasterComponent } from './quiz-master.component';
 
-describe('QuizMasterComponent', () => {
+describe('AddQuizComponent', () => {
   let component: QuizMasterComponent;
   let fixture: ComponentFixture<QuizMasterComponent>;
 

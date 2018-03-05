@@ -7,6 +7,7 @@ import { QuizMaster } from '../../models/quiz-master';
 import { Observable } from 'rxjs/Observable';
 import { Ioption } from '../../models/ioption';
 import { CommonUtility } from '../../shared/common-utility';
+import { Location } from '@angular/common'
 
 
 @Component({
@@ -17,7 +18,7 @@ import { CommonUtility } from '../../shared/common-utility';
 export class QuestionPaperComponent implements OnInit {
   quizId: number;
   quiz: QuizMaster;
-  questions: Iquestion[];  
+  questions: Iquestion[];
   showModal: boolean;
   noOfQuestions: number;
   PageIndex = 0;
@@ -26,6 +27,7 @@ export class QuestionPaperComponent implements OnInit {
 
   constructor(private _activatedRoute: ActivatedRoute,
     private _router: Router,
+    private _location: Location,
     private _quizService: QuizService) {
     this.quiz = new QuizMaster();
   }
@@ -35,13 +37,13 @@ export class QuestionPaperComponent implements OnInit {
     this.quizId = this._activatedRoute.snapshot.params['id'];
     this._quizService.getQuizById(this.quizId)
       .subscribe(
-      (res) => {
-        this.quiz = res;
-        this.questions = this.quiz.questions;
-        this.noOfQuestions = this.questions.length;
-      },
-      (error) => this.handleError);
-   
+        (res) => {
+          this.quiz = res;
+          this.questions = this.quiz.questions;
+          this.noOfQuestions = this.questions.length;
+        },
+        (error) => this.handleError);
+
   }
 
 
@@ -71,13 +73,15 @@ export class QuestionPaperComponent implements OnInit {
   }
 
   submitTest() {
-    this.quiz.hasAttempt = true;
-    
-    this._quizService.submitTest(this.quiz)
-                      .subscribe(res=>this.showModal=res,
-                       error=>console.log(error) 
-                      );
- 
+    if (confirm('Are you sure to submit this Test ?')) {
+      this.quiz.hasAttempt = true;
+
+      this._quizService.submitTest(this.quiz)
+        .subscribe(res => this.showModal = res,
+          error => console.log(error)
+        );
+    }
+
   }
 
   handleError(error: any) {
@@ -86,7 +90,7 @@ export class QuestionPaperComponent implements OnInit {
 
 
   closeModal(isShow) {
-    this.showModal=isShow;
+    this.showModal = isShow;
   }
 
   selectedAnswer(question: Iquestion) {

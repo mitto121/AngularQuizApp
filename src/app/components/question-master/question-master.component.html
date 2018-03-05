@@ -35,7 +35,7 @@
   </div>
 </div>
 
-<app-modal-window modalTitle="success !!"  [showModal]='showQuestionModal' [hideCloseBtn]='false' >
+<app-modal-window modalTitle="success !!" (onCloseModal)="closeModal($event)"  [showModal]='showQuestionModal'  >
   <div>
       <span class="highlightText">Please set correct Answer to this question</span>
       <hr>
@@ -51,3 +51,4 @@
     </div>
   </div>
 </app-modal-window>
+

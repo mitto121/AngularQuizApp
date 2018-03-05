@@ -12,9 +12,9 @@ import { resolve } from 'dns';
 })
 export class QuestionPaperAdminViewComponent implements OnInit {
   quizId: number;
-  quiz: QuizMaster;  
-  showExamCreationWindow:boolean;
-  
+  quiz: QuizMaster;
+  showExamCreationWindow: boolean;
+
   constructor(private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _quizService: QuizService,
@@ -27,45 +27,35 @@ export class QuestionPaperAdminViewComponent implements OnInit {
 
     this._quizService.getQuizById(this.quizId).subscribe(
       (res) => this.quiz = res,
-      (error) => console.error(error)
+      (error) => console.error(error),
+      () => this.displayQuestionWithAnswer()
     );
 
   }
-
+  displayQuestionWithAnswer() {
+    this.quiz.questions.forEach(x => x.options.forEach(x => x.isSelected = x.isAnswer));
+  }
   removeQuestion(questionId) {
-    if (confirm("are you sure to remove this question ?")) {
-      let isSucceeded:boolean;
-       this._questionService.removeQuestion(questionId)
-       .subscribe(
-         res =>this.removeQuestionSuccessMethod(res,questionId),
-         error=> console.error(error)              
-      );     
-    }    
+    if (confirm("Are you sure to remove this question ?")) {
+      let isSucceeded: boolean;
+      this._questionService.removeQuestion(questionId)
+        .subscribe(
+          res => this.removeQuestionSuccessMethod(res, questionId),
+          error => console.error(error)
+        );
+    }
   }
 
-  removeQuestionSuccessMethod(isSuccess:boolean,questionId:number)
-  {
-     if(isSuccess)
-     {
-       this.quiz.questions.find(x=>x.id==questionId).isActive=false;
-     }
-     else
-     {
-       alert("Deletion failed !!");
-     }
+  removeQuestionSuccessMethod(isSuccess: boolean, questionId: number) {
+    if (isSuccess) {
+      this.quiz.questions.find(x => x.id == questionId).isActive = false;
+    }
+    else {
+      alert("Deletion failed !!");
+    }
   }
-  closeModal(val)
-  {
-    this.showExamCreationWindow=val;
+  closeModal(val) {
+    this.showExamCreationWindow = val;
   }
-  showExamForm()
-  {
-    if(confirm("Warning !! After create exam, you can't add question to this. Are you sure to continue ?" ))
-    this.showExamCreationWindow=true;
-
-  }
-  createExam(val)
-  {    
-    this.showExamCreationWindow=val;
-  }
+  
 }
