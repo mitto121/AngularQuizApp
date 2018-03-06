@@ -1,9 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit,Input } from '@angular/core';
 import { Question } from '../../models/question';
 import { ActivatedRoute } from '@angular/router';
 import { QuestionService } from '../../services/question-service.service';
 import {Location} from '@angular/common'
 import { Ioption } from '../../models/ioption';
+
 
 @Component({
   selector: 'app-question-view',
@@ -11,7 +12,7 @@ import { Ioption } from '../../models/ioption';
   styleUrls: ['./question-view.component.css']
 })
 export class QuestionViewComponent implements OnInit {
-
+ 
   questionId:number;
   viewMode:string;
   question:Question;
@@ -20,7 +21,7 @@ export class QuestionViewComponent implements OnInit {
               private _questionService:QuestionService,
               private _location:Location) { }
 
-  ngOnInit() {
+  ngOnInit() {    
     this.questionId=Number(this._activedRoute.snapshot.params['id']);
     this.viewMode=this._activedRoute.snapshot.params['viewMode'];
     this.isEditable=this.viewMode=='EDIT';
@@ -37,5 +38,22 @@ export class QuestionViewComponent implements OnInit {
   onCancel()
   {
     this._location.back();
+  }
+  onSubmit()
+  {
+    this._questionService.UpdateQuestion(this.question)
+    .subscribe(
+      res => {
+        if(res)
+        {
+          this._location.back();
+        }
+        else
+        {
+          alert('Failed !! something is wrong ,please try agin');
+        }
+      },
+      error => console.error(error)
+    );
   }
 }

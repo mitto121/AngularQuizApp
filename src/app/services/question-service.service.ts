@@ -26,6 +26,14 @@ export class QuestionService {
     .map(res=>res)
     .catch(CommonUtility.handleError);
   }
+  public UpdateQuestion(question:Iquestion)
+  {    
+    let options = CommonUtility.getRequestOptions();
+         
+    return this.http.put(CommonUtility.baseApiUrl+"Question/UpdateQuestion", JSON.stringify(question), options )
+    .map(res=>res)
+    .catch(CommonUtility.handleError);
+  }
 
   removeQuestion(id:number):Observable<boolean> 
   {    

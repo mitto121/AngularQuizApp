@@ -35,6 +35,7 @@ import { StartQuizComponent } from './components/start-quiz/start-quiz.component
 import { QuestionFilterPipe } from './shared/question-filter.pipe';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { QuestionViewComponent } from './components/question-view/question-view.component';
+import { PagingComponent } from './components/shared/paging/paging.component';
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -85,6 +86,7 @@ const route: Route[] = [
     QuestionListComponent,
     StartQuizComponent,
     QuestionViewComponent,
+    PagingComponent,
   ],
   imports: [
     BrowserModule,

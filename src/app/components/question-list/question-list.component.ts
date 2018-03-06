@@ -11,12 +11,11 @@ import { QuestionService } from '../../services/question-service.service';
   styleUrls: ['./question-list.component.css']
 })
 export class QuestionListComponent implements OnInit {
-
-
   quizes: QuizMaster[];
   questions: Iquestion[]
   selectedQuizId: number;
-  filterValue: string;
+  filterValue: string; 
+  startIndex:number;
 
   constructor(private _quizService: QuizService,
               private _questionService:QuestionService) { }
@@ -25,19 +24,27 @@ export class QuestionListComponent implements OnInit {
     this._quizService.getQuizes()
       .subscribe(res => {
         this.quizes = res.result;
-        this.selectedQuizId = this.quizes[0].id;
+        this.selectedQuizId=this.quizes[0].id;        
       },
         err => console.error(err),
         () => this.loadQuestionbyQuiz()
       );
   }
 
-  onChange(id) {
+  onChange(id:number) {
+    localStorage.removeItem('quizId');
+    localStorage.setItem('quizId',String(id));
     this.selectedQuizId = id;
     this.loadQuestionbyQuiz();
   }
 
   loadQuestionbyQuiz() {
+    debugger;
+    if(localStorage.getItem('quizId'))
+    {
+      this.selectedQuizId=Number(localStorage.getItem('quizId'));
+    }
+    
     this.questions = this.quizes.find(x => x.id == this.selectedQuizId).questions;
   }
   removeQuestions(id:number)
@@ -69,4 +76,7 @@ export class QuestionListComponent implements OnInit {
       alert(statusMessage);
     }
   }
+ 
+ 
+
 }

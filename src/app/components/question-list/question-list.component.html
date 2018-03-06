@@ -3,7 +3,7 @@
     <label class="form-label">Select Quiz :</label>
   </div>
   <div class="col-md-4">
-    <select class="form-control" (change)="onChange($event.target.value)">
+    <select class="form-control" [(ngModel)]='selectedQuizId' (change)="onChange($event.target.value)">
       <option *ngFor='let quiz of quizes' [value]="quiz.id">{{quiz.name}}</option>
     </select>
   </div>
@@ -44,7 +44,7 @@
         </td>
         <td>
           <p *ngIf="question.isActive" data-placement="top" data-toggle="tooltip" title="Edit">
-            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" [routerLink]="['/question',question.id,'EDIT']">
+            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"  [routerLink]="['/question',question.id,'EDIT']">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </p>
@@ -66,3 +66,5 @@
     </tbody>
   </table>
 </div>
+<app-paging *ngIf='questions && questions.length' #paging  [totalRecords]="questions.length"></app-paging>
+
