@@ -8,7 +8,7 @@
 				<span class="icon-bar"></span>
 				<span class="icon-bar"></span>
 			</button>
-			<a class="navbar-brand"  >Dashboard</a>
+			<a class="navbar-brand">Dashboard</a>
 		</div>
 		<!-- Collect the nav links, forms, and other content for toggling -->
 		<div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
@@ -22,12 +22,12 @@
 					<a [routerLink]="[{outlets:{admin:['questions']}}]">Questions
 						<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
 					</a>
-				</li>		
-				<li>
-						<a [routerLink]="[{outlets:{admin:['questions']}}]">Quiz Result
-							<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
-						</a>
-				</li>		
+				</li>
+				<li routerLinkActive="active">
+					<a [routerLink]="[{outlets:{admin:['quizBoard']}}]">Quiz Result
+						<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
+					</a>
+				</li>
 				<li style="cursor: pointer">
 					<a (click)='onLogout()'>Logout
 						<span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon"></span>
@@ -38,6 +38,6 @@
 	</div>
 </nav>
 <div class="main">
-	<router-outlet name="admin">	
+	<router-outlet name="admin">
 	</router-outlet>
 </div>

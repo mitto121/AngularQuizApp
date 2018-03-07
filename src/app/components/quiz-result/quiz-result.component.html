@@ -1,27 +1,35 @@
-
 <div class="container resultContainer">
     <div class="row">
-        <div class="col-md-12">         
-            <h2>Quiz Result</h2>      
+        <div class="col-md-12">
+            <h2>Quiz Result</h2>
         </div>
-    </div>    
+    </div>
     <div class="panel panel-primary">
-        <div class="row">
-            <div class="col-md-offset-1 col-md-8">
-                    <h2>{{quizResult.name}}</h2>
+        <div class="col-md-12 alert alert-info">
+            <div class="col-md-9">
+                <h3>{{quizResult.name}}</h3>
             </div>
             <div class="col-md-3">
-              <label class="form-label">Durations: {{quizResult.duration}} minutes</label>  
-              <label class="form-label" *ngIf="quizResult.questions && quizResult.questions.length">Total Questions: {{quizResult.questions.length}}</label>
-              
-            </div>  
+                <label class="form-label">Durations: {{quizResult.duration}} minutes</label>
+                <br>
+                <label class="form-label" >Total Questions: {{quizResult.totalQuestions}}</label>
+                <br>
+                <label class="form-label" >Total Attempted : {{quizResult.totalQuestionsAttempt}}</label>
+                <br>
+                <label class="form-label" >Total Correct Answer : {{quizResult.totalCorrectAnswer}}</label>
+                <br>
+                <label class="form-label" >Total Wrong Answer : {{quizResult.totalWrongAnswer}}</label>
+                <br>
+                <label class="form-label" >Result : {{quizResult.resultStatus}}</label>
+            </div>
         </div>
-      <hr/>    
-  <div *ngFor="let question of quizResult.questions;let index = index;">
-    <div>
-      <app-question [question]='question' [questionNumber]='index+1' ></app-question>
-      <app-question-result-stutas-bar [question]='question'></app-question-result-stutas-bar>
+
+        <div *ngFor="let question of quizResult.questions;let index = index;">
+            <div>
+                <app-question [question]='question' [questionNumber]='index+1'></app-question>
+                <app-question-result-stutas-bar [question]='question'></app-question-result-stutas-bar>
+            </div>
+        </div>
+  
     </div>
-  </div>
-</div>
 </div>

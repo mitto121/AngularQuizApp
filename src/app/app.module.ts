@@ -35,7 +35,8 @@ import { StartQuizComponent } from './components/start-quiz/start-quiz.component
 import { QuestionFilterPipe } from './shared/question-filter.pipe';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { QuestionViewComponent } from './components/question-view/question-view.component';
-import { PagingComponent } from './components/shared/paging/paging.component';
+import { QuizBoardComponent } from './components/quiz-board/quiz-board.component';
+
 
 const route: Route[] = [
   { path: 'login', component: LoginComponent },
@@ -46,12 +47,14 @@ const route: Route[] = [
   { path: 'quizMaster/Edit/:id', component: QuizMasterComponent, canActivate: [AuthGuardService] },
   { path: 'startQuiz/:id', component: StartQuizComponent, canActivate: [AuthGuardService] },
   { path: 'quiz/:id', component: QuestionPaperComponent, canActivate: [AuthGuardService] },
-  { path: 'quizResult/:id', component: QuizResultComponent, canActivate: [AuthGuardService] },
+  { path: 'quizResult/:id/:participantId', component: QuizResultComponent, canActivate: [AuthGuardService] },
   {
     path: 'adminDashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService], data: { userRole: 'ADMIN' }, children: [
       { path: 'quizes', component: QuizesComponent, outlet: "admin" },
       { path: '', redirectTo: 'quizes', pathMatch: 'full' },
-      { path: 'questions', component: QuestionListComponent, outlet: "admin" }
+      { path: 'questions', component: QuestionListComponent, outlet: "admin" },
+      { path: 'quizBoard', component: QuizBoardComponent, outlet: "admin"  },
+      
     ]
   },
   { path: 'questionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService], data: { userRole: 'ADMIN' } },
@@ -86,7 +89,7 @@ const route: Route[] = [
     QuestionListComponent,
     StartQuizComponent,
     QuestionViewComponent,
-    PagingComponent,
+    QuizBoardComponent,        
   ],
   imports: [
     BrowserModule,

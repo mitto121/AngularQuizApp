@@ -8,6 +8,8 @@ import { Response } from '@angular/http/src/static_response';
 import { Iquestion } from '../models/iquestion';
 import { CommonUtility } from '../shared/common-utility';
 import { ApiResponse } from '../models/api-response';
+import { QuizParticipant } from '../models/quiz-participant';
+import { QuizResult } from '../models/quiz-result';
 
 
 @Injectable()
@@ -73,15 +75,19 @@ export class QuizService {
          .catch(err=>CommonUtility.handleError(err));
   }
 
- getQuizResult(quizId:Number):Observable<QuizMaster>
+ getQuizResult(quizId:Number,participantId:number):Observable<QuizResult>
  {
-  this.userId=CommonUtility.getAuthUserId();
-  
-   return this.http.get(CommonUtility.baseApiUrl+"Quiz/QuizResult/"+quizId+"/"+this.userId)
+    
+   return this.http.get(CommonUtility.baseApiUrl+"Quiz/QuizResult/"+quizId+"/"+participantId)
    .map(res=>res.json())
    .catch(err=>CommonUtility.handleError(err));   
  }
   
+ getQuizParticipants(id: number): Observable<QuizParticipant[]> {   
+  return this.http.get(CommonUtility.baseApiUrl+'Quiz/QuizParticipants/'+id)
+  .map(res => res.json())
+  .catch(this.handleError);
+}
     
   handleError(error: Response) {
     return Observable.throw(error);

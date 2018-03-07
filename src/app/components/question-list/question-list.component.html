@@ -63,8 +63,31 @@
         </td>
 
       </tr>
+      <tr *ngIf="questions && !questions.length">
+        <td colspan="5">
+          <label class="no-result">No records found</label>
+        </td>
+      </tr>
+
     </tbody>
   </table>
 </div>
-<app-paging *ngIf='questions && questions.length' #paging  [totalRecords]="questions.length"></app-paging>
+
+<!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
+  <li [ngClass]="{disabled:pager.currentPage === 1}">
+      <a (click)="setPaging(1)">First</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === 1}">
+      <a (click)="setPaging(pager.currentPage - 1)">Previous</a>
+  </li>
+  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
+      <a (click)="setPaging(page)">{{page}}</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalRecords}">
+      <a (click)="setPaging(pager.currentPage + 1)">Next</a>
+  </li>
+  <li [ngClass]="{disabled:pager.currentPage === pager.totalRecords}">
+      <a (click)="setPaging(pager.totalRecords)">Last</a>
+  </li>
+</ul> -->
 
