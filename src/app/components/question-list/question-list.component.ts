@@ -18,6 +18,10 @@ export class QuestionListComponent implements OnInit {
   selectedQuizId: number;
   filterValue: string;
 
+  questionId:number;
+  actionMode:string;
+  showModal:boolean;
+
   pager: PagingModel<Iquestion[]>;
 
   constructor(private _quizService: QuizService,
@@ -85,7 +89,16 @@ export class QuestionListComponent implements OnInit {
       alert(statusMessage);
     }
   }
-
-
+  openQuestionModal(id:number,mode:string)
+  {
+     this.questionId=id;
+     this.actionMode=mode;
+     this.showModal=true;
+  }
+  closeModal(isShow)
+  {
+      this.showModal=isShow;
+  }
+  
 
 }

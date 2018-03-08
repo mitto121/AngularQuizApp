@@ -84,7 +84,7 @@ export class QuestionMasterComponent implements OnInit {
   }
   createQuestion() {
     localStorage.removeItem('question');
-    this.question.QuizId = this.quizId;
+    this.question.quizId = this.quizId;
 
     this._questionService.CreateQuestion(this.question)
       .subscribe(

@@ -16,6 +16,9 @@ export class QuestionComponent implements OnInit {
   @Input()
   questionNumber: number;
 
+  @Input()
+  isReadOnly: boolean;
+
   @Output() onSelect:EventEmitter<Iquestion>=new EventEmitter();
 
 

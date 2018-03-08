@@ -1,0 +1,11 @@
+.options input[type=checkbox] {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    height: 16px;
+    width: 18px;
+}
+.tblQuestion{
+    overflow-y:scroll;
+    height:300px;
+    display:block;
+ }

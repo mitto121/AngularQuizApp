@@ -3,8 +3,9 @@ import { Ioption } from './ioption';
 export class Question {
     id: number;
     name: string;
-    QuizId: number;
+    quizId: number;
     options: Ioption[];
     isAttempt: boolean;
     isActive:boolean;
+    isSelected:boolean;
 }

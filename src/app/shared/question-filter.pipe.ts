@@ -7,8 +7,7 @@ import { Question } from '../models/question';
 })
 export class QuestionFilterPipe implements PipeTransform {
 
-  transform(value: Question[], filterBy: string,aa): Question[] {
-    debugger;
+  transform(value: Question[], filterBy: string,aa): Question[] {    
     filterBy = (filterBy) ? filterBy.toLowerCase() : null;
 
     return filterBy ? value.filter(

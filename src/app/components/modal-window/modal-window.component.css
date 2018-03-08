@@ -10,8 +10,15 @@
     overflow: auto; /* Enable scroll if needed */
     background-color: rgb(0,0,0); /* Fallback color */
     background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    overflow: hidden;
+    
 }
 .modal-header{
     background-color: darkcyan !important;
     color: blanchedalmond ;
+}
+
+.modal-dialog{
+    width: 720px;
+    overflow: hidden;
 }

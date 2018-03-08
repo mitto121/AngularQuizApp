@@ -8,7 +8,8 @@
             <h3>{{quiz.name}}</h3>
           </div>
           <div class="col-md-4">
-              <button class="btn btn-default  pull-right" [routerLink]='["/questionMaster/Create",quiz.id]'>Create Question </button>
+            <button class="btn btn-default pull-right" [routerLink]='["/questionMaster/Create",quiz.id]'>Create Question </button>
+            <button class="btn btn-default pull-right" (click)="showQuestionListModal=true">Select from existing questions</button>
           </div>
         </div>
         <div class="row">
@@ -22,7 +23,7 @@
                 </div>
               </div>
               <div class="panel-body">
-                <app-question [question]='question' [questionNumber]='index+1'></app-question>
+                <app-question [question]='question' [isReadOnly]="true"></app-question>
               </div>
             </div>
           </div>
@@ -38,6 +39,10 @@
   </div>
 
 </div>
-
-
-
+<ng-template [ngIf]="showQuestionListModal">
+  <app-modal-window modalTitle="Add Questions to Quiz" (onCloseModal)="closeModal($event)" [showModal]='showQuestionListModal'>
+    <div>
+      <app-questions-list-dialog [quizId]="quizId" (onSuccess)="closeModal($event)" ></app-questions-list-dialog>
+    </div>
+  </app-modal-window>
+</ng-template>

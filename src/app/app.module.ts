@@ -36,6 +36,7 @@ import { QuestionFilterPipe } from './shared/question-filter.pipe';
 import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { QuestionViewComponent } from './components/question-view/question-view.component';
 import { QuizBoardComponent } from './components/quiz-board/quiz-board.component';
+import { QuestionsListDialogComponent } from './components/questions-list-dialog/questions-list-dialog.component';
 
 
 const route: Route[] = [
@@ -89,7 +90,8 @@ const route: Route[] = [
     QuestionListComponent,
     StartQuizComponent,
     QuestionViewComponent,
-    QuizBoardComponent,        
+    QuizBoardComponent,    
+    QuestionsListDialogComponent,        
   ],
   imports: [
     BrowserModule,

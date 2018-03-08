@@ -37,14 +37,14 @@
         </td>
         <td>
           <p data-placement="top" data-toggle="tooltip" title="View">
-            <button class="btn btn-primary btn-xs" data-title="View" data-toggle="modal" [routerLink]="['/question',question.id,'VIEW']">
+            <button class="btn btn-primary btn-xs" data-title="View" data-toggle="modal" (click)="openQuestionModal(question.id,'VIEW');">
               <span class="glyphicon glyphicon-eye-open"></span>
             </button>
           </p>
         </td>
         <td>
           <p *ngIf="question.isActive" data-placement="top" data-toggle="tooltip" title="Edit">
-            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal"  [routerLink]="['/question',question.id,'EDIT']">
+            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" (click)="openQuestionModal(question.id,'EDIT');" >
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </p>
@@ -72,7 +72,13 @@
     </tbody>
   </table>
 </div>
-
+<ng-template [ngIf]="showModal">
+  <app-modal-window modalTitle="Question Master" (onCloseModal)="closeModal($event)" [showModal]='showModal'>
+    <div>
+      <app-question-view [questionId]="questionId" [viewMode]="actionMode" (onSuccess)="closeModal($event)" ></app-question-view>
+    </div>
+  </app-modal-window>
+</ng-template>
 <!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
   <li [ngClass]="{disabled:pager.currentPage === 1}">
       <a (click)="setPaging(1)">First</a>
@@ -90,4 +96,3 @@
       <a (click)="setPaging(pager.totalRecords)">Last</a>
   </li>
 </ul> -->
-

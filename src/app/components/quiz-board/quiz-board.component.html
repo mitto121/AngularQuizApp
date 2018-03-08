@@ -50,17 +50,15 @@
               <div class="col-md-4">
               <select class="form-control" [ngModel]="searchBy" (change)="onfilterChange($event.target.value)" >
                 <option value="name" >Name</option>
-                <option value="date" >Date</option>
-                <option value="time" >Time</option>
+                <option value="date" >Date</option>               
               </select>             
             </div>
             <div class="col-md-5">
               <input type="text" class="form-control"  [(ngModel)]="searchValue" *ngIf="searchBy=='name'"/>
-              <input type="date" class="form-control"  [(ngModel)]="searchValue" *ngIf="searchBy=='date'"/>
-              <input type="time" class="form-control" [(ngModel)]="searchValue" *ngIf="searchBy=='time'"/>         
+              <input type="date" class="form-control"  [(ngModel)]="searchValue" *ngIf="searchBy=='date'"/>                       
             </div>
             <div class="col-md-1">
-                <button class="btn pull-left btn-xls">search</button>
+                <button class="btn pull-left btn-xls" (click)='onSearch();'>search</button>
             </div>
           </div>
           <hr>
@@ -69,7 +67,7 @@
           <h4>Participant list</h4>
         </div>
         <div class="col-md-4">
-            <label class="form-label" *ngIf="participants && participants.length">Total records: {{participants.length}} </label>  
+            <label class="form-label" *ngIf="participantsItems && participantsItems.length">Total records: {{participantsItems.length}} </label>  
         </div>      
       </div>
       <div class="row">
@@ -84,7 +82,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let participant of participants">
+              <tr *ngFor="let participant of participantsItems">
                 <td>{{participant.name}}</td>
                 <td>{{participant.date}}</td>
                 <td>{{participant.time}}</td>
@@ -92,7 +90,7 @@
                   <button class="btn btn-default" [routerLink]="['/quizResult',participant.quizId,participant.id]" >View Result</button>
                 </td>
               </tr>
-              <tr *ngIf="participants && !participants.length">
+              <tr *ngIf="participantsItems && !participantsItems.length">
                 <td colspan="4">
                   <label class="no-result">No records found</label>
                 </td>
@@ -105,4 +103,3 @@
   </div>
 </div>
 
-{{searchValue}}

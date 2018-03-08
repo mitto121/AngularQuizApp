@@ -13,8 +13,8 @@ import { resolve } from 'dns';
 export class QuestionPaperAdminViewComponent implements OnInit {
   quizId: number;
   quiz: QuizMaster;
-  showExamCreationWindow: boolean;
-
+  showQuestionListModal: boolean;
+  
   constructor(private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _quizService: QuizService,
@@ -55,7 +55,7 @@ export class QuestionPaperAdminViewComponent implements OnInit {
     }
   }
   closeModal(val) {
-    this.showExamCreationWindow = val;
+    this.showQuestionListModal = val;
   }
   
 }

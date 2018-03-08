@@ -12,10 +12,7 @@ body, html {
    
     margin-top: 10px;
 }
-.card-container.card {
-    /* max-height: 500px; */
-    /* overflow: auto;     */
-}
+
 .card {
     background-color: rgb(228, 228, 222);
     /* just in case there no content*/
