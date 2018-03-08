@@ -26,7 +26,6 @@ import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticateUserService } from './services/authenticate-user.service';
 import { QuestionPaperAdminViewComponent } from './components/question-paper-admin-view/question-paper-admin-view.component';
 import { QuestionMasterComponent } from './components/question-master/question-master.component';
-import { DisplayDirective } from './shared/display.directive';
 import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
 import { QuestionService } from './services/question-service.service';
 import { QuestionListComponent } from './components/question-list/question-list.component';
@@ -84,8 +83,7 @@ const route: Route[] = [
     QuizMasterComponent,
     ShowValidationErrorComponent,
     QuestionPaperAdminViewComponent,
-    QuestionMasterComponent,
-    DisplayDirective,
+    QuestionMasterComponent,    
     AdminDashboardComponent,
     QuestionListComponent,
     StartQuizComponent,
