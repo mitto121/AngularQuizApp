@@ -6,4 +6,5 @@ export class QuizParticipant {
     quizId:number;
     date:string;
     time:Time;
+    
 }

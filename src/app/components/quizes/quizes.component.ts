@@ -15,11 +15,13 @@ export class QuizesComponent implements OnInit {
   filterValue: string;
   selectedQuizId:number;
   showModal:boolean;
-
-
+  pageSize:number;
+  currentPageNumber:number;
+  
   constructor(private _quiz: QuizService,
               private _router:Router) {
-
+    this.pageSize=5;
+    this.currentPageNumber=1;
   }
 
   ngOnInit() {
@@ -53,11 +55,15 @@ export class QuizesComponent implements OnInit {
      }
      else
      {
-       this._router.navigate(['/questionPaper',this.selectedQuizId]);
+       this._router.navigate(['/questionPaper',this.selectedQuizId]); 
+            
      }
   }
   closeModal(){
     this.showModal=false;
   }
-  
+  navigateQuizLinkPage(id:number)
+  {
+    this._router.navigate(['/startQuiz',encodeURIComponent(String(id))])
+  }
 }

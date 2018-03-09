@@ -19,11 +19,12 @@
           <th width="21%"> Quiz Name </th>
           <th width="70%"> Description </th>
           <th width="7%">Duration</th>
+          <th>Test Link</th>
           <th colspan="2"></th>
         </tr>
       </thead>
       <tbody>
-        <tr *ngFor='let quiz of quizes|quizFilter:filterValue' [ngStyle]="{'display':quiz.isActive?'':'none'}">
+        <tr *ngFor='let quiz of quizes|quizFilter:filterValue| paginate:{ itemsPerPage: pageSize, currentPage: currentPageNumber }' [ngStyle]="{'display':quiz.isActive?'':'none'}">
           <th>
             <input type="checkbox" [checked]="selectedQuizId==quiz.id" (change)="selectedQuizId=quiz.id">
           </th>
@@ -32,9 +33,12 @@
           </td>
           <td>
             <span> {{quiz.description }}</span>
-          </td>
+          </td>          
           <td>
               <span> {{quiz.duration}}</span>
+          </td>
+          <td> 
+              <a target="_blank" [routerLink]="['/startQuiz',quiz.quizLinkId]"><i class="fa fa-chain"></i></a>              
           </td>
           <td>
             <p data-placement="top" data-toggle="tooltip" title="Edit">
@@ -53,6 +57,8 @@
         </tr>
       </tbody>
     </table>
+  <pagination-controls *ngIf="quizes && quizes.length>pageSize" (pageChange)="currentPageNumber = $event"></pagination-controls>
+    
   </div>
   <app-modal-window modalTitle="Alert !!" (onCloseModal)="closeModal($event)" [showModal]='showModal'  >
       

@@ -5,33 +5,77 @@
         </div>
     </div>
     <div class="panel panel-primary">
-        <div class="col-md-12 alert alert-info">
-            <div class="col-md-7">
-                <h3>{{quizResult.name}}</h3>
-            </div>
-            <div class="col-md-3">
-                <label class="form-label pull-right">Durations (In Minutes): {{quizResult.duration}} </label>
-                <br>
-                <label class="form-label pull-right">Total Questions: {{quizResult.totalQuestions}}</label>
-                <br>
-                <label class="form-label pull-right">Total Attempted : {{quizResult.totalQuestionsAttempt}}</label>
-            </div>
-            <div class="col-md-2">
-
-                <label class="form-label">Correct Answer : {{quizResult.totalCorrectAnswer}}</label>
-                <br>
-                <label class="form-label">Wrong Answer : {{quizResult.totalWrongAnswer}}</label>
-                <br>
-                <label class="form-label">Result : {{quizResult.resultStatus}}</label>
+        <div class="panel-heading">
+            <div class="panel-title">
+                <span class="pull-right" *ngIf="quizResult.duration">Duration :{{quizResult.duration}} minutes</span>
+                <h4>{{quizResult.name}}</h4>
             </div>
         </div>
+        <div class="panel-body">
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Total Questions </label>
+                    </div>
+                    <div class="col-md-2">
+                        <b> {{quizResult.totalQuestions}}</b>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Total Attempted </label>
+                    </div>
+                    <div class="col-md-2">
+                        <b> {{quizResult.totalQuestionsAttempt}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Correct Answer </label>
+                    </div>
+                    <div class="col-md-2">
+                        <b> {{quizResult.totalCorrectAnswer}}</b>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Wrong Answer </label>
+                    </div>
+                    <div class="col-md-2">
+                        <b>{{quizResult.totalWrongAnswer}}</b>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Marks (%)</label>
+                    </div>
+                    <div class="col-md-2">
+                        <b >{{quizResult.marksInPercentage}} </b>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div class="col-md-4">
+                        <label class="form-label">Result </label>
+                    </div>
+                    <div class="col-md-2">
+                        <b>{{quizResult.resultStatus}}</b>
+                    </div>
+                </div>
 
+            </div>
+
+        </div>
+    </div>
+    <div class="panel panel-primary">
         <div *ngFor="let question of quizResult.questions;let index = index;">
-            <div>                
+            <div>
                 <app-question [question]='question' [questionNumber]='index+1'></app-question>
                 <app-question-result-stutas-bar [question]='question'></app-question-result-stutas-bar>
             </div>
-        </div>
-
+        </div>  
     </div>
 </div>

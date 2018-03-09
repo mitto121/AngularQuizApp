@@ -13,12 +13,11 @@ export class QuizResultComponent implements OnInit {
 
   quizId: Number;
   participantId:number;
-  quizResult:QuizResult;
-  
+  quizResult:QuizResult; 
 
   constructor(private _activedRouter: ActivatedRoute,
               private _quizService:QuizService) {
-                this.quizResult=new QuizResult();
+                this.quizResult=new QuizResult();               
                }
 
   ngOnInit() {

@@ -25,13 +25,18 @@ export class QuestionPaperAdminViewComponent implements OnInit {
   ngOnInit() {
     this.quizId = this._activatedRoute.snapshot.params['id'];
 
-    this._quizService.getQuizById(this.quizId).subscribe(
-      (res) => this.quiz = res,
-      (error) => console.error(error),
-      () => this.displayQuestionWithAnswer()
-    );
+    this.loadQuizWithQuestions();
 
   }
+  private loadQuizWithQuestions() {
+    this._quizService.getQuizById(this.quizId)
+    .subscribe(
+      (res) => this.quiz = res,
+       (error) => console.error(error), 
+       () => this.displayQuestionWithAnswer()
+      );
+  }
+
   displayQuestionWithAnswer() {
     this.quiz.questions.forEach(x => x.options.forEach(x => x.isSelected = x.isAnswer));
   }
@@ -52,9 +57,14 @@ export class QuestionPaperAdminViewComponent implements OnInit {
     }
     else {
       alert("Deletion failed !!");
-    }
+    } 
   }
   closeModal(val) {
+    this.showQuestionListModal = val;
+  }
+  onQuestionsAdd(val)
+  {
+    this.loadQuizWithQuestions();
     this.showQuestionListModal = val;
   }
   

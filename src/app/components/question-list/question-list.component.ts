@@ -4,7 +4,6 @@ import { QuizService } from '../../services/quiz.service';
 import { QuizMaster } from '../../models/quiz-master';
 import { Question } from '../../models/question';
 import { QuestionService } from '../../services/question-service.service';
-import { PagingModel } from '../../models/paging-model';
 import { CommonUtility } from '../../shared/common-utility';
 
 @Component({
@@ -17,16 +16,16 @@ export class QuestionListComponent implements OnInit {
   questions: Iquestion[]
   selectedQuizId: number;
   filterValue: string;
-
-  questionId:number;
-  actionMode:string;
-  showModal:boolean;
-
-  pager: PagingModel<Iquestion[]>;
+  questionId: number;
+  actionMode: string;
+  showModal: boolean;
+  currentPageNumber: number;
+  pageSize: number;
 
   constructor(private _quizService: QuizService,
     private _questionService: QuestionService) {
-    this.pager = new PagingModel<Iquestion[]>();
+    this.pageSize = 5;
+    this.currentPageNumber = 1;    
   }
 
   ngOnInit() {
@@ -53,15 +52,9 @@ export class QuestionListComponent implements OnInit {
     }
 
     this.questions = this.quizes.find(x => x.id == this.selectedQuizId).questions;
-    //this.setPaging();
+
   }
 
-  setPaging(currentIndex: number = 1) {
-    this.pager = CommonUtility.getPaging<Iquestion[]>(this.questions.length, currentIndex, 3);
-    let pageResult:Iquestion[]=[];
-    Object.assign(pageResult,this.questions);    
-    this.pager.result=pageResult.slice(this.pager.startIndex,this.pager.endIndex);    
-  }
   removeQuestions(id: number) {
     if (confirm("Are you sure to remove this question ?")) {
       let isSucceeded: boolean;
@@ -89,16 +82,14 @@ export class QuestionListComponent implements OnInit {
       alert(statusMessage);
     }
   }
-  openQuestionModal(id:number,mode:string)
-  {
-     this.questionId=id;
-     this.actionMode=mode;
-     this.showModal=true;
+  openQuestionModal(id: number, mode: string) {
+    this.questionId = id;
+    this.actionMode = mode;
+    this.showModal = true;
   }
-  closeModal(isShow)
-  {
-      this.showModal=isShow;
+  closeModal(isShow) {
+    this.showModal = isShow;
   }
-  
+
 
 }

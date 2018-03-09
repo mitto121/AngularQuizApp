@@ -28,9 +28,10 @@
       </tr>
     </thead>
     <tbody>
-      <tr *ngFor='let question of questions|questionFilter:filterValue;let index=index;' [ngStyle]="{'background-color':question.isActive?'':'#c1c1c1'}">
+      <tr *ngFor='let question of questions| questionFilter:filterValue | paginate:{ itemsPerPage: pageSize, currentPage: currentPageNumber } ;let index=index;'
+        [ngStyle]="{'background-color':question.isActive?'':'#c1c1c1'}">
         <td>
-          {{index+1}}
+          {{(currentPageNumber-1)*pageSize+(index +1)}}
         </td>
         <td>
           <span>{{question.name}}</span>
@@ -44,7 +45,7 @@
         </td>
         <td>
           <p *ngIf="question.isActive" data-placement="top" data-toggle="tooltip" title="Edit">
-            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" (click)="openQuestionModal(question.id,'EDIT');" >
+            <button class="btn btn-primary btn-xs" data-title="Edit" data-toggle="modal" (click)="openQuestionModal(question.id,'EDIT');">
               <span class="glyphicon glyphicon-pencil"></span>
             </button>
           </p>
@@ -71,28 +72,12 @@
 
     </tbody>
   </table>
+  <pagination-controls *ngIf="questions && questions.length>pageSize" (pageChange)="currentPageNumber = $event"></pagination-controls>
 </div>
 <ng-template [ngIf]="showModal">
   <app-modal-window modalTitle="Question Master" (onCloseModal)="closeModal($event)" [showModal]='showModal'>
     <div>
-      <app-question-view [questionId]="questionId" [viewMode]="actionMode" (onSuccess)="closeModal($event)" ></app-question-view>
+      <app-question-view [questionId]="questionId" [viewMode]="actionMode" (onSuccess)="closeModal($event)"></app-question-view>
     </div>
   </app-modal-window>
 </ng-template>
-<!-- <ul *ngIf="pager.pages && pager.pages.length" class="pagination">
-  <li [ngClass]="{disabled:pager.currentPage === 1}">
-      <a (click)="setPaging(1)">First</a>
-  </li>
-  <li [ngClass]="{disabled:pager.currentPage === 1}">
-      <a (click)="setPaging(pager.currentPage - 1)">Previous</a>
-  </li>
-  <li *ngFor="let page of pager.pages" [ngClass]="{active:pager.currentPage === page}">
-      <a (click)="setPaging(page)">{{page}}</a>
-  </li>
-  <li [ngClass]="{disabled:pager.currentPage === pager.totalRecords}">
-      <a (click)="setPaging(pager.currentPage + 1)">Next</a>
-  </li>
-  <li [ngClass]="{disabled:pager.currentPage === pager.totalRecords}">
-      <a (click)="setPaging(pager.totalRecords)">Last</a>
-  </li>
-</ul> -->

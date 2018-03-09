@@ -24,11 +24,11 @@ export class StartQuizComponent implements OnInit {
      }
 
   ngOnInit() {
-    this.quizId = this._activatedRoute.snapshot.params['id'];
+   let decryptId = this._activatedRoute.snapshot.params['id'];
+    this.quizId=Number(atob(decryptId));
     if (this.quizId && this.quizId > 0) {
       this._quizService.getQuizById(this.quizId)
         .subscribe(res => this.quiz = res)
-
         this.hasQuizAttemptEarlier(this.quizId);
     }
   }

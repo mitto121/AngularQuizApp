@@ -82,7 +82,7 @@
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let participant of participantsItems">
+              <tr *ngFor="let participant of participantsItems| paginate:{ itemsPerPage: 5, currentPage: currentPageIndex } ">
                 <td>{{participant.name}}</td>
                 <td>{{participant.date}}</td>
                 <td>{{participant.time}}</td>
@@ -96,7 +96,8 @@
                 </td>
               </tr>
             </tbody>
-          </table>
+          </table>         
+          <pagination-controls *ngIf="showPaging" (pageChange)="currentPageIndex = $event"></pagination-controls>
         </div>
       </div>
     </div>

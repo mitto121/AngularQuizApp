@@ -17,6 +17,7 @@ export class QuizBoardComponent implements OnInit {
   selectedQuizId: number;
   searchBy: string = "name";
   searchValue: any;
+  showPaging:boolean;
   constructor(private _quiz: QuizService) {
     this.participantsItems = [];
   }
@@ -56,15 +57,15 @@ export class QuizBoardComponent implements OnInit {
             Object.assign(this.participantsItems, this.participants);
           }
         },
-        (error) => console.error(error)
+        (error) => console.error(error),
+        ()=>this.showPaging=this.participants.length>5
       );
   }
   onfilterChange(selectedVal: string) {
     this.searchBy = selectedVal;
     this.searchValue = '';
   }
-  onSearch(): {} {
-    debugger;
+  onSearch(): QuizParticipant[] {    
     Object.assign(this.participantsItems, this.participants);
     this.searchValue = (this.searchValue) ? this.searchValue.trim().toLowerCase() : null;
     if (this.searchBy == 'name') {

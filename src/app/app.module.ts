@@ -4,6 +4,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { HttpClientModule } from '@angular/common/http';
 import { Route, RouterModule, CanActivate } from '@angular/router';
+import {NgxPaginationModule} from 'ngx-pagination';
 
 import { AppComponent } from './app.component';
 import { QuizService } from './services/quiz.service';
@@ -89,7 +90,7 @@ const route: Route[] = [
     StartQuizComponent,
     QuestionViewComponent,
     QuizBoardComponent,    
-    QuestionsListDialogComponent,        
+    QuestionsListDialogComponent             
   ],
   imports: [
     BrowserModule,
@@ -97,6 +98,7 @@ const route: Route[] = [
     ReactiveFormsModule,
     HttpModule,
     HttpClientModule,
+    NgxPaginationModule,
     RouterModule.forRoot(route)
   ],
   providers: [QuizService,

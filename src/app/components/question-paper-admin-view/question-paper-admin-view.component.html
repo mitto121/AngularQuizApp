@@ -42,7 +42,7 @@
 <ng-template [ngIf]="showQuestionListModal">
   <app-modal-window modalTitle="Add Questions to Quiz" (onCloseModal)="closeModal($event)" [showModal]='showQuestionListModal'>
     <div>
-      <app-questions-list-dialog [quizId]="quizId" (onSuccess)="closeModal($event)" ></app-questions-list-dialog>
+      <app-questions-list-dialog [quizId]="quizId" (onSuccess)="onQuestionsAdd($event)" ></app-questions-list-dialog>
     </div>
   </app-modal-window>
 </ng-template>

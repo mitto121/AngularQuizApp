@@ -5,6 +5,7 @@ export class QuizMaster {
     name: string;
     description: string; 
     duration:number;
+    quizLinkId:string;
     passingPercentage:number;  
     isActive:boolean;
     questions: Iquestion[];
