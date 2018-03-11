@@ -1,0 +1,8 @@
+.resultContainer{
+    background-color: rgb(247, 253, 251);
+    padding-left: 5%;    
+    z-index: 1000;
+    opacity: .80; 
+    filter: alpha(opacity=40);
+    pointer-events: none;
+}

@@ -17,7 +17,7 @@ export class QuestionService {
     .map(res => res.json())
     .catch(CommonUtility.handleError);
   }
-  getQuestionById(id: number): Observable<Question> {
+  getQuestionById(id: number): Observable<Iquestion> {
     return this.http.get(CommonUtility.baseApiUrl+'Question/GetQuestion/'+id)
     .map(res => res.json())
     .catch(CommonUtility.handleError);
@@ -44,7 +44,7 @@ export class QuestionService {
   {    
     let options = CommonUtility.getRequestOptions();
     
-    return this.http.delete(CommonUtility.baseApiUrl+'Question/RemoveQuestion?questionId='+id,options)
+    return this.http.delete(CommonUtility.baseApiUrl+`Question/RemoveQuestion/${id}`,options)
      .map(res=>res)
      .catch(CommonUtility.handleError)
   }
@@ -53,7 +53,7 @@ export class QuestionService {
   {    
     let options = CommonUtility.getRequestOptions();
     
-    return this.http.put(CommonUtility.baseApiUrl+'Question/ActivateQuestion?questionId='+id,options)
+    return this.http.put(CommonUtility.baseApiUrl+`Question/ActivateQuestion/${id}`,options)
      .map(res=>res)
      .catch(CommonUtility.handleError)
   }
@@ -64,6 +64,13 @@ export class QuestionService {
     
     return this.http.post(CommonUtility.baseApiUrl+'Question/AddQuestionsToQuiz',{'QuizId':quizId,'QuestionIds':questionIds},options)
     .map(res=>res)
+    .catch(CommonUtility.handleError)
+  }
+
+  CheckQuestionExistOrNot(quizId:number,question:string):Observable<boolean>
+  {
+    return this.http.get(CommonUtility.baseApiUrl+`Question/CheckQuestionExistOrNot/${quizId}/`+question)
+    .map(res=>res.json())
     .catch(CommonUtility.handleError)
   }
 

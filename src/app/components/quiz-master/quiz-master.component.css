@@ -10,15 +10,13 @@ textarea {
     resize: none; 
   }
 .panel{
-  margin-left: 13%;
-  max-width: 800px; 
+  margin-left: 20%;
+  margin-right: 20%;
 }
   .containerWindow {
     background-color: rgb(228, 228, 222);
   
-    /* just in case there no content*/  
-    margin: 0 auto 20px;
-  
+    
     /* shadows and rounded borders */
     -moz-border-radius: 2px;
     -webkit-border-radius: 2px;

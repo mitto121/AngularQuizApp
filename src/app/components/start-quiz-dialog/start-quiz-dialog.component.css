@@ -15,3 +15,7 @@
     background-color: darkcyan !important;
     color: blanchedalmond ;
 }
+.warningText{
+    color: red;
+    font-weight: bold;
+}

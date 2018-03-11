@@ -25,7 +25,7 @@ export class QuizService {
   }
 
   getQuizById(id: number): Observable<QuizMaster> {
-    return this.http.get(CommonUtility.baseApiUrl+'Quiz/Quize/'+id)
+    return this.http.get(CommonUtility.baseApiUrl+`Quiz/Quize/${id}`)
     .map(res => res.json())
     .catch(this.handleError);
   }
@@ -52,25 +52,31 @@ export class QuizService {
     
     let options=CommonUtility.getRequestOptions();
     
-    return this.http.delete(CommonUtility.baseApiUrl+"Quiz/RemoveQuiz?Id="+id, options )
+    return this.http.delete(CommonUtility.baseApiUrl+`Quiz/RemoveQuiz/${id}`, options )
                     .map(res=>res.json())
                     .catch(error=>CommonUtility.handleError(error));
   }
 
-  CheckQuizHasAttemptedOrNot(quizId:number):Observable<boolean>
-  {
-    this.userId=CommonUtility.getAuthUserId();
+  activateQuiz(id:number):Observable<boolean> 
+  {    
+    let options = CommonUtility.getRequestOptions();
+    
+    return this.http.put(CommonUtility.baseApiUrl+`Quiz/ActivateQuiz/${id}`,options)
+     .map(res=>res)
+     .catch(CommonUtility.handleError)
+  }
 
-    return this.http.get(CommonUtility.baseApiUrl+"Quiz/CheckQuizHasAttempted/"+quizId+"/"+this.userId)
+  CheckQuizHasAttemptedOrNot(quizId:number,userId:number):Observable<boolean>
+  {
+    return this.http.get(CommonUtility.baseApiUrl+`Quiz/CheckQuizHasAttempted/${quizId}/${userId}`)
     .map(res=>res.json())
     .catch(err=>CommonUtility.handleError(err));
   }
-  submitTest(quiz: QuizMaster) {
-    this.userId=CommonUtility.getAuthUserId();
-
+  submitTest(quiz: QuizMaster,userId:number) {
+   
     let options=CommonUtility.getRequestOptions();
     
-   return this.http.post(CommonUtility.baseApiUrl+"Quiz/SubmitQuiz/"+this.userId,JSON.stringify(quiz),options)
+   return this.http.post(CommonUtility.baseApiUrl+`Quiz/SubmitQuiz/${userId}`,JSON.stringify(quiz),options)
          .map(res=>res.json())
          .catch(err=>CommonUtility.handleError(err));
   }
@@ -78,13 +84,13 @@ export class QuizService {
  getQuizResult(quizId:Number,participantId:number):Observable<QuizResult>
  {
     
-   return this.http.get(CommonUtility.baseApiUrl+"Quiz/QuizResult/"+quizId+"/"+participantId)
+   return this.http.get(CommonUtility.baseApiUrl+`Quiz/QuizResult/${quizId}/${participantId}`)
    .map(res=>res.json())
    .catch(err=>CommonUtility.handleError(err));   
  }
   
  getQuizParticipants(id: number): Observable<QuizParticipant[]> {   
-  return this.http.get(CommonUtility.baseApiUrl+'Quiz/QuizParticipants/'+id)
+  return this.http.get(CommonUtility.baseApiUrl+`Quiz/QuizParticipants/${id}`)
   .map(res => res.json())
   .catch(this.handleError);
 }

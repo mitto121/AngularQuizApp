@@ -53,13 +53,10 @@ export class LoginComponent implements OnInit {
     {
         localStorage.clear(); 
         localStorage.setItem("user", JSON.stringify(response.result));
-        if(response.result && response.result.isAdmin)
+        if(response.result)
         {
-          this._router.navigateByUrl('/adminDashboard');
-        }
-        else{
-          this._router.navigateByUrl('/dashboard');
-        }          
+          this._router.navigateByUrl('home');
+        }               
     }
     else
     {

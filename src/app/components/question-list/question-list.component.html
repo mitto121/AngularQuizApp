@@ -77,7 +77,7 @@
 <ng-template [ngIf]="showModal">
   <app-modal-window modalTitle="Question Master" (onCloseModal)="closeModal($event)" [showModal]='showModal'>
     <div>
-      <app-question-view [questionId]="questionId" [viewMode]="actionMode" (onSuccess)="closeModal($event)"></app-question-view>
+      <app-question-view [questionId]="questionId" [viewMode]="actionMode" (onSuccess)="onUpdate($event)"></app-question-view>
     </div>
   </app-modal-window>
 </ng-template>

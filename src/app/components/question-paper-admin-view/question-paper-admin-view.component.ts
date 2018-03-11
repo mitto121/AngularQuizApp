@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { QuizService } from '../../services/quiz.service';
 import { QuizMaster } from '../../models/quiz-master';
-import { QuestionService } from '../../services/question-service.service';
+import { QuestionService } from '../../services/question.service';
 import { resolve } from 'dns';
 
 @Component({

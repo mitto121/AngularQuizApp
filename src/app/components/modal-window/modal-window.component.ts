@@ -15,7 +15,7 @@ export class ModalWindowComponent implements OnInit {
   showModal: boolean;
 
   @Input()
-  hideCloseBtn = true;
+  showCloseBtn:boolean ;
 
   @Output() onCloseModal: EventEmitter<any> = new EventEmitter();
 

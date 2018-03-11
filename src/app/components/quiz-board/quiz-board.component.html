@@ -1,106 +1,25 @@
-<div class="row">
-  <div class="col-lg-6 col-md-6">
-    <div class="card card-container">
-      <div class="row">      
-        <div class="col-md-offset-6">
-            <input type="text" class="form-control" id="filterValue" placeholder="Search" [ngModel]='filterValue' (ngModelChange)='onSearchTextChange($event)'
-          />
-        </div>
-      </div>
-      <hr>
-      <div class="row">
-        <div class="col-md-8">
-          <h4>Quiz list</h4>
-        </div>
-        <div class="col-md-4"> 
-          <label class="form-label" *ngIf="quizes && quizes.length">Total records: {{quizes.length}}</label>       
-        </div>
-      </div>
-      <div class="row">
-        <div class="table-responsive">
-          <table id="tblQuiz" class="table table-striped table-bordered">
-            <thead class="bodyHead">
-              <tr>
-                <th width="21%"> Quiz Name </th>
-                <th width="70%"> Description </th>
-                <th width="7%">Duration</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor='let quiz of quizes|quizFilter:filterValue' (click)="onSelectedRow(quiz.id);" [ngClass]="{'selectedRow':quiz.id==selectedQuizId}">
-                <td>
-                  <span>{{quiz.name}}</span>
-                </td>
-                <td>
-                  <span> {{quiz.description }}</span>
-                </td>
-                <td>
-                  <span> {{quiz.duration}}</span>
-                </td>
-              </tr>
-            </tbody>
-          </table>
-        </div>
-      </div>
-    </div>
-  </div>
-  <div class="col-lg-6 col-md-6">
-    <div class="card card-container">
-        <div class="row">            
-              <div class="col-md-4">
-              <select class="form-control" [ngModel]="searchBy" (change)="onfilterChange($event.target.value)" >
-                <option value="name" >Name</option>
-                <option value="date" >Date</option>               
-              </select>             
-            </div>
-            <div class="col-md-5">
-              <input type="text" class="form-control"  [(ngModel)]="searchValue" *ngIf="searchBy=='name'"/>
-              <input type="date" class="form-control"  [(ngModel)]="searchValue" *ngIf="searchBy=='date'"/>                       
-            </div>
-            <div class="col-md-1">
-                <button class="btn pull-left btn-xls" (click)='onSearch();'>search</button>
-            </div>
-          </div>
-          <hr>
-      <div class="row">
-        <div class="col-md-8">
-          <h4>Participant list</h4>
-        </div>
-        <div class="col-md-4">
-            <label class="form-label" *ngIf="participantsItems && participantsItems.length">Total records: {{participantsItems.length}} </label>  
-        </div>      
-      </div>
-      <div class="row">
-        <div class="table-responsive">
-          <table class="table table-striped table-bordered">
-            <thead class="bodyHead">
-              <tr>
-                <th width="38%"> Name </th>
-                <th width="30%"> Attempt Date </th>
-                <th width="25%"> Time </th>
-                <th width="7%"></th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr *ngFor="let participant of participantsItems| paginate:{ itemsPerPage: 5, currentPage: currentPageIndex } ">
-                <td>{{participant.name}}</td>
-                <td>{{participant.date}}</td>
-                <td>{{participant.time}}</td>
-                <td>
-                  <button class="btn btn-default" [routerLink]="['/quizResult',participant.quizId,participant.id]" >View Result</button>
-                </td>
-              </tr>
-              <tr *ngIf="participantsItems && !participantsItems.length">
-                <td colspan="4">
-                  <label class="no-result">No records found</label>
-                </td>
-              </tr>
-            </tbody>
-          </table>         
-          <pagination-controls *ngIf="showPaging" (pageChange)="currentPageIndex = $event"></pagination-controls>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
 
+<div class="row">
+    <div class="col-lg-3 col-md-3" *ngFor="let quiz of quizes">
+        <div class="panel panel-primary" [routerLink]="['/participants',quiz.id]">
+            <div class="panel-heading">
+                <h3 class="panel-title">{{quiz.name}}</h3>
+            </div>
+            <div class="panel-body wordwrap">
+                {{quiz.description}}
+            </div>
+            <div class="panel-footer">
+                <div class="row">
+                    <div class="col-md-8">Total Questions</div>
+                    <div class="col-md-4">
+                        <span class="pull-right" *ngIf="quiz.questions">{{quiz.questions.length}}</span>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-8">Total Participated</div>
+                    <div class="col-md-4"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

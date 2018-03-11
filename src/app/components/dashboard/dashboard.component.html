@@ -1,0 +1,60 @@
+<div class="container-fluid">
+    <div class="col-md-2">
+        <nav class="navbar navbar-inverse sidebar" *ngIf='_authService.isLoggedIn' role="navigation">
+            <div class="container-fluid">
+                <div class="navbar-header">
+                    <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
+                        <span class="sr-only">Toggle navigation</span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                        <span class="icon-bar"></span>
+                    </button>
+                    <a class="navbar-brand" *ngIf='_authService.name'>Hi {{_authService.name}}</a>
+                </div>
+                <div class="collapse navbar-collapse" id="bs-sidebar-navbar-collapse-1">
+                    <ul class="nav navbar-nav">
+                        <li routerLinkActive="active" [routerLinkActiveOptions]="{exact:true}">
+                            <a routerLink="/home">Home
+                                <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="[{outlets:{dashboard:['quizes']}}]">Quizes
+                                <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="[{outlets:{dashboard:['questions']}}]">Questions
+                                <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
+                            </a>
+                        </li>
+                        <li routerLinkActive="active">
+                            <a [routerLink]="[{outlets:{dashboard:['quizResult']}}]">Quiz Result
+                                <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
+                            </a>
+                        </li>
+                        <li style="cursor: pointer">
+                            <a (click)='onLogout()'>Logout
+                                <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon"></span>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <div *ngIf="_router.url=='/home' then homePage else dashboardOutlet">
+
+    </div>
+    <ng-template #dashboardOutlet>
+        <div class="col-md-10">
+            <router-outlet name="dashboard"></router-outlet>
+        </div>
+    </ng-template>
+    <ng-template #homePage>
+        <div class="col-md-10">
+           <quiz-board></quiz-board>
+        </div>
+    </ng-template>
+
+</div>

@@ -26,7 +26,7 @@
       <hr/>
       <div *ngIf="questions" class="row">
         <div *ngFor="let question of questions;let index = index;">
-          <div *ngIf='showCurrentPage(index)'>
+          <div *ngIf='PageIndex==index'>
             <app-question [question]='question' [questionNumber]='index+1' (onSelect)='selectedAnswer($event)' ></app-question>
           </div>
         </div>
@@ -44,26 +44,9 @@
 </div>
 
 
-<app-modal-window modalTitle="Alert !!" (onCloseModal)="closeModal($event)" [showModal]='questions && questions.length<1' [hideCloseBtn]='false' >
+<app-modal-window modalTitle="success !!"  [showModal]='showModal' showCloseBtn='false'  >
     <div>
-        <label class="form-label">Questions are not available...</label>    <br>
-        <label class="form-label"> Please try after some time</label>
-      </div> 
-      <div class="row">
-          <div class="col-md-offset-5">
-              <button class="btn btn-primary" [routerLink]="['/dashboard']" >Ok</button>
-        </div>
-      </div>
-</app-modal-window>
-
-<app-modal-window modalTitle="success !!" (onCloseModal)="closeModal($event)" [showModal]='showModal' [hideCloseBtn]='false' >
-    <div>
-        <span>Test has been successfully submitted.</span>
+        <span style="color:green">Test has been successfully submitted.</span>
      </div> 
-     <div class="row">
-        <div class="col-md-12">
-            <button class="btn btnOk" [routerLink]="['/dashboard']">Ok</button>
-      </div>
-    </div>
 </app-modal-window>
 

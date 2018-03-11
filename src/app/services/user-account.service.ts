@@ -4,6 +4,7 @@ import { Observable } from 'rxjs';
 import { CommonUtility } from '../shared/common-utility';
 import { Http, RequestOptions, RequestMethod, Headers } from '@angular/http';
 import { ApiResponse } from '../models/api-response';
+import { Participant } from '../models/participant';
 
 @Injectable()
 export class UserAccountService {
@@ -19,6 +20,13 @@ export class UserAccountService {
       .map(res => res.json())
       .catch(CommonUtility.handleError);
   }
-  
+  public createParticipant(participant): Observable<ApiResponse<Participant>> {
+    
+    let options=CommonUtility.getRequestOptions();  
+
+    return this.http.post(CommonUtility.baseApiUrl + "UserAccount/CreateParticipant", JSON.stringify(participant), options)
+      .map(res => res.json())
+      .catch(CommonUtility.handleError);
+  }
 
 }

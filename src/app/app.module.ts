@@ -2,79 +2,57 @@ import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
-import { HttpClientModule } from '@angular/common/http';
-import { Route, RouterModule, CanActivate } from '@angular/router';
-import {NgxPaginationModule} from 'ngx-pagination';
+import { RouterModule } from '@angular/router';
+import { AppRouting } from './app.routing';
+import { NgxPaginationModule } from 'ngx-pagination';
 
-import { AppComponent } from './app.component';
-import { QuizService } from './services/quiz.service';
-import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
-import { LoginComponent } from './components/login/login.component';
-import { SignUpComponent } from './Components/sign-up/sign-up.component';
-import { QuizMaster } from './models/quiz-master';
-import { QuestionPaperComponent } from './components/question-paper/question-paper.component';
-import { MenuComponent } from './components/menu/menu.component';
-import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
-import { QuestionComponent } from './components/question/question.component';
-import { QuestionResultStutasBarComponent } from './components/question-result-stutas-bar/question-result-stutas-bar.component';
-import { QuizesComponent } from './components/quizes/quizes.component';
-import { QuizFilterPipe } from './shared/quiz-filter.pipe';
-import { ModalWindowComponent } from './components/modal-window/modal-window.component';
-import { QuizMasterComponent } from './components/quiz-master/quiz-master.component';
-import { ShowValidationErrorComponent } from './components/show-validation-error/show-validation-error.component';
+//services
 import { AuthService } from './services/auth.service';
 import { AuthGuardService } from './services/auth-guard.service';
 import { AuthenticateUserService } from './services/authenticate-user.service';
+import { QuestionService } from './services/question.service';
+import { UserAccountService } from './services/user-account.service';
+import { QuizService } from './services/quiz.service';
+
+//pipes
+import { QuizFilterPipe } from './pipes/quiz-filter.pipe';
+import { QuestionFilterPipe } from './pipes/question-filter.pipe';
+
+//components
+import { AppComponent } from './app.component';
+import { PageNotFoundComponent } from './components/page-not-found/page-not-found.component';
+import { LoginComponent } from './components/login/login.component';
+import { SignUpComponent } from './Components/sign-up/sign-up.component';
+import { QuestionPaperComponent } from './components/question-paper/question-paper.component';
+import { QuestionComponent } from './components/question/question.component';
+import { QuestionResultStutasBarComponent } from './components/question-result-stutas-bar/question-result-stutas-bar.component';
+import { QuizesComponent } from './components/quizes/quizes.component';
+import { ModalWindowComponent } from './components/modal-window/modal-window.component';
+import { QuizMasterComponent } from './components/quiz-master/quiz-master.component';
+import { ShowValidationErrorComponent } from './components/show-validation-error/show-validation-error.component';
 import { QuestionPaperAdminViewComponent } from './components/question-paper-admin-view/question-paper-admin-view.component';
 import { QuestionMasterComponent } from './components/question-master/question-master.component';
-import { AdminDashboardComponent } from './components/admin-dashboard/admin-dashboard.component';
-import { QuestionService } from './services/question-service.service';
-import { QuestionListComponent } from './components/question-list/question-list.component';
-import { UserAccountService } from './services/user-account.service';
-import { StartQuizComponent } from './components/start-quiz/start-quiz.component';
-import { QuestionFilterPipe } from './shared/question-filter.pipe';
-import { UserDashboardComponent } from './components/user-dashboard/user-dashboard.component';
 import { QuestionViewComponent } from './components/question-view/question-view.component';
-import { QuizBoardComponent } from './components/quiz-board/quiz-board.component';
+import { QuizResultComponent } from './components/quiz-result/quiz-result.component';
 import { QuestionsListDialogComponent } from './components/questions-list-dialog/questions-list-dialog.component';
-
-
-const route: Route[] = [
-  { path: 'login', component: LoginComponent },
-  { path: '', redirectTo: 'login', pathMatch: 'full' },
-  { path: 'signup', component: SignUpComponent },
-  { path: 'dashboard', component: UserDashboardComponent, canActivate: [AuthGuardService] },
-  { path: 'quizMaster/Create', component: QuizMasterComponent, canActivate: [AuthGuardService] },
-  { path: 'quizMaster/Edit/:id', component: QuizMasterComponent, canActivate: [AuthGuardService] },
-  { path: 'startQuiz/:id', component: StartQuizComponent, canActivate: [AuthGuardService] },
-  { path: 'quiz/:id', component: QuestionPaperComponent, canActivate: [AuthGuardService] },
-  { path: 'quizResult/:id/:participantId', component: QuizResultComponent, canActivate: [AuthGuardService] },
-  {
-    path: 'adminDashboard', component: AdminDashboardComponent, canActivate: [AuthGuardService], data: { userRole: 'ADMIN' }, children: [
-      { path: 'quizes', component: QuizesComponent, outlet: "admin" },
-      { path: '', redirectTo: 'quizes', pathMatch: 'full' },
-      { path: 'questions', component: QuestionListComponent, outlet: "admin" },
-      { path: 'quizBoard', component: QuizBoardComponent, outlet: "admin"  },
-      
-    ]
-  },
-  { path: 'questionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService], data: { userRole: 'ADMIN' } },
-  { path: 'questionMaster/Create/:id', component: QuestionMasterComponent, canActivate: [AuthGuardService], data: { userRole: 'ADMIN' } },
-  { path: 'question/:id/:viewMode', component: QuestionViewComponent, canActivate: [AuthGuardService], data: { userRole: 'ADMIN' } },
-  { path: '**', component: PageNotFoundComponent }
-];
+import { ParticipantRegistrationComponent } from './components/participant-registration/participant-registration.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { StartQuizParticipatePageComponent } from './components/start-quiz-participate-page/start-quiz-participate-page.component';
+import { StartQuizDialogComponent } from './components/start-quiz-dialog/start-quiz-dialog.component';
+import { QuizAnswerSheetComponent } from './components/quiz-answer-sheet/quiz-answer-sheet.component';
+import { QuizBoardComponent } from './components/quiz-board/quiz-board.component';
+import { ParticipantListComponent } from './components/participant-list/participant-list.component';
+import { QuestionListComponent } from './components/question-list/question-list.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    UserDashboardComponent,
     PageNotFoundComponent,
     LoginComponent,
     SignUpComponent,
     QuestionPaperComponent,
-    MenuComponent,
-    QuizResultComponent,
+    QuizAnswerSheetComponent,
     QuestionComponent,
     QuestionResultStutasBarComponent,
     QuizesComponent,
@@ -84,29 +62,33 @@ const route: Route[] = [
     QuizMasterComponent,
     ShowValidationErrorComponent,
     QuestionPaperAdminViewComponent,
-    QuestionMasterComponent,    
-    AdminDashboardComponent,
+    QuestionMasterComponent,
     QuestionListComponent,
-    StartQuizComponent,
+    StartQuizDialogComponent,
     QuestionViewComponent,
-    QuizBoardComponent,    
-    QuestionsListDialogComponent             
+    QuizResultComponent,
+    QuestionsListDialogComponent, 
+    ParticipantRegistrationComponent, 
+    DashboardComponent,
+    StartQuizParticipatePageComponent,
+    QuizBoardComponent,
+    ParticipantListComponent,
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule,
-    HttpClientModule,
-    NgxPaginationModule,
-    RouterModule.forRoot(route)
+    AppRouting,
+    HttpModule,    
+    NgxPaginationModule   
   ],
-  providers: [QuizService,
-    QuestionService,
+  providers: [
     AuthService,
     AuthGuardService,
     AuthenticateUserService,
-    UserAccountService
+    UserAccountService,
+    QuizService,
+    QuestionService
   ],
   bootstrap: [AppComponent]
 })

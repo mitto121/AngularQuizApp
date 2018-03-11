@@ -2,7 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { QuizMaster } from '../../models/quiz-master';
 import { Iquestion } from '../../models/iquestion';
 import { QuizService } from '../../services/quiz.service';
-import { QuestionService } from '../../services/question-service.service';
+import { QuestionService } from '../../services/question.service';
 
 
 @Component({
@@ -29,7 +29,7 @@ export class QuestionsListDialogComponent implements OnInit {
     this._quizService.getQuizes()
       .subscribe(res => {
         if (res && res.result) {
-          this.quizes = res.result.filter(x => x.id != this.quizId);
+          this.quizes = res.result.filter(x => x.id != this.quizId && x.isActive);
         }
       },
         err => console.error(err),

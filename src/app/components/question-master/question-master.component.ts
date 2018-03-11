@@ -6,7 +6,7 @@ import { Option } from '../../models/option';
 import { FormGroup, FormArray, FormControl, Validators } from '@angular/forms';
 import { Location } from '@angular/common';
 import { ActivatedRoute } from '@angular/router';
-import { QuestionService } from '../../services/question-service.service';
+import { QuestionService } from '../../services/question.service';
 
 
 @Component({
@@ -19,8 +19,8 @@ export class QuestionMasterComponent implements OnInit {
   question: Iquestion;
   isAddOptionEnable: boolean;
   showQuestionModal: boolean;
-  isValidOption: boolean = true;
-
+  alertMessage: string;
+  isValidForm: boolean = true;
 
   constructor(private _location: Location,
     private _activatedRoute: ActivatedRoute,
@@ -30,20 +30,19 @@ export class QuestionMasterComponent implements OnInit {
 
   ngOnInit() {
     this.quizId = this._activatedRoute.snapshot.params['id'];
-    if (localStorage.getItem('question')) {
-      this.question = JSON.parse(localStorage.getItem('question'));
-      this.showQuestionModal = true;
-    }
   }
 
   addOption() {
-    this.isValidOption = this.validateOptions();
-    if (this.isValidOption) {
+    this.isValidForm = this.validateOptions();
+    if (this.isValidForm) {
       let noOfOptions = this.question.options.length;
       let option = new Option();
       option.code = String(1055 + noOfOptions);
       option.name = "";
       this.question.options.push(option);
+    }
+    else {
+      this.alertMessage = "Option can't be empty";
     }
   }
 
@@ -78,31 +77,53 @@ export class QuestionMasterComponent implements OnInit {
   setAnswer(question: Iquestion) {
     question.options.forEach(x => x.isAnswer = x.isSelected);
   }
-  saveAndViewModdal() {
-    localStorage.setItem('question', JSON.stringify(this.question));
-    this.showQuestionModal = true;
+  saveAndContinue() {  
+
+    this.isValidForm = this.validateOptions();
+    if (!this.isValidForm) {
+      this.alertMessage = "Option can't be empty";
+    }
+    else {
+      let hasQuestionExist: boolean;
+      this._questionService.CheckQuestionExistOrNot(this.quizId, this.question.name)
+        .subscribe(
+        res => hasQuestionExist = res,
+        err => console.log(err),
+        () => {
+          if (hasQuestionExist) {
+            this.alertMessage = 'This question is already exist';
+            this.isValidForm = false;
+          }
+          else {
+            this.showQuestionModal = true;
+          }
+        });
+    }
   }
   createQuestion() {
-    localStorage.removeItem('question');
-    this.question.quizId = this.quizId;
-
-    this._questionService.CreateQuestion(this.question)
-      .subscribe(
-        res => {
-          if(res)
-          {
-            this._location.back();
-          }
-          else
-          {
-            alert('Failed !! something is wrong ,please try agin');
-          }
-        },
-        error => console.error(error)
-      );
+    let hasAnswer = this.question.options.filter(x => x.isAnswer).length;
+    if (hasAnswer && hasAnswer > 0) {
+      this.question.quizId = this.quizId;
+      this.addNewQuestion();
+    }
+    else {
+      alert('please select answer');
+    }
   }
-  closeModal(isdisplay)
-  {
-    this.showQuestionModal=isdisplay;
+
+  private addNewQuestion() {
+    this._questionService.CreateQuestion(this.question)
+      .subscribe(res => {
+        if (res) {
+          this._location.back();
+        }
+        else {
+          alert('Failed !! something is wrong ,please try agin');
+        }
+      }, error => console.error(error));
+  }
+
+  closeModal(isdisplay) {
+    this.showQuestionModal = isdisplay;
   }
 }

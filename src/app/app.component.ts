@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { AuthService } from './services/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -6,12 +8,10 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.css']
 })
 export class AppComponent {
-  welcomeMessage = 'Welcome to Quiz Master';
-  isAuthenticateUser = false;
-
-  constructor() {
-    const user = localStorage.getItem('user');
-    this.isAuthenticateUser = user ? true : false;
+  title = 'Welcome to Quiz Master';
+  
+  constructor() {    
   }
 
+ 
 }

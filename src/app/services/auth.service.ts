@@ -1,16 +1,18 @@
 import { Injectable } from '@angular/core';
-//import {JwtHelperService} from '@auth0/angular-jwt'
 
 @Injectable()
 export class AuthService {
   isLoggedIn:boolean;
+  name:string;
   constructor() { }
 
   public isAuthenticated(): boolean {
-    const user =localStorage.getItem("user");
-    if(user && JSON.parse(user).authToken) 
+    const user =JSON.parse(localStorage.getItem("user"));
+    
+    if(user && user.authToken) 
     {
-      this.isLoggedIn=true;    
+      this.isLoggedIn=true;
+      this.name=user.name;    
     }
    return this.isLoggedIn; 
   }

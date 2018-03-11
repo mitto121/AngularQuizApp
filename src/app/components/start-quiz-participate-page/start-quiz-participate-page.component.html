@@ -1,0 +1,7 @@
+<div *ngIf="!participantId then participantView else quizStartView"></div>
+<ng-template #participantView>
+    <participant-registration (onSubmit)="onContinue($event)"></participant-registration>
+</ng-template>
+<ng-template #quizStartView>
+    <start-quiz-dialog [quizId]="quizId" [participantId]="participantId"></start-quiz-dialog>
+</ng-template>

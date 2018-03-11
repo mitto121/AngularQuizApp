@@ -3,7 +3,7 @@ import { Iquestion } from '../../models/iquestion';
 import { QuizService } from '../../services/quiz.service';
 import { QuizMaster } from '../../models/quiz-master';
 import { Question } from '../../models/question';
-import { QuestionService } from '../../services/question-service.service';
+import { QuestionService } from '../../services/question.service';
 import { CommonUtility } from '../../shared/common-utility';
 
 @Component({
@@ -25,17 +25,17 @@ export class QuestionListComponent implements OnInit {
   constructor(private _quizService: QuizService,
     private _questionService: QuestionService) {
     this.pageSize = 5;
-    this.currentPageNumber = 1;    
+    this.currentPageNumber = 1;
   }
 
   ngOnInit() {
     this._quizService.getQuizes()
       .subscribe(res => {
-        this.quizes = res.result;
+        this.quizes = res.result.filter(x => x.isActive);
         this.selectedQuizId = this.quizes[0].id;
       },
-        err => console.error(err),
-        () => this.loadQuestionbyQuiz()
+      err => console.error(err),
+      () => this.loadQuestionbyQuiz()
       );
   }
 
@@ -60,8 +60,8 @@ export class QuestionListComponent implements OnInit {
       let isSucceeded: boolean;
       this._questionService.removeQuestion(id)
         .subscribe(
-          res => this.questionListSuccessViewRender(res, id, false, 'Deletion'),
-          error => console.error(error)
+        res => this.questionListSuccessViewRender(res, id, false, 'Deletion'),
+        error => console.error(error)
         );
     }
   }
@@ -69,8 +69,8 @@ export class QuestionListComponent implements OnInit {
     let isSucceeded: boolean;
     this._questionService.activateQuestion(questionId)
       .subscribe(
-        res => this.questionListSuccessViewRender(res, questionId, true, 'Add to Quiz has'),
-        error => console.error(error)
+      res => this.questionListSuccessViewRender(res, questionId, true, 'Add to Quiz has'),
+      error => console.error(error)
       );
   }
   questionListSuccessViewRender(isSuccess: boolean, questionId: number, isActive: boolean, msg: string) {
@@ -91,5 +91,15 @@ export class QuestionListComponent implements OnInit {
     this.showModal = isShow;
   }
 
+  onUpdate(question) {
 
+    let questionItem = this.questions.find(item => item.id === question.id);
+    let index = this.questions.indexOf(questionItem);
+    if (index !== -1) {
+      this.questions.splice(index, 1, question);
+    }
+
+    this.showModal = false;
+
+  }
 }

@@ -1,6 +1,6 @@
 <div class="row" >
     <div class="col-md-10">           
-      <p class="alert {{isCorrectAnswer()?'alert-success':'alert-danger'}} ">Your answer is {{isCorrectAnswer()?'correct':'wrong'}}.</p>
+      <p class="alert {{isCorrectAnswer()?'alert-success':'alert-danger'}} ">{{isCorrectAnswer()?'Correct':'Wrong'}} answer</p>
       <p class="panel panel-primary alert alert-success" *ngIf='viewCorrectAnswer'>Correct answer is <b>{{answer}}</b></p>
     </div>
     <div class="col-md-2" *ngIf='!isCorrectAnswer()' >

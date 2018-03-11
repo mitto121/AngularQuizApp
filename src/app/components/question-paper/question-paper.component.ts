@@ -8,6 +8,8 @@ import { Observable } from 'rxjs/Observable';
 import { Ioption } from '../../models/ioption';
 import { CommonUtility } from '../../shared/common-utility';
 import { Location } from '@angular/common'
+import { PlatformLocation } from '@angular/common'
+import { setTimeout } from 'timers';
 
 
 @Component({
@@ -17,6 +19,7 @@ import { Location } from '@angular/common'
 })
 export class QuestionPaperComponent implements OnInit {
   quizId: number;
+  participantId:number;
   quiz: QuizMaster;
   questions: Iquestion[];
   showModal: boolean;
@@ -28,13 +31,20 @@ export class QuestionPaperComponent implements OnInit {
   constructor(private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _location: Location,
-    private _quizService: QuizService) {
+    private _quizService: QuizService,
+    private _platformLocation:PlatformLocation) {
     this.quiz = new QuizMaster();
   }
 
   ngOnInit() {
+    this._platformLocation.onPopState(() => {
+      this._location.forward();
+    });
 
-    this.quizId = this._activatedRoute.snapshot.params['id'];
+    let decryptQId = this._activatedRoute.snapshot.params['id'];
+    this.quizId=Number(atob(decryptQId));
+    let decryptPId=this._activatedRoute.snapshot.params['participantId'];
+    this.participantId = Number(atob(decryptPId));
     this._quizService.getQuizById(this.quizId)
       .subscribe(
         (res) => {
@@ -43,13 +53,9 @@ export class QuestionPaperComponent implements OnInit {
           this.noOfQuestions = this.questions.length;
         },
         (error) => this.handleError);
-
+        
   }
-
-
-  showCurrentPage(currentPageNumber: number): boolean {
-    return this.PageIndex == currentPageNumber;
-  }
+ 
   pageNavigation(navType: string) {
     if (navType == 'Previous' && this.PageIndex > 0) {
       this.PageIndex = this.PageIndex - 1;
@@ -57,7 +63,6 @@ export class QuestionPaperComponent implements OnInit {
       this.PageIndex = this.PageIndex + 1;
     }
   }
-
 
   setCurrentPage(index: number) {
     this.PageIndex = index;
@@ -76,8 +81,18 @@ export class QuestionPaperComponent implements OnInit {
     if (confirm('Are you sure to submit this Test ?')) {
       this.quiz.hasAttempt = true;
 
-      this._quizService.submitTest(this.quiz)
-        .subscribe(res => this.showModal = res,
+      this._quizService.submitTest(this.quiz,this.participantId)
+        .subscribe(res => {
+          if(res)
+          {
+            this.showModal=true;
+            var nav=this._router;
+            let id=this.quiz.quizLinkId;
+            setTimeout((function(){
+               nav.navigate(['/startQuiz',id])              
+            }),800);
+          }
+        },
           error => console.log(error)
         );
     }
@@ -87,15 +102,9 @@ export class QuestionPaperComponent implements OnInit {
   handleError(error: any) {
     console.log(error);
   }
-
-
-  closeModal(isShow) {
-    this.showModal = isShow;
-  }
-
   selectedAnswer(question: Iquestion) {
     question.isAttempt = true;
   }
-
+ 
 }
 

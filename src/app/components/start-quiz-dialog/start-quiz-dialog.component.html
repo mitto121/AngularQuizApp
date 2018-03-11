@@ -1,0 +1,20 @@
+
+<app-modal-window modalTitle="{{quiz.name}}" showModal='true' showCloseBtn='false'>
+  <div>
+      <div class="row">
+          <div class="col-md-12">
+            <label class="form-label">{{quiz.description}}</label>
+          </div>
+        </div>
+        <div class="row">
+           <div class="col-md-8">
+             <span *ngIf="!hasAttempt">Click Start to begin Quiz</span>
+             <span *ngIf="hasAttempt" [ngClass]="{'warningText':hasAttempt}" >You have already attempt this test</span>         
+           </div>
+        </div>
+        <div class="col-md-offset-5">
+          <button *ngIf="!hasAttempt" class="btn btn-primary" (click)="beginQuiz();" >Start</button>
+        </div>
+  </div>
+</app-modal-window>
+

@@ -45,7 +45,14 @@ export class QuizesComponent implements OnInit {
       );
     }
   }
-
+  activateQuiz(id:number)
+  {
+    this._quiz.activateQuiz(id)
+    .subscribe(
+      res => {this.quizes.find(x => x.id == id).isActive =res},
+      error => console.error(error)
+    );
+  }
   
   setQuestionPaper()
   {

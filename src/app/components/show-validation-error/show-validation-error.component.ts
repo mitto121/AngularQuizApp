@@ -4,7 +4,6 @@ import { AbstractControlDirective, AbstractControl } from '@angular/forms';
   selector: 'show-validation-error',
   template: `<ul *ngIf="isValidField()" >
               <li style="color: red">
-              <span class="glyphicon glyphicon-remove form-control-feedback fix-error-icon"></span>
               {{getError()}}</li>
             </ul>`,
 })

@@ -1,0 +1,53 @@
+<div class="card card-container">
+  <div class="row">
+    <form class="form-horizontal" [formGroup]="participantSignUpForm">
+      <fieldset>
+
+        <legend>Participant Form</legend>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label class="control-label" for="name">Name</label>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <input id="name" name="name" type="text" formControlName="name" placeholder="Enter name" class="form-control input-md">
+              <show-validation-error [control]="participantSignUpForm.controls.name"></show-validation-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label class="control-label" for="dateofbirth">Date of Birth</label>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <input id="dateofbirth" name="date_of_birth" type="date" formControlName="birth_date" class="form-control input-md">
+              <show-validation-error [control]="participantSignUpForm.controls.birth_date"></show-validation-error>
+            </div>
+          </div>
+        </div>
+
+        <div class="row">
+          <div class="col-md-4">
+            <label class="control-label" for="email">Email</label>
+          </div>
+          <div class="col-md-5">
+            <div class="form-group">
+              <input id="email" name="email" type="text" formControlName="email" placeholder="Your email here" class="form-control input-md">
+              <show-validation-error [control]="participantSignUpForm.controls.email"></show-validation-error>
+            </div>
+          </div>
+        </div>
+        <div class="form-group">
+          <div class="col-md-offset-5 col-md-4">
+            <button class="btn btn-primary" (click)="createParticipant();">Continue</button>
+          </div>
+        </div>
+      </fieldset>
+    </form>
+
+
+  </div>
+</div>

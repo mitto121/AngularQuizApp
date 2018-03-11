@@ -1,6 +1,6 @@
-<div class="alert alert-danger" *ngIf='!isValidOption' >Option can't be empty </div>
 <div class="questionWindow">
-  <div style="padding-left:8px">
+<div class="alert alert-danger" *ngIf='!isValidForm' >{{alertMessage}}</div>
+  <div>
     <div class="row form-group">
       <div class="col-md-10">
         <input type="text" class="form-control" placeholder="Enter question here" [(ngModel)]='question.name' (keyup)='onQuestionChange()' >
@@ -16,7 +16,7 @@
             <b> Option: {{index+1}}</b>
           </div>
           <div class="col-md-9">
-            <input type="text"  [ngClass]="(isValidOption)?'form-control':'form-control invalidField'" placeholder="Option text" [(ngModel)]='option.name'  >
+            <input type="text" class="form-control" placeholder="Option text" [(ngModel)]='option.name'  >
           </div>
           <div class="col-md-1">
                <button type="button" class="close" (click)="removeOption(option);" >
@@ -28,7 +28,7 @@
     </div>
     <div class="row">
       <div class="col-md-offset-5">
-          <button class="btn btn-default" *ngIf="question.options.length>1" (click)="saveAndViewModdal()" >Save & Continue</button>       
+          <button class="btn btn-default" *ngIf="question.options.length>1" (click)="saveAndContinue()" >Save & Continue</button>       
           <button class="btn btn-default" (click)='setFormControl();' >Reset</button>        
       </div>
     </div>

@@ -1,9 +1,10 @@
 import { Component, OnInit,Input,EventEmitter, Output } from '@angular/core';
-import { Question } from '../../models/question';
 import { ActivatedRoute } from '@angular/router';
-import { QuestionService } from '../../services/question-service.service';
+import { QuestionService } from '../../services/question.service';
 import {Location} from '@angular/common'
 import { Ioption } from '../../models/ioption';
+import { Iquestion } from '../../models/iquestion';
+import { Question } from '../../models/question';
 
 
 
@@ -20,7 +21,7 @@ export class QuestionViewComponent implements OnInit {
   viewMode:string;
   @Output()
   onSuccess:EventEmitter<any>=new EventEmitter();
-  question:Question;
+  question:Iquestion;
   isEditable:boolean;
   constructor(private _activedRoute:ActivatedRoute,
               private _questionService:QuestionService,
@@ -31,12 +32,11 @@ export class QuestionViewComponent implements OnInit {
     this._questionService.getQuestionById(this.questionId)
     .subscribe(
           res=>this.question=res,
-          error=>console.error('server error'),
-          ()=>console.log(this.question)          
+          error=>console.error('server error')                  
     );
   }
   selectAnswer(option: Ioption) {      
-    this.question.options.forEach((x) => { x.isAnswer = (x.code == option.code); }); 
+    this.question.options.forEach((x) =>{ x.isAnswer = (x.code == option.code); }); 
   }
   
   onSubmit()
@@ -46,7 +46,7 @@ export class QuestionViewComponent implements OnInit {
       res => {
         if(res)
         {
-         this.onSuccess.emit();
+         this.onSuccess.emit(this.question);
         }
         else
         {

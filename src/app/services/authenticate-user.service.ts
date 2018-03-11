@@ -14,7 +14,7 @@ export class AuthenticateUserService {
 
 
     login(username: string, password: string):Promise<ApiResponse<UserAccount>> {
-        return this._http.get(CommonUtility.baseApiUrl+'UserAccount/AuthenticateUser/'+username+'/'+password)
+        return this._http.get(CommonUtility.baseApiUrl+`UserAccount/AuthenticateUser/${username}/${password}`)
             .map(user =>user.json())
             .toPromise()            
             .catch(err=>console.error(err));            
