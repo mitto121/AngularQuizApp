@@ -13,6 +13,7 @@ import { AuthenticateUserService } from './services/authenticate-user.service';
 import { QuestionService } from './services/question.service';
 import { UserAccountService } from './services/user-account.service';
 import { QuizService } from './services/quiz.service';
+import { ParticipantService } from './services/participant.service';
 
 //pipes
 import { QuizFilterPipe } from './pipes/quiz-filter.pipe';
@@ -43,6 +44,7 @@ import { QuizAnswerSheetComponent } from './components/quiz-answer-sheet/quiz-an
 import { QuizBoardComponent } from './components/quiz-board/quiz-board.component';
 import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
+import { TimerComponent } from './components/shared/timer/timer.component';
 
 
 @NgModule({
@@ -73,6 +75,7 @@ import { QuestionListComponent } from './components/question-list/question-list.
     StartQuizParticipatePageComponent,
     QuizBoardComponent,
     ParticipantListComponent,
+    TimerComponent,
   ],
   imports: [
     BrowserModule,
@@ -88,7 +91,8 @@ import { QuestionListComponent } from './components/question-list/question-list.
     AuthenticateUserService,
     UserAccountService,
     QuizService,
-    QuestionService
+    QuestionService,
+    ParticipantService
   ],
   bootstrap: [AppComponent]
 })

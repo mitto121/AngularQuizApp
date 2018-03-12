@@ -11,10 +11,7 @@
             <show-validation-error [control]="loginForm.controls.password" ></show-validation-error>
             <label style="color:red">{{loginStatusMsg}}</label>
             <button class="btn btn-lg btn-primary btn-block btn-signin" (click)="userLogIn(loginForm)" >Sign in</button>
-        </form>
-        <a routerLink='/signup' class="forgot-password">
-            don't have account?
-        </a>
+        </form>       
     </div>
 </div>
 

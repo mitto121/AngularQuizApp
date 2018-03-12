@@ -67,9 +67,9 @@ export class QuestionService {
     .catch(CommonUtility.handleError)
   }
 
-  CheckQuestionExistOrNot(quizId:number,question:string):Observable<boolean>
+  GetQuestionsByQuizId(quizId:number):Observable<Iquestion[]>
   {
-    return this.http.get(CommonUtility.baseApiUrl+`Question/CheckQuestionExistOrNot/${quizId}/`+question)
+    return this.http.get(CommonUtility.baseApiUrl+`Question/GetQuestionsByQuizId/${quizId}`)
     .map(res=>res.json())
     .catch(CommonUtility.handleError)
   }

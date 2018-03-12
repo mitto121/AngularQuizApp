@@ -43,7 +43,7 @@ const appRoutes: Route[] = [
     { path: 'participants/:quizId', component: ParticipantListComponent, canActivate: [AuthGuardService] },
     { path: 'quizMaster/Create', component: QuizMasterComponent, canActivate: [AuthGuardService] },
     { path: 'quizMaster/Edit/:id', component: QuizMasterComponent, canActivate: [AuthGuardService] },
-    { path: 'quizResult/:id/:participantId', component: QuizAnswerSheetComponent, canActivate: [AuthGuardService] },
+    { path: 'quizResult/:id', component: QuizAnswerSheetComponent, canActivate: [AuthGuardService] },
     { path: 'questionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },
     { path: 'questionMaster/Create/:id', component: QuestionMasterComponent, canActivate: [AuthGuardService] },
     { path: 'question/:id/:viewMode', component: QuestionViewComponent, canActivate: [AuthGuardService] },

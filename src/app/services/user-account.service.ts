@@ -20,13 +20,6 @@ export class UserAccountService {
       .map(res => res.json())
       .catch(CommonUtility.handleError);
   }
-  public createParticipant(participant): Observable<ApiResponse<Participant>> {
-    
-    let options=CommonUtility.getRequestOptions();  
-
-    return this.http.post(CommonUtility.baseApiUrl + "UserAccount/CreateParticipant", JSON.stringify(participant), options)
-      .map(res => res.json())
-      .catch(CommonUtility.handleError);
-  }
+  
 
 }

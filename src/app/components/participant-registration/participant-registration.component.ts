@@ -2,8 +2,8 @@ import { Component, OnInit,EventEmitter,Output } from '@angular/core';
 import { CommonUtility } from '../../shared/common-utility';
 import { FormGroup, FormControl, Validators } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
-import { UserAccountService } from '../../services/user-account.service';
 import { Participant } from '../../models/participant';
+import { ParticipantService } from '../../services/participant.service';
 
 
 @Component({
@@ -20,7 +20,7 @@ export class ParticipantRegistrationComponent implements OnInit {
   onSubmit:EventEmitter<any>=new EventEmitter();
 
 
-  constructor(private _userAccountService: UserAccountService,
+  constructor(private _ParticipantService: ParticipantService,
               private _activatedRoute:ActivatedRoute,) {
                 this.participant=new Participant();
   }
@@ -47,7 +47,7 @@ export class ParticipantRegistrationComponent implements OnInit {
         Email: this.participantSignUpForm.get('email').value       
       };
       
-      this._userAccountService.createParticipant(newParticipant)
+      this._ParticipantService.createParticipant(newParticipant)
         .subscribe( res => {
          if(res.isSucceeded)
          {

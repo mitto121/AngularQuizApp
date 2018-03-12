@@ -17,6 +17,7 @@ import { QuestionService } from '../../services/question.service';
 export class QuestionMasterComponent implements OnInit {
   quizId: number;
   question: Iquestion;
+  questionList:Iquestion[];
   isAddOptionEnable: boolean;
   showQuestionModal: boolean;
   alertMessage: string;
@@ -30,6 +31,10 @@ export class QuestionMasterComponent implements OnInit {
 
   ngOnInit() {
     this.quizId = this._activatedRoute.snapshot.params['id'];
+    this._questionService.GetQuestionsByQuizId(this.quizId)
+    .subscribe(
+      res=>this.questionList=res,
+    );
   }
 
   addOption() {
@@ -72,6 +77,7 @@ export class QuestionMasterComponent implements OnInit {
   setFormControl() {
     this.question = new Question();
     this.question.options = [];
+    this.isValidForm=true;
   }
 
   setAnswer(question: Iquestion) {
@@ -84,23 +90,26 @@ export class QuestionMasterComponent implements OnInit {
       this.alertMessage = "Option can't be empty";
     }
     else {
-      let hasQuestionExist: boolean;
-      this._questionService.CheckQuestionExistOrNot(this.quizId, this.question.name)
-        .subscribe(
-        res => hasQuestionExist = res,
-        err => console.log(err),
-        () => {
+      let hasQuestionExist=this.CheckQuestionExistOrNot();   
           if (hasQuestionExist) {
             this.alertMessage = 'This question is already exist';
             this.isValidForm = false;
           }
           else {
             this.showQuestionModal = true;
-          }
-        });
+          }      
     }
   }
-  createQuestion() {
+  private CheckQuestionExistOrNot():boolean
+  {
+    debugger;
+    let question=this.question.name.replace(' ','').toLowerCase();
+    let questions=this.questionList.filter(
+      x=>x.name.replace(' ','').toLowerCase().indexOf(question)!== -1 
+    )
+    return questions && questions.length>0;
+  }
+  private createQuestion() {
     let hasAnswer = this.question.options.filter(x => x.isAnswer).length;
     if (hasAnswer && hasAnswer > 0) {
       this.question.quizId = this.quizId;

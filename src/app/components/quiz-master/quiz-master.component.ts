@@ -41,10 +41,10 @@ export class QuizMasterComponent implements OnInit {
 
   private createValidationControls(): void {
     this.quizMasterForm = new FormGroup({
-      Name: new FormControl(this.quiz.name, Validators.required),
-      Description: new FormControl(this.quiz.description, Validators.required),
-      Duration: new FormControl(this.quiz.duration, [Validators.required, Validators.min(20), Validators.max(1000),]),
-      Passing_Percentage: new FormControl(this.quiz.passingPercentage, [Validators.required, Validators.max(100), Validators.min(30)])
+      Name: new FormControl(this.quiz.name, [Validators.required,Validators.maxLength(300)]),
+      Description: new FormControl(this.quiz.description, [Validators.required,Validators.maxLength(500)]),
+      Duration: new FormControl(this.quiz.duration, [Validators.required, Validators.min(20), Validators.max(300),]),
+      Passing_Percentage: new FormControl(this.quiz.passingPercentage, [Validators.required, Validators.max(100), Validators.min(0)])
     });
   }
 

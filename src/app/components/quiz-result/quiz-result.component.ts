@@ -3,6 +3,7 @@ import { QuizService } from '../../services/quiz.service';
 import { QuizMaster } from '../../models/quiz-master';
 import { QuizParticipant } from '../../models/quiz-participant';
 import { CommonUtility } from '../../shared/common-utility';
+import { ParticipantService } from '../../services/participant.service';
 
 @Component({
   selector: 'app-quiz-board',
@@ -19,7 +20,8 @@ export class QuizResultComponent implements OnInit {
   searchBy: string = "name";
   searchValue: any;
   showPaging: boolean;
-  constructor(private _quiz: QuizService) {
+  constructor(private _quiz: QuizService,
+              private _participantService:ParticipantService) {
     this.participantsItems = [];
   }
 
@@ -50,7 +52,7 @@ export class QuizResultComponent implements OnInit {
     }
   }
   loadParticipants() {
-    this._quiz.getQuizParticipants(this.selectedQuizId)
+    this._participantService.getQuizParticipants(this.selectedQuizId)
       .subscribe(
       (res) => {
         if (res) {

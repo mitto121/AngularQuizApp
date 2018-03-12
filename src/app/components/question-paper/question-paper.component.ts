@@ -79,32 +79,36 @@ export class QuestionPaperComponent implements OnInit {
 
   submitTest() {
     if (confirm('Are you sure to submit this Test ?')) {
-      this.quiz.hasAttempt = true;
-
-      this._quizService.submitTest(this.quiz,this.participantId)
-        .subscribe(res => {
-          if(res)
-          {
-            this.showModal=true;
-            var nav=this._router;
-            let id=this.quiz.quizLinkId;
-            setTimeout((function(){
-               nav.navigate(['/startQuiz',id])              
-            }),800);
-          }
-        },
-          error => console.log(error)
-        );
+      this.submitQuiz();
     }
 
   }
 
+ 
   handleError(error: any) {
     console.log(error);
   }
   selectedAnswer(question: Iquestion) {
     question.isAttempt = true;
   }
- 
+
+  submitOnTimeOut()
+  {
+    this.submitQuiz();
+  }
+  private submitQuiz() {
+    this._quizService.submitTest(this.quiz, this.participantId)
+      .subscribe(res => {
+        if (res) {
+          this.showModal = true;
+          var nav = this._router;
+          let id = this.quiz.quizLinkId;
+          setTimeout((function () {
+            nav.navigate(['/startQuiz', id]);
+          }), 800);
+        }
+      }, error => console.log(error));
+  }
+
 }
 

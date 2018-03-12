@@ -11,8 +11,7 @@ import { QuizResult } from '../../models/quiz-result';
 })
 export class QuizAnswerSheetComponent implements OnInit {
 
-  quizId: Number;
-  participantId:number;
+  attemptId:number;
   quizResult:QuizResult; 
 
   constructor(private _activedRouter: ActivatedRoute,
@@ -20,11 +19,10 @@ export class QuizAnswerSheetComponent implements OnInit {
                 this.quizResult=new QuizResult();               
                }
 
-  ngOnInit() {
-    this.quizId = this._activedRouter.snapshot.params["id"];
-    this.participantId = this._activedRouter.snapshot.params["participantId"];
-    
-    this._quizService.getQuizResult(this.quizId,this.participantId)
+  ngOnInit() {    
+    this.attemptId = this._activedRouter.snapshot.params["id"];
+      
+    this._quizService.getQuizResult(this.attemptId)
     .subscribe(
       res=>this.quizResult=res,
       err=>console.log(err)  

@@ -81,19 +81,14 @@ export class QuizService {
          .catch(err=>CommonUtility.handleError(err));
   }
 
- getQuizResult(quizId:Number,participantId:number):Observable<QuizResult>
+ getQuizResult(attemptId:Number):Observable<QuizResult>
  {
     
-   return this.http.get(CommonUtility.baseApiUrl+`Quiz/QuizResult/${quizId}/${participantId}`)
+   return this.http.get(CommonUtility.baseApiUrl+`Quiz/QuizResult/${attemptId}`)
    .map(res=>res.json())
    .catch(err=>CommonUtility.handleError(err));   
  }
   
- getQuizParticipants(id: number): Observable<QuizParticipant[]> {   
-  return this.http.get(CommonUtility.baseApiUrl+`Quiz/QuizParticipants/${id}`)
-  .map(res => res.json())
-  .catch(this.handleError);
-}
     
   handleError(error: Response) {
     return Observable.throw(error);
