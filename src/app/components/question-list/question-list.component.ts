@@ -50,9 +50,10 @@ export class QuestionListComponent implements OnInit {
     if (localStorage.getItem('quizId')) {
       this.selectedQuizId = Number(localStorage.getItem('quizId'));
     }
-
-    this.questions = this.quizes.find(x => x.id == this.selectedQuizId).questions;
-
+    this._questionService.GetQuestionsByQuizId(this.selectedQuizId)
+    .subscribe(
+      res=>this.questions=res
+    );
   }
 
   removeQuestions(id: number) {

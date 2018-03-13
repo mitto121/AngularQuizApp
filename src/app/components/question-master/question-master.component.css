@@ -24,3 +24,7 @@
     border-color: #a94442;
     background-color:  #f3e0e0;
  }
+ textarea {
+    min-height:60px;
+    resize: none; 
+  }

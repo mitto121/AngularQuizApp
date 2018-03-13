@@ -78,6 +78,7 @@ export class QuestionMasterComponent implements OnInit {
     this.question = new Question();
     this.question.options = [];
     this.isValidForm=true;
+    this.isAddOptionEnable=false;
   }
 
   setAnswer(question: Iquestion) {

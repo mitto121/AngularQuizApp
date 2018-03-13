@@ -17,9 +17,10 @@
         <tr>
           <th> </th>
           <th width="21%"> Quiz Name </th>
-          <th width="70%"> Description </th>
-          <th width="7%">Duration</th>
-          <th>Test Link</th>
+          <th width="60%"> Description </th>
+          <th width="9%">Duration (minutes)</th>
+          <th width="5%">Questions</th>
+          <th width="2%">Test Link</th>
           <th colspan="2"></th>
         </tr>
       </thead>
@@ -38,8 +39,11 @@
           <td>
               <span> {{quiz.duration}}</span>
           </td>
+          <td>
+            <span *ngIf="quiz.questions"> {{quiz.questions.length}}</span>
+          </td>
           <td > 
-              <a target="_blank" [routerLink]="['/startQuiz',quiz.quizLinkId]" [ngClass]="{'disabled':!quiz.isActive}"><i class="fa fa-chain"></i></a>              
+              <a target="_blank" [routerLink]="['/startQuiz',quiz.quizLinkId]" [ngClass]="{'disabled':!quiz.isActive || !quiz.questions.length}"><i class="fa fa-chain"></i></a>              
           </td>
           <td>
             <p data-placement="top" data-toggle="tooltip" title="Edit" *ngIf="quiz.isActive">

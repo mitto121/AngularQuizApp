@@ -24,7 +24,7 @@ textarea {
     color: grey;
  }
 
- td .wordwrap {       
+ .table tbody td .wordwrap {       
     white-space: nowrap; 
     overflow: hidden;
     text-overflow: ellipsis;    

@@ -3,7 +3,7 @@
   <div>
     <div class="row form-group">
       <div class="col-md-10">
-        <input type="text" class="form-control" placeholder="Enter question here" [(ngModel)]='question.name' (keyup)='onQuestionChange()' >
+        <textarea  class="form-control" placeholder="Enter question here" [(ngModel)]='question.name' (keyup)='onQuestionChange()' ></textarea>
       </div>
       <div class="col-md-2">
         <button class="btn btn-primary" (click)='addOption()' [disabled]='!isAddOptionEnable' >Add option</button>

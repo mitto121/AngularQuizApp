@@ -35,8 +35,7 @@ export class TimerComponent implements OnInit {
     this.timerSubs= timer     
       .subscribe(
       t => {
-          this.second =this.getSeconds(t);
-          console.log(this.second);
+          this.second =this.getSeconds(t);         
           this.minutes=this.getMinutes(t);
           this.stopTimer();
       },

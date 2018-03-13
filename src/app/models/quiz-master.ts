@@ -10,5 +10,5 @@ export class QuizMaster {
     isActive:boolean;
     questions: Iquestion[];
     hasAttempt: boolean;
-  
+    totalParticipated:number;
 }
