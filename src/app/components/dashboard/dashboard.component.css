@@ -7,7 +7,6 @@ main .row{
 }
 
 /*Remove rounded coners*/
-
 nav.sidebar.navbar {
     border-radius: 0px;
 }
@@ -70,6 +69,7 @@ nav.sidebar, .main{
     nav.sidebar .navbar-nav > li{
         border-bottom: 1px #e5e5e5 solid;
     }
+    
 
     /* Colors/style dropdown box*/
     nav.sidebar .navbar-nav .open .dropdown-menu {
@@ -91,6 +91,9 @@ nav.sidebar, .main{
 
     /*colors dropdown box text */
     .navbar-inverse .navbar-nav .open .dropdown-menu>li>a {
+        color: #777;
+    }
+    .navbar-inverse .navbar-nav .open .dropdown-menu>li> .col-md-6 a {
         color: #777;
     }
 
@@ -152,5 +155,9 @@ nav.sidebar, .main{
 	}
 	section{
 		padding-left: 15px;
-	}
+    }
+    .box {      
+        -webkit-filter: invert(100%);
+        filter: invert(100%);
+    }
 }

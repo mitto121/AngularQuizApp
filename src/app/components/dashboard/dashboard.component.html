@@ -1,6 +1,6 @@
 <div class="container-fluid">
     <div class="col-md-2">
-        <nav class="navbar navbar-inverse sidebar" *ngIf='_authService.isLoggedIn' role="navigation">
+        <nav id="navMenu" class="navbar navbar-inverse sidebar" *ngIf='_authService.isLoggedIn' role="navigation">
             <div class="container-fluid">
                 <div class="navbar-header">
                     <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#bs-sidebar-navbar-collapse-1">
@@ -44,7 +44,10 @@
                                 <ul class="dropdown-menu">
                                   <li routerLinkActive="active"><a>Profile</a></li>
                                   <li routerLinkActive="active"><a>Change Password</a></li>
-                                  <li routerLinkActive="active"><a>Themes</a></li>
+                                  <li routerLinkActive="active">                                     
+                                        <a style="float:left">Themes</a> 
+                                        <input type="color" [(ngModel)]="themeColor" (change)="onColorChange($event);" >                                                         
+                                  </li>
                                 </ul>
                         </li>
                         <li style="cursor: pointer">

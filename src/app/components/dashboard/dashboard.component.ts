@@ -12,11 +12,16 @@ import { QuizMaster } from '../../models/quiz-master';
 export class DashboardComponent implements OnInit {
 
   statusMessage = 'loading...';
-
+  themeColor='#ffffff';
   constructor(private _router: Router,
     private _authService: AuthService) { }
 
   ngOnInit() {
+    if(localStorage.getItem('themeColor'))
+    {
+      this.themeColor=localStorage.getItem('themeColor');
+      document.body.style.backgroundColor =this.themeColor;
+    }
   }
 
   onLogout() {
@@ -25,4 +30,10 @@ export class DashboardComponent implements OnInit {
     this._router.navigateByUrl('/login');
   }
 
+  onColorChange(evt)
+  {       
+    this.themeColor==evt.target.value;
+    localStorage.setItem('themeColor', this.themeColor);    
+    document.body.style.backgroundColor = this.themeColor;
+  }
 }
