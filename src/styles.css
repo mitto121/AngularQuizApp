@@ -10,3 +10,13 @@
     background-color: rgb(193, 201, 199);
     font-weight: bold;
 }
+.table thead th a {
+    cursor: pointer;
+}
+
+input[type=checkbox] {
+    background-color: #eee;
+    border: 1px solid #ccc;
+    height: 16px;
+    width: 18px;
+}

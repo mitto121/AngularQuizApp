@@ -18,6 +18,8 @@ import { ParticipantService } from './services/participant.service';
 //pipes
 import { QuizFilterPipe } from './pipes/quiz-filter.pipe';
 import { QuestionFilterPipe } from './pipes/question-filter.pipe';
+import { UsersFilterPipe } from './pipes/users-filter.pipe';
+
 
 //components
 import { AppComponent } from './app.component';
@@ -45,6 +47,7 @@ import { QuizBoardComponent } from './components/quiz-board/quiz-board.component
 import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { TimerComponent } from './components/shared/timer/timer.component';
+import { AppUsersComponent } from './components/app-users/app-users.component';
 
 
 @NgModule({
@@ -69,21 +72,23 @@ import { TimerComponent } from './components/shared/timer/timer.component';
     StartQuizDialogComponent,
     QuestionViewComponent,
     QuizResultComponent,
-    QuestionsListDialogComponent, 
-    ParticipantRegistrationComponent, 
+    QuestionsListDialogComponent,
+    ParticipantRegistrationComponent,
     DashboardComponent,
     StartQuizParticipatePageComponent,
     QuizBoardComponent,
     ParticipantListComponent,
-    TimerComponent,
+    TimerComponent,    
+    AppUsersComponent,
+    UsersFilterPipe   
   ],
   imports: [
     BrowserModule,
     FormsModule,
     ReactiveFormsModule,
     AppRouting,
-    HttpModule,    
-    NgxPaginationModule   
+    HttpModule,
+    NgxPaginationModule
   ],
   providers: [
     AuthService,

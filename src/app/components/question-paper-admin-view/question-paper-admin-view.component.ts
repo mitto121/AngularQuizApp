@@ -14,7 +14,7 @@ export class QuestionPaperAdminViewComponent implements OnInit {
   quizId: number;
   quiz: QuizMaster;
   showQuestionListModal: boolean;
-  
+
   constructor(private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _quizService: QuizService,
@@ -32,7 +32,7 @@ export class QuestionPaperAdminViewComponent implements OnInit {
     this._quizService.getQuizById(this.quizId)
     .subscribe(
       (res) => this.quiz = res,
-       (error) => console.error(error), 
+       (error) => console.error(error),
        () => this.displayQuestionWithAnswer()
       );
   }
@@ -41,7 +41,7 @@ export class QuestionPaperAdminViewComponent implements OnInit {
     this.quiz.questions.forEach(x => x.options.forEach(x => x.isSelected = x.isAnswer));
   }
   removeQuestion(questionId) {
-    if (confirm("Are you sure to remove this question ?")) {
+    if (confirm('Are you sure to remove this question ?')) {
       let isSucceeded: boolean;
       this._questionService.removeQuestion(questionId)
         .subscribe(
@@ -54,18 +54,16 @@ export class QuestionPaperAdminViewComponent implements OnInit {
   removeQuestionSuccessMethod(isSuccess: boolean, questionId: number) {
     if (isSuccess) {
       this.quiz.questions.find(x => x.id == questionId).isActive = false;
+    } else {
+      alert('Deletion failed !!');
     }
-    else {
-      alert("Deletion failed !!");
-    } 
   }
   closeModal(val) {
     this.showQuestionListModal = val;
   }
-  onQuestionsAdd(val)
-  {
+  onQuestionsAdd(val) {
     this.loadQuizWithQuestions();
     this.showQuestionListModal = val;
   }
-  
+
 }

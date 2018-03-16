@@ -7,8 +7,8 @@ import { QuizMaster } from '../../models/quiz-master';
 import { Observable } from 'rxjs/Observable';
 import { Ioption } from '../../models/ioption';
 import { CommonUtility } from '../../shared/common-utility';
-import { Location } from '@angular/common'
-import { PlatformLocation } from '@angular/common'
+import { Location } from '@angular/common';
+import { PlatformLocation } from '@angular/common';
 import { setTimeout } from 'timers';
 
 
@@ -19,20 +19,18 @@ import { setTimeout } from 'timers';
 })
 export class QuestionPaperComponent implements OnInit {
   quizId: number;
-  participantId:number;
+  participantId: number;
   quiz: QuizMaster;
   questions: Iquestion[];
   showModal: boolean;
   noOfQuestions: number;
   PageIndex = 0;
 
-
-
   constructor(private _activatedRoute: ActivatedRoute,
     private _router: Router,
     private _location: Location,
     private _quizService: QuizService,
-    private _platformLocation:PlatformLocation) {
+    private _platformLocation: PlatformLocation) {
     this.quiz = new QuizMaster();
   }
 
@@ -40,51 +38,56 @@ export class QuestionPaperComponent implements OnInit {
     this._platformLocation.onPopState(() => {
       this._location.forward();
     });
+    this.getQueryStringParam();
 
-    let decryptQId = this._activatedRoute.snapshot.params['id'];
-    this.quizId=Number(atob(decryptQId));
-    let decryptPId=this._activatedRoute.snapshot.params['participantId'];
-    this.participantId = Number(atob(decryptPId));
+    let hasAttempted=localStorage.getItem('hasQuizSubmitted');
+    if(hasAttempted)
+    {
+      this._router.navigate(['/startQuiz', this.quizId])
+    }   
+
     this._quizService.getQuizById(this.quizId)
       .subscribe(
         (res) => {
           this.quiz = res;
-          this.questions = this.quiz.questions;
-          this.noOfQuestions = this.questions.length;
         },
-        (error) => this.handleError);
-        
+        (error) => this.handleError,
+        () => this.loadTest()
+      );
+
   }
- 
+
+  loadTest() {
+    let attemptedquestion = localStorage.getItem('attemptedQuestion');
+    if (attemptedquestion) {
+      this.questions = JSON.parse(attemptedquestion);
+    }
+    else {
+      this.questions = this.quiz.questions;
+    }
+    this.noOfQuestions = this.questions.length;
+  }
+
   pageNavigation(navType: string) {
     if (navType == 'Previous' && this.PageIndex > 0) {
-      this.PageIndex = this.PageIndex - 1;
+      this.setCurrentPage(this.PageIndex - 1);
     } else if (navType == 'Next' && this.PageIndex < (this.noOfQuestions - 1)) {
-      this.PageIndex = this.PageIndex + 1;
+      this.setCurrentPage(this.PageIndex + 1);
     }
   }
 
   setCurrentPage(index: number) {
+    localStorage.setItem('attemptedQuestion', JSON.stringify(this.questions));
     this.PageIndex = index;
   }
 
-  applyNavStyle(isAttempt: boolean, currentPageIndex: number): string {
-    let navClass: string;
-    navClass = isAttempt ? 'answered ' : 'not-answered ';
-    if (this.PageIndex == currentPageIndex) {
-      navClass += 'highlight';
-    }
-    return navClass;
-  }
-
   submitTest() {
-    if (confirm('Are you sure to submit this Test ?')) {
+    if (confirm('Are you sure to submit this Test ?')) {          
       this.submitQuiz();
     }
 
   }
 
- 
   handleError(error: any) {
     console.log(error);
   }
@@ -92,22 +95,34 @@ export class QuestionPaperComponent implements OnInit {
     question.isAttempt = true;
   }
 
-  submitOnTimeOut()
-  {
+  submitOnTimeOut() {
     this.submitQuiz();
   }
+
+  private getQueryStringParam() {
+    const decryptQId = this._activatedRoute.snapshot.params['id'];
+    this.quizId = Number(atob(decryptQId));
+    const decryptPId = this._activatedRoute.snapshot.params['participantId'];
+    this.participantId = Number(atob(decryptPId));
+  }
+
   private submitQuiz() {
+
+    CommonUtility.removeLocalStorage('remaingTime','attemptedQuestion');
+    
     this._quizService.submitTest(this.quiz, this.participantId)
       .subscribe(res => {
         if (res) {
           this.showModal = true;
-          var nav = this._router;
-          let id = this.quiz.quizLinkId;
+          const nav = this._router;
+          const id = this.quiz.quizLinkId;
           setTimeout((function () {
             nav.navigate(['/startQuiz', id]);
           }), 800);
         }
-      }, error => console.log(error));
+      }, error => console.log(error),
+      ()=>localStorage.setItem('hasQuizSubmitted',String(true))
+    );
   }
 
 }

@@ -33,6 +33,20 @@
                                 <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
                             </a>
                         </li>
+                        <li *ngIf='_authService.isAdmin' routerLinkActive="active">
+                                <a [routerLink]="[{outlets:{dashboard:['appUsers']}}]">App Users
+                                    <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon-paper"></span>
+                                </a>
+                         </li>
+                         <li class="dropdown" >
+                                <a class="dropdown-toggle" data-toggle="dropdown" href="#">Settings
+                                <span class="caret"></span></a>
+                                <ul class="dropdown-menu">
+                                  <li routerLinkActive="active"><a>Profile</a></li>
+                                  <li routerLinkActive="active"><a>Change Password</a></li>
+                                  <li routerLinkActive="active"><a>Themes</a></li>
+                                </ul>
+                        </li>
                         <li style="cursor: pointer">
                             <a (click)='onLogout()'>Logout
                                 <span style="font-size:16px;" class="pull-right hidden-xs showopacity glyphicon glyphicon"></span>

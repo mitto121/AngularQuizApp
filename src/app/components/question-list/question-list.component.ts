@@ -13,7 +13,7 @@ import { CommonUtility } from '../../shared/common-utility';
 })
 export class QuestionListComponent implements OnInit {
   quizes: QuizMaster[];
-  questions: Iquestion[]
+  questions: Iquestion[];
   selectedQuizId: number;
   filterValue: string;
   questionId: number;
@@ -52,12 +52,12 @@ export class QuestionListComponent implements OnInit {
     }
     this._questionService.GetQuestionsByQuizId(this.selectedQuizId)
     .subscribe(
-      res=>this.questions=res
+      res => this.questions = res
     );
   }
 
   removeQuestions(id: number) {
-    if (confirm("Are you sure to remove this question ?")) {
+    if (confirm('Are you sure to remove this question ?')) {
       let isSucceeded: boolean;
       this._questionService.removeQuestion(id)
         .subscribe(
@@ -77,9 +77,8 @@ export class QuestionListComponent implements OnInit {
   questionListSuccessViewRender(isSuccess: boolean, questionId: number, isActive: boolean, msg: string) {
     if (isSuccess) {
       this.questions.find(x => x.id == questionId).isActive = isActive;
-    }
-    else {
-      let statusMessage = msg + " failed !!";
+    } else {
+      const statusMessage = msg + ' failed !!';
       alert(statusMessage);
     }
   }
@@ -94,8 +93,8 @@ export class QuestionListComponent implements OnInit {
 
   onUpdate(question) {
 
-    let questionItem = this.questions.find(item => item.id === question.id);
-    let index = this.questions.indexOf(questionItem);
+    const questionItem = this.questions.find(item => item.id === question.id);
+    const index = this.questions.indexOf(questionItem);
     if (index !== -1) {
       this.questions.splice(index, 1, question);
     }

@@ -9,13 +9,13 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class ModalWindowComponent implements OnInit {
 
   @Input()
-  modalTitle: string='Alert !!';
+  modalTitle = 'Alert !!';
 
   @Input()
   showModal: boolean;
 
   @Input()
-  showCloseBtn:boolean ;
+  showCloseBtn: boolean ;
 
   @Output() onCloseModal: EventEmitter<any> = new EventEmitter();
 
@@ -29,8 +29,7 @@ export class ModalWindowComponent implements OnInit {
     this.onCloseModal.emit();
     this.showModal = false;
   }
-  SubmitCloseModal(asd)
-  {
+  SubmitCloseModal(asd) {
     console.log('aasdas');
   }
 }

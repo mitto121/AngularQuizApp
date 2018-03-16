@@ -15,11 +15,11 @@ import { ApiResponse } from '../../models/api-response';
 export class LoginComponent implements OnInit {
   loginForm: FormGroup;
   validateOnSubmit: boolean;
-  loginStatusMsg:string;
+  loginStatusMsg: string;
 
   constructor(private _router: Router,
-              private _authenticateUserService:AuthenticateUserService ) { 
-                this.loginStatusMsg="";                
+              private _authenticateUserService: AuthenticateUserService ) {
+                this.loginStatusMsg = '';
                }
 
   ngOnInit() {
@@ -33,34 +33,29 @@ export class LoginComponent implements OnInit {
     });
   }
 
-  userLogIn() {    
-    let isSuccess:boolean;
+  userLogIn() {
+    let isSuccess: boolean;
     if (this.loginForm.valid) {
-     let userName=this.loginForm.controls['userName'].value;
-     let password=this.loginForm.controls['password'].value;
+     const userName = this.loginForm.controls['userName'].value;
+     const password = this.loginForm.controls['password'].value;
 
-     this._authenticateUserService.login(userName,password)
-                   .then((res)=>  this.authenticateUser(res));      
-     
+     this._authenticateUserService.login(userName, password)
+                   .then((res) =>  this.authenticateUser(res));
+
     } else {
        this.validateAllFormFields(this.loginForm);
     }
   }
 
-  authenticateUser(response:ApiResponse<UserAccount>)
-  {
-    if(response && response.isSucceeded)
-    {
-        localStorage.clear(); 
-        localStorage.setItem("user", JSON.stringify(response.result));
-        if(response.result)
-        {
+  authenticateUser(response: ApiResponse<UserAccount>) {
+    if (response && response.isSucceeded) {
+        localStorage.clear();
+        localStorage.setItem('user', JSON.stringify(response.result));
+        if (response.result) {
           this._router.navigateByUrl('home');
-        }               
-    }
-    else
-    {
-        this.loginStatusMsg=response.displayMessage;
+        }
+    } else {
+        this.loginStatusMsg = response.displayMessage;
     }
   }
 

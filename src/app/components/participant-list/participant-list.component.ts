@@ -5,6 +5,7 @@ import { ActivatedRoute } from '@angular/router';
 import { ParticipantSearchFilter } from '../../models/participantSearchFilter';
 import { CommonUtility } from '../../shared/common-utility';
 
+
 @Component({
   selector: 'app-participant-list',
   templateUrl: './participant-list.component.html',
@@ -19,6 +20,9 @@ export class ParticipantListComponent implements OnInit {
   totalParticipant = 0;
   searchFilter: ParticipantSearchFilter;
 
+  sortingColumn: string;
+  isDesc: boolean;
+
   constructor(private _activedRoute: ActivatedRoute,
     private _participantService: ParticipantService) {
     this.participantsPagedItems = [];
@@ -26,28 +30,28 @@ export class ParticipantListComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.quizId = this._activedRoute.snapshot.params["quizId"];
+    this.quizId = this._activedRoute.snapshot.params['quizId'];
     this.getParticipantsByQuizId();
   }
 
 
   onSearch() {
-    let name = (this.searchFilter.name) ?
+    const name = (this.searchFilter.name) ?
       this.searchFilter.name.trim().toLowerCase() : null;
 
-    let email = (this.searchFilter.email) ?
+    const email = (this.searchFilter.email) ?
       this.searchFilter.email.trim().toLowerCase() : null;
 
-    let result = (this.searchFilter.result) ?
+    const result = (this.searchFilter.result) ?
       this.searchFilter.result.trim().toLowerCase() : null;
 
-    let dateOfBirth = (this.searchFilter.dateOfBirth) ?
+    const dateOfBirth = (this.searchFilter.dateOfBirth) ?
       this.searchFilter.dateOfBirth.trim().toLowerCase() : null;
 
-    let attemptDate = (this.searchFilter.attemptDate) ?
+    const attemptDate = (this.searchFilter.attemptDate) ?
       this.searchFilter.attemptDate.trim().toLowerCase() : null;
 
-    this.searchParticipant({ name, email, dateOfBirth, attemptDate, result })
+    this.searchParticipant({ name, email, dateOfBirth, attemptDate, result });
   }
 
   private getParticipantsByQuizId() {
@@ -58,7 +62,7 @@ export class ParticipantListComponent implements OnInit {
           this.totalParticipant = res.length;
           this.participantsPagedItems = [];
           Object.assign(this.participantsPagedItems, this.participants);
-          this.showPaging = (this.totalParticipant / 10) > 1;
+          this.showPaging = (this.totalParticipant / 5) > 1;
         }
       }, (error) => console.error(error));
   }
@@ -70,7 +74,7 @@ export class ParticipantListComponent implements OnInit {
       this.participantsPagedItems = this.participantsPagedItems.filter(
         (participant: QuizParticipant) => participant.name.toLowerCase().indexOf(filter.name) !== -1);
     }
-    
+
     if (filter.email) {
       this.participantsPagedItems = this.participantsPagedItems.filter(
         (participant: QuizParticipant) => participant.email.toLowerCase().indexOf(filter.email) !== -1);
@@ -90,7 +94,14 @@ export class ParticipantListComponent implements OnInit {
 
     this.participantsPagedItems = filter.result ? this.participantsPagedItems.filter(
       (participant: QuizParticipant) => participant.result.toLowerCase().indexOf(filter.result) !== -1)
-      : this.participantsPagedItems;
-
+      : this.participantsPagedItems;  
   }
+
+  sort(columnName: string) {
+    this.sortingColumn = columnName;
+    this.isDesc = !this.isDesc;   
+    let direction=this.isDesc?1:-1;
+    CommonUtility.Sorting(this.participantsPagedItems,columnName,direction)
+  }
+
 }

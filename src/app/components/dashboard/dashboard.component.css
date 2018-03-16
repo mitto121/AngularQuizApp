@@ -49,9 +49,11 @@ nav.sidebar, .main{
     }
     /*Center Brand*/
     nav.sidebar .navbar-brand, nav.sidebar .navbar-header{
-        text-align: center;
-        width: 100%;
-        margin-left: 0px;
+       font-size: small;
+       font-weight: bold;
+       color: darkturquoise;
+       width: 100%;
+       margin-left: 0px;
     }
 
     /*Center Icons*/

@@ -1,9 +1,8 @@
-<div class="container">
+<div class="card card-container">
   <div class="row">
     <form class="form-horizontal" [formGroup]="signUpForm">
-      <fieldset>
-        
-        <legend>Registration Form</legend>
+      <fieldset>        
+        <legend>User Registration Form</legend>
 
         <!-- Text input-->
         <div class="form-group">
@@ -65,22 +64,17 @@
         <div class="form-group">         
           <div class="col-md-offset-4 col-md-4">
             <button class="btn btn-primary" (click)="createNewUser();"  >Submit</button>
+            <button class="btn btn-primary" (click)="onCancel();"  >Cancel</button>
           </div>
         </div>
 
       </fieldset>
     </form>
 
-    <app-modal-window   [showModal]='showModal'  >
+    <app-modal-window   [showModal]='showModal'  (onCloseModal)="closeModal($event)" >
         <div>
             <span [ngStyle]='{color:isSucceed?"green":"red"}'>{{statusMessage}}</span>
-         </div> 
-         <div class="row">
-            <div class="col-md-offset-5 col-md-7">
-                <button class="btn btn-primary" *ngIf='isSucceed' routerLink='/login' >Back to login page</button>
-                <button class="btn btn-primary" (click)='closeModal();' >Close</button>
-          </div>
-        </div>
+         </div>         
     </app-modal-window>
   </div>
 </div>

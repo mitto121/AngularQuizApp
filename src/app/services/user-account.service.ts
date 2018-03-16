@@ -12,14 +12,30 @@ export class UserAccountService {
 
   constructor(private http: Http) { }
 
-  public createUser(user): Observable<ApiResponse<boolean>> {
+  public getUsers(): Observable<UserAccount[]> {
     
-    let options=CommonUtility.getRequestOptions();  
-
-    return this.http.post(CommonUtility.baseApiUrl + "UserAccount/CreateUser", JSON.stringify(user), options)
+    return this.http.get(CommonUtility.baseApiUrl + 'UserAccount/Users')
       .map(res => res.json())
       .catch(CommonUtility.handleError);
   }
-  
+
+  public createUser(user): Observable<ApiResponse<boolean>> {
+
+    const options = CommonUtility.getRequestOptions();
+    return this.http.post(CommonUtility.baseApiUrl + 'UserAccount/CreateUser', JSON.stringify(user), options)
+      .map(res => res.json())
+      .catch(CommonUtility.handleError);
+  }
+
+  public activeOrDeactiveUserAccount(userId:number,isActive:boolean)
+  {
+    const options = CommonUtility.getRequestOptions();
+
+    return this.http.put(CommonUtility.baseApiUrl+`UserAccount/ActiveOrDeactiveUserAccount/${userId}/${isActive}`,options)
+        .map(res=>res.json())
+        .catch(CommonUtility.handleError); 
+    
+  }
+
 
 }

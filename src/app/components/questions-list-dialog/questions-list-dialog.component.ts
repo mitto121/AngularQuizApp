@@ -16,7 +16,7 @@ export class QuestionsListDialogComponent implements OnInit {
   @Output()
   onSuccess: EventEmitter<any> = new EventEmitter();
   quizes: QuizMaster[];
-  questions: Iquestion[]
+  questions: Iquestion[];
   selectedQuizId?: number = null;
   filterValue: string;
   isAllChecked: boolean;
@@ -45,31 +45,30 @@ export class QuestionsListDialogComponent implements OnInit {
           res => this.questions = res.filter(x => x.quizId != this.quizId),
           err => console.error(err)
         );
-    }
-    else {
+    } else {
       this.questions = this.quizes.find(x => x.id == this.selectedQuizId).questions;
     }
   }
   selectAll() {
     this.questions.forEach(x => x.isSelected = this.isAllChecked);
-    this.displayMessage = "";
+    this.displayMessage = '';
   }
 
   selectQuestion() {
-    let totalQuestion = this.questions.length;
-    let checkedCount = this.questions.filter(x => x.isSelected).length;
+    const totalQuestion = this.questions.length;
+    const checkedCount = this.questions.filter(x => x.isSelected).length;
     this.isAllChecked = (totalQuestion === checkedCount);
-    this.displayMessage = "";
+    this.displayMessage = '';
   }
   addToQuiz() {
-    let checkedCount = this.questions.filter(x => x.isSelected).length;
+    const checkedCount = this.questions.filter(x => x.isSelected).length;
     if (checkedCount) {
-      let questionArray: number[] = [];
+      const questionArray: number[] = [];
       this.questions.filter(x => x.isSelected).forEach(
         x => questionArray.push(x.id)
       );
-   
-      this._questionService.addQuestionsToQuiz(this.quizId,questionArray)
+
+      this._questionService.addQuestionsToQuiz(this.quizId, questionArray)
         .subscribe(
           res => {
             if (res) {
@@ -79,9 +78,8 @@ export class QuestionsListDialogComponent implements OnInit {
           error => console.error(error)
         );
 
-    }
-    else {
-      this.displayMessage = "please select atleast one checkbox";
+    } else {
+      this.displayMessage = 'please select atleast one checkbox';
     }
 
   }

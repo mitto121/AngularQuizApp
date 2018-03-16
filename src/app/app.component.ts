@@ -9,9 +9,9 @@ import { Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'Welcome to Quiz Master';
-  
-  constructor() {    
+
+  constructor() {
   }
 
- 
+
 }

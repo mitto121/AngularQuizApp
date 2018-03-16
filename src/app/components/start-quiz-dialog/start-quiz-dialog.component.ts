@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute,Router } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { CommonUtility } from '../../shared/common-utility';
 import { QuizService } from '../../services/quiz.service';
@@ -21,14 +21,14 @@ export class StartQuizDialogComponent implements OnInit {
   constructor(private _activatedRoute: ActivatedRoute,
     private _quizService: QuizService,
     private _location: Location,
-    private _router:Router) {
+    private _router: Router) {
     this.quiz = new QuizMaster();
   }
 
   ngOnInit() {
     if (this.quizId) {
       this._quizService.getQuizById(this.quizId)
-        .subscribe(res => this.quiz = res)
+        .subscribe(res => this.quiz = res);
       this.hasQuizAttemptEarlier();
     }
   }
@@ -40,9 +40,10 @@ export class StartQuizDialogComponent implements OnInit {
       error => console.error(error));
   }
 
-  beginQuiz()
-  {
-    this._router.navigate(['/quiz',this.quiz.quizLinkId,btoa(String(this.participantId))])
+  beginQuiz() {
+    CommonUtility.removeLocalStorage('remaingTime','attemptedQuestion','hasQuizSubmitted');
+            
+    this._router.navigate(['/quiz', this.quiz.quizLinkId, btoa(String(this.participantId))]);
   }
 
 

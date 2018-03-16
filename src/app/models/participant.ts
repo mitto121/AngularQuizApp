@@ -1,6 +1,6 @@
-export class Participant{
-   id:number;
-   name:string;
-   dateOfBirth:Date;
-   email:string;    
+export class Participant {
+   id: number;
+   name: string;
+   dateOfBirth: Date;
+   email: string;
 }

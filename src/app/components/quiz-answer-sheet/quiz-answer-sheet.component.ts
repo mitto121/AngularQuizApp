@@ -11,26 +11,21 @@ import { QuizResult } from '../../models/quiz-result';
 })
 export class QuizAnswerSheetComponent implements OnInit {
 
-  attemptId:number;
-  quizResult:QuizResult; 
+  attemptId: number;
+  quizResult: QuizResult;
 
   constructor(private _activedRouter: ActivatedRoute,
-              private _quizService:QuizService) {
-                this.quizResult=new QuizResult();               
+              private _quizService: QuizService) {
+                this.quizResult = new QuizResult();
                }
 
-  ngOnInit() {    
-    this.attemptId = this._activedRouter.snapshot.params["id"];
-      
+  ngOnInit() {
+    this.attemptId = this._activedRouter.snapshot.params['id'];
+
     this._quizService.getQuizResult(this.attemptId)
     .subscribe(
-      res=>this.quizResult=res,
-      err=>console.log(err)  
+      res => this.quizResult = res,
+      err => console.log(err)
     );
   }
-
-
-
-
-
 }

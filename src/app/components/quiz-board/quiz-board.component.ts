@@ -10,7 +10,7 @@ import { QuizMaster } from '../../models/quiz-master';
 export class QuizBoardComponent implements OnInit {
 
   quizes: QuizMaster[];
- 
+
   constructor(private _quiz: QuizService) { }
 
   ngOnInit() {
@@ -18,12 +18,12 @@ export class QuizBoardComponent implements OnInit {
       .subscribe(
       (res) => {
         if (res) {
-          this.quizes = res.result.filter(x => x.isActive)
+          this.quizes = res.result.filter(x => x.isActive);
         }
       },
       (error) => console.log(error));
   }
 
-  
+
 
 }

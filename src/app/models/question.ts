@@ -6,6 +6,7 @@ export class Question {
     quizId: number;
     options: Ioption[];
     isAttempt: boolean;
-    isActive:boolean;
-    isSelected:boolean;
+    isActive: boolean;
+    isSelected: boolean;
+    isReminderable:boolean;
 }

@@ -4,6 +4,7 @@ import { UserAccount } from '../../models/user-account';
 import { UserAccountService } from '../../services/user-account.service';
 import { Router } from '@angular/router';
 import { CommonUtility } from '../../shared/common-utility';
+import {Location} from '@angular/common'
 
 
 @Component({
@@ -14,11 +15,11 @@ import { CommonUtility } from '../../shared/common-utility';
 export class SignUpComponent implements OnInit {
 
   signUpForm: FormGroup;
-  statusMessage:string;
-  showModal:boolean;
-  isSucceed:boolean;
+  statusMessage: string;
+  showModal: boolean;
+  isSucceed: boolean;
   constructor(private _userAccountService: UserAccountService,
-              private _router:Router) {
+              private _router: Router,private _Location: Location) {
   }
 
   ngOnInit() {
@@ -39,51 +40,50 @@ export class SignUpComponent implements OnInit {
 
   createNewUser(signUpForm: FormControl) {
     if (this.signUpForm.valid) {
-      let newUser = {
+      const newUser = {
         FirstName: this.signUpForm.get('first_Name').value,
         LastName: this.signUpForm.get('last_Name').value,
         Email: this.signUpForm.get('email').value,
         UserName: this.signUpForm.get('user_Name').value,
         Password: this.signUpForm.get('password').value
       };
-      
+
       this._userAccountService.createUser(newUser)
         .subscribe( res => {
-          this.statusMessage=res.displayMessage;
-          this.isSucceed=res.result;
-          this.showModal=true;          
+          this.statusMessage = res.displayMessage;
+          this.isSucceed = res.result;
+          this.showModal = true;
         });
 
-    }
-    else {
+    } else {
       CommonUtility.validateAllFormFields(this.signUpForm);
     }
 
   }
 
- 
-  closeModal()
-  {
-    this.showModal=false;  
-    if(this.isSucceed)
-    {  
+  closeModal(val) {
+    this.showModal = val;
+    if (this.isSucceed) {
     this.signUpForm.reset();
-    this.statusMessage='';
+    this.statusMessage = '';
     }
   }
+
+  onCancel()
+  {
+    this._Location.back();
+  }
   
-  passwordConfirming(c: FormControl): { isNotEqual: boolean } {    
+  passwordConfirming(c: FormControl): { isNotEqual: boolean } {
     if (c.parent) {
       console.log(c.parent.value['password']);
       if (c.parent.value['password'] !== c.value) {
-        c.setErrors({ MatchPassword: false })
+        c.setErrors({ MatchPassword: false });
       } else {
-        return null
+        return null;
       }
-    }
-    else
-    {
+    } else {
       return null;
-    }   
+    }
   }
 }

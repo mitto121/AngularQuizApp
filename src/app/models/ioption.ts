@@ -1,6 +1,6 @@
 export interface Ioption {
     id: number;
-    code:string;
+    code: string;
     name: string;
     questionId: number;
     quizId: number;

@@ -18,7 +18,7 @@ export class ShowValidationErrorComponent {
   }
 
   getError(): string {
-    let errors = Object.keys(this.control.errors)
+    const errors = Object.keys(this.control.errors)
      .map(field => this.getMessage(field, this.control.errors[field], this.control));
      return errors[0];
 
@@ -31,7 +31,7 @@ export class ShowValidationErrorComponent {
 
     fname = fname.replace(/\b\w/g, l => l.toUpperCase());
 
-    let msg = ShowValidationErrorComponent.validationMessage[type](params);
+    const msg = ShowValidationErrorComponent.validationMessage[type](params);
 
     return msg.replace('##FIELD##', fname);
 
@@ -49,7 +49,7 @@ export class ShowValidationErrorComponent {
     'email': (params) => 'Should be vaild email.',
     'min': (params) => '##FIELD## should be minimum ' + params.min,
     'max': (params) => '##FIELD## should be less than ' + params.max,
-    'MatchPassword':(params)=> 'Not match'
+    'MatchPassword': (params) => 'Not match'
   };
 
 }

@@ -22,7 +22,7 @@ export class DashboardComponent implements OnInit {
   onLogout() {
     localStorage.clear();
     this._authService.isLoggedIn = false;
-    this._router.navigateByUrl('/login')
+    this._router.navigateByUrl('/login');
   }
 
 }

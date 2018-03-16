@@ -1,9 +1,9 @@
 export class Option {
     id: number;
-    code:string;
+    code: string;
     name: string;
     questionId: number;
     quizId: number;
     isSelected: boolean;
-    isAnswer: boolean;    
+    isAnswer: boolean;
 }

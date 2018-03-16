@@ -6,6 +6,6 @@ export interface Iquestion {
     quizId: number;
     options: Ioption[];
     isAttempt: boolean;
-    isActive:boolean;
-    isSelected:boolean;
+    isActive: boolean;
+    isSelected: boolean;
 }

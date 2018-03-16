@@ -14,14 +14,16 @@ export class QuizResultComponent implements OnInit {
   quizes: QuizMaster[];
   participants: QuizParticipant[];
   participantsItems: QuizParticipant[];
-  totalParticipant: number = 0;
+  totalParticipant = 0;
   filterValue: string;
   selectedQuizId: number;
-  searchBy: string = "name";
+  searchBy = 'name';
   searchValue: any;
   showPaging: boolean;
+  sortingColumn:string;
+  isDesc:boolean;
   constructor(private _quiz: QuizService,
-              private _participantService:ParticipantService) {
+              private _participantService: ParticipantService) {
     this.participantsItems = [];
   }
 
@@ -58,7 +60,7 @@ export class QuizResultComponent implements OnInit {
         if (res) {
           this.participants = res;
           this.totalParticipant = res.length;
-          this.participantsItems=[];
+          this.participantsItems = [];
           Object.assign(this.participantsItems, this.participants);
         }
       },
@@ -77,13 +79,17 @@ export class QuizResultComponent implements OnInit {
       this.participantsItems = this.searchValue ? this.participantsItems.filter(
         (participant: QuizParticipant) => participant.name.toLowerCase().indexOf(this.searchValue) !== -1
       ) : this.participantsItems;
-    }
-    else if (this.searchBy == 'date') {
+    } else if (this.searchBy == 'date') {
       this.participantsItems = this.searchValue ? this.participantsItems.filter(
         (participant: QuizParticipant) => this.searchValue == CommonUtility.formatDate(participant.date)
       ) : this.participantsItems;
     }
     return this.participantsItems;
   }
-
+  sort(columnName: string) {
+    this.sortingColumn = columnName;
+    this.isDesc = !this.isDesc;   
+    let direction=this.isDesc?1:-1;
+    CommonUtility.Sorting(this.participantsItems,columnName,direction);
+  }
 }

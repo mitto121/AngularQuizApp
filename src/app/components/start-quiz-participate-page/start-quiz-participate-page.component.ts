@@ -12,17 +12,16 @@ import { Participant } from '../../models/participant';
 export class StartQuizParticipatePageComponent implements OnInit {
 
   quizId: number;
-  participantId:number;
+  participantId: number;
   constructor(private _activatedRoute: ActivatedRoute,
     private _quizService: QuizService) { }
 
   ngOnInit() {
-    let decryptId = this._activatedRoute.snapshot.params['id'];
-    this.quizId=Number(atob(decryptId));
+    const decryptId = this._activatedRoute.snapshot.params['id'];
+    this.quizId = Number(atob(decryptId));
   }
 
-  onContinue(id)
-  {    
-   this.participantId=id;  
+  onContinue(id) {
+   this.participantId = id;
   }
 }
