@@ -9,32 +9,30 @@ import { UserAccountService } from '../../services/user-account.service';
 })
 export class AppUsersComponent implements OnInit {
 
-  users:UserAccount[];
-  searchText:string;
+  users: UserAccount[];
+  searchText: string;
 
 
-  constructor(private _userAccountService:UserAccountService) {
-    this.users=[];
-   }
+  constructor(private _userAccountService: UserAccountService) {
+    this.users = [];
+  }
 
   ngOnInit() {
     this._userAccountService.getUsers()
-    .subscribe(
-      res=>this.users=res
-    );
+      .subscribe(
+        res => this.users = res
+      );
   }
 
- activeOrDeactiveUserAccount(userId:number,isActive:boolean)
- {
-    this._userAccountService.activeOrDeactiveUserAccount(userId,isActive)
-        .subscribe(
-          res=>{
-              if(res)
-              {
-                this.users.find(x=>x.id==userId).isActive=isActive;
-              }
+  activeOrDeactiveUserAccount(userId: number, isActive: boolean) {
+    this._userAccountService.activeOrDeactiveUserAccount(userId, isActive)
+      .subscribe(
+        res => {
+          if (res) {
+            this.users.find(x => x.id == userId).isActive = isActive;
           }
-        );
- }
+        }
+      );
+  }
 
 }

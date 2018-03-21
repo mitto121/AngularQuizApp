@@ -16,19 +16,34 @@ export class QuestionComponent implements OnInit {
   @Input()
   questionNumber: number;
 
+  optionType: string;
+
   @Input()
   isReadOnly: boolean;
+
 
   @Output() onSelect: EventEmitter<Iquestion> = new EventEmitter();
 
 
-  constructor() { }
-
-  ngOnInit() {
+  constructor() {
+    this.optionType = 'checkbox';
   }
 
-  selectAnswer(option: Ioption) {
-    this.question.options.forEach((x) => { x.isSelected = (x.code == option.code); });
+  ngOnInit() {
+    debugger;
+    let hasMultipleChoice = this.question.options.filter(x => x.isAnswer).length;
+    if (hasMultipleChoice && hasMultipleChoice == 1) {
+      this.optionType = 'radio';
+    }
+  }
+
+  selectAnswer(option: Ioption,event) {    
+    if (this.optionType == 'checkbox') {
+      this.question.options.find(x => x.code == option.code).isSelected = event.target.checked;
+    }
+    else {
+      this.question.options.forEach(x => x.isSelected = (x.code == option.code));
+    }
     this.onSelect.emit(this.question);
   }
 

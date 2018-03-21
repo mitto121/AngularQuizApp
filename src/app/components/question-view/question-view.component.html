@@ -1,22 +1,6 @@
 <div class="panel" *ngIf="question">
-  <div class="panel-body">
-    <h4>
-      <span *ngIf='!isEditable' [innerHTML]="question.name"></span>
-      <textarea  class="form-control" *ngIf='isEditable' [(ngModel)]='question.name' ></textarea>
-    </h4>
-    <div class="row text-left options">
-      <div class="col-md-6" *ngFor="let option of question.options">
-            <div class="row">
-              <div class="col-md-1">
-                <input [id]="option.id" type="radio" [value]="option.code" [checked]="option.isAnswer" (change)="selectAnswer(option);" [disabled]='!isEditable' />
-              </div>
-              <div class="col-md-10 form-group">
-                <span *ngIf='!isEditable'> {{option.name}}</span>
-                <textarea  class="form-control" *ngIf='isEditable' [(ngModel)]='option.name' ></textarea>
-              </div>
-            </div>   
-      </div>
-    </div>
+  <div class="panel-body" *ngIf="isEditable then EditMode else ViewMode">
+    
   </div>  
     <div class="col-md-12">
       <div class="col-md-offset-5">
@@ -24,3 +8,23 @@
       </div>
     </div>
   </div>
+<ng-template #EditMode>
+    <h4>     
+        <textarea  class="form-control"  [(ngModel)]='question.name' ></textarea>
+      </h4>
+      <div class="row text-left options">
+        <div class="col-md-6" *ngFor="let option of question.options">
+          <div></div>
+              <div class="row">
+                <div class="col-md-1">
+                </div>
+                <div class="col-md-10 form-group">
+                  <textarea  class="form-control"  [(ngModel)]='option.name' ></textarea>
+                </div>
+              </div>   
+        </div>
+      </div>
+</ng-template>
+<ng-template #ViewMode>
+    <app-question [question]='question' [questionNumber]='index+1' isReadOnly='true' ></app-question>
+</ng-template>

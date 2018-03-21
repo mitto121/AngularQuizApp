@@ -21,7 +21,6 @@ export class QuestionPaperComponent implements OnInit {
   quizId: number;
   participantId: number;
   quiz: QuizMaster;
-  questions: Iquestion[];
   showModal: boolean;
   noOfQuestions: number;
   PageIndex = 0;
@@ -40,11 +39,10 @@ export class QuestionPaperComponent implements OnInit {
     });
     this.getQueryStringParam();
 
-    let hasAttempted=localStorage.getItem('hasQuizSubmitted');
-    if(hasAttempted)
-    {
+    let hasAttempted = localStorage.getItem('hasQuizSubmitted');
+    if (hasAttempted) {
       this._router.navigate(['/startQuiz', this.quizId])
-    }   
+    }
 
     this._quizService.getQuizById(this.quizId)
       .subscribe(
@@ -59,13 +57,12 @@ export class QuestionPaperComponent implements OnInit {
 
   loadTest() {
     let attemptedquestion = localStorage.getItem('attemptedQuestion');
+
     if (attemptedquestion) {
-      this.questions = JSON.parse(attemptedquestion);
+      this.quiz.questions = JSON.parse(attemptedquestion);
     }
-    else {
-      this.questions = this.quiz.questions;
-    }
-    this.noOfQuestions = this.questions.length;
+
+    this.noOfQuestions = this.quiz.questions.length;
   }
 
   pageNavigation(navType: string) {
@@ -77,12 +74,16 @@ export class QuestionPaperComponent implements OnInit {
   }
 
   setCurrentPage(index: number) {
-    localStorage.setItem('attemptedQuestion', JSON.stringify(this.questions));
+
+    localStorage.setItem('attemptedQuestion', JSON.stringify(this.quiz.questions));
     this.PageIndex = index;
   }
-
+  
+  setAttemptStatus(question: Question) {
+    question.isAttempt = question.options.filter(x => x.isSelected).length > 0;
+  }
   submitTest() {
-    if (confirm('Are you sure to submit this Test ?')) {          
+    if (confirm('Are you sure to submit this Test ?')) {
       this.submitQuiz();
     }
 
@@ -91,9 +92,7 @@ export class QuestionPaperComponent implements OnInit {
   handleError(error: any) {
     console.log(error);
   }
-  selectedAnswer(question: Iquestion) {
-    question.isAttempt = true;
-  }
+
 
   submitOnTimeOut() {
     this.submitQuiz();
@@ -107,9 +106,9 @@ export class QuestionPaperComponent implements OnInit {
   }
 
   private submitQuiz() {
+    debugger;
+    CommonUtility.removeLocalStorage('remaingTime', 'attemptedQuestion');
 
-    CommonUtility.removeLocalStorage('remaingTime','attemptedQuestion');
-    
     this._quizService.submitTest(this.quiz, this.participantId)
       .subscribe(res => {
         if (res) {
@@ -121,8 +120,8 @@ export class QuestionPaperComponent implements OnInit {
           }), 800);
         }
       }, error => console.log(error),
-      ()=>localStorage.setItem('hasQuizSubmitted',String(true))
-    );
+        () => localStorage.setItem('hasQuizSubmitted', String(true))
+      );
   }
 
 }

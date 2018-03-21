@@ -32,13 +32,11 @@ export class QuestionViewComponent implements OnInit {
     this._questionService.getQuestionById(this.questionId)
     .subscribe(
           res => this.question = res,
-          error => console.error('server error')
+          error => console.error('server error'),
+          ()=>this.bindAnswer()
     );
   }
-  selectAnswer(option: Ioption) {
-    this.question.options.forEach((x) => { x.isAnswer = (x.code == option.code); });
-  }
-
+  
   onSubmit() {
     this._questionService.UpdateQuestion(this.question)
     .subscribe(
@@ -51,5 +49,10 @@ export class QuestionViewComponent implements OnInit {
       },
       error => console.error(error)
     );
+  }
+
+  private bindAnswer()
+  {
+    this.question.options.forEach(x=>x.isSelected=x.isAnswer)
   }
 }

@@ -1,0 +1,57 @@
+<div class="card card-container">
+  <form class="form-horizontal" [formGroup]="userProfileForm">
+    <div class="row">
+      <div class="col-md-8">
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-6 control-label" for="firstName">Name :</label>         
+            <label class="col-md-6 form-label">{{user.name}}</label>
+        
+        </div>
+
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-6 control-label" for="email">Email</label>
+          <div class="col-md-6">
+            <input id="email" name="email" type="text" formControlName="email" placeholder="Your email here" class="form-control input-md">
+            <show-validation-error [control]="userProfileForm.controls.email"></show-validation-error>
+          </div>
+        </div>
+
+        <!-- Text input-->
+        <div class="form-group">
+          <label class="col-md-6 control-label" for="contact">Contact Number</label>
+          <div class="col-md-6">
+            <input id="contact" name="contact" type="text" formControlName='contactNumber' placeholder="Contact Number" class="form-control input-md">
+          </div>
+        </div>
+
+      </div>
+      <div class="col-md-4">       
+          <div class="col-md-12">   
+          <img style="height: 100px;width: 100px;" *ngIf='profilePicture' [src]="profilePicture" >   
+          </div>    
+          <div class="col-md-12">            
+              <span class="btn btn-default btn-xs btn-file">
+                  Browse <input  type="file" (change)="onFileUpload($event)" > 
+              </span>        
+          </div>       
+      </div>
+    </div>
+    <div class="row">
+      <div class="form-group">
+        <div class="col-md-offset-4 col-md-4">
+          <button class="btn btn-primary" (click)="onSave();">Save</button>
+          <button class="btn btn-primary" (click)="onCancel();">Cancel</button>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>
+
+<app-modal-window   [showModal]='showModal'  (onCloseModal)="closeModal($event)" >
+    <div>
+        <span >{{statusMessage}}</span>
+     </div>         
+</app-modal-window>

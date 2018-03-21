@@ -25,32 +25,37 @@ import { QuizBoardComponent } from './components/quiz-board/quiz-board.component
 import { ParticipantListComponent } from './components/participant-list/participant-list.component';
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { AppUsersComponent } from './components/app-users/app-users.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 import { AuthGuardService } from './services/auth-guard.service';
 
 const appRoutes: Route[] = [
-    { path: 'login', component: LoginComponent },
-    { path: '', redirectTo: 'login', pathMatch: 'full' },    
-    { path: 'startQuiz/:id', component: StartQuizParticipatePageComponent },
-    { path: 'quiz/:id/:participantId', component: QuestionPaperComponent },
+  { path: 'login', component: LoginComponent },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
+  { path: 'startQuiz/:id', component: StartQuizParticipatePageComponent },
+  { path: 'quiz/:id/:participantId', component: QuestionPaperComponent },
 
-    {path: 'home', component: DashboardComponent, canActivate: [AuthGuardService], children: [
-        { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
-        { path: 'questions', component: QuestionListComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
-        { path: 'quizResult', component: QuizResultComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
-        { path: 'appUsers', component: AppUsersComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
-      ]
-    },
-    { path: 'participants/:quizId', component: ParticipantListComponent, canActivate: [AuthGuardService] },
-    { path: 'quizMaster/Create', component: QuizMasterComponent, canActivate: [AuthGuardService] },
-    { path: 'quizMaster/Edit/:id', component: QuizMasterComponent, canActivate: [AuthGuardService] },
-    { path: 'quizResult/:id', component: QuizAnswerSheetComponent, canActivate: [AuthGuardService] },
-    { path: 'questionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },
-    { path: 'questionMaster/Create/:id', component: QuestionMasterComponent, canActivate: [AuthGuardService] },
-    { path: 'question/:id/:viewMode', component: QuestionViewComponent, canActivate: [AuthGuardService] },
-    { path: 'createUser', component: SignUpComponent,canActivate: [AuthGuardService] },
-    { path: '**', component: PageNotFoundComponent }
-  ];
+  {
+    path: 'home', component: DashboardComponent, canActivate: [AuthGuardService], children: [
+      { path: 'quizes', component: QuizesComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
+      { path: 'questions', component: QuestionListComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
+      { path: 'quizResult', component: QuizResultComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
+      { path: 'appUsers', component: AppUsersComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
+      { path: 'userProfile', component: ProfileComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
+      { path: 'changePassword', component: ChangePasswordComponent, canActivate: [AuthGuardService], outlet: 'dashboard' },
+    ]
+  },
+  { path: 'participants/:quizId', component: ParticipantListComponent, canActivate: [AuthGuardService] },
+  { path: 'quizMaster/Create', component: QuizMasterComponent, canActivate: [AuthGuardService] },
+  { path: 'quizMaster/Edit/:id', component: QuizMasterComponent, canActivate: [AuthGuardService] },
+  { path: 'quizResult/:id', component: QuizAnswerSheetComponent, canActivate: [AuthGuardService] },
+  { path: 'questionPaper/:id', component: QuestionPaperAdminViewComponent, canActivate: [AuthGuardService] },
+  { path: 'questionMaster/Create/:id', component: QuestionMasterComponent, canActivate: [AuthGuardService] },
+  { path: 'question/:id/:viewMode', component: QuestionViewComponent, canActivate: [AuthGuardService] },
+  { path: 'createUser', component: SignUpComponent, canActivate: [AuthGuardService] },
+  { path: '**', component: PageNotFoundComponent }
+];
 
 
-  export const AppRouting = RouterModule.forRoot(appRoutes);
+export const AppRouting = RouterModule.forRoot(appRoutes);

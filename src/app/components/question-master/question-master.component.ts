@@ -32,38 +32,42 @@ export class QuestionMasterComponent implements OnInit {
   ngOnInit() {
     this.quizId = this._activatedRoute.snapshot.params['id'];
     this._questionService.GetQuestionsByQuizId(this.quizId)
-    .subscribe(
-      res => this.questionList = res,
+      .subscribe(
+        res => this.questionList = res,
     );
   }
 
   addOption() {
-    this.isValidForm = this.validateOptions();
+    this.validateForm();
     if (this.isValidForm) {
       const noOfOptions = this.question.options.length;
       const option = new Option();
       option.code = String(1055 + noOfOptions);
       option.name = '';
       this.question.options.push(option);
-    } else {
-      this.alertMessage = 'Option can\'t be empty';
-    }
+    } 
   }
 
   onQuestionChange() {
     this.isAddOptionEnable = this.question.name.trim().length > 0;
   }
 
-  validateOptions(): boolean {
+  validateForm() {
+    if (!this.question.name.trim().length) {
+      this.isValidForm = false;
+      this.alertMessage = 'Question can\'t be empty';
+    }
+    else {
+      let inValidCount = 0;
+      this.question.options.forEach(function (opt, i) {
 
-    let inValidCount = 0;
-    this.question.options.forEach(function (opt, i) {
-
-      if (opt.name.trim().length === 0) {
-        inValidCount++;
-      }
-    });
-    return inValidCount == 0;
+        if (opt.name.trim().length === 0) {
+          inValidCount++;
+        }
+      });
+      this.isValidForm= (inValidCount == 0);
+      this.alertMessage = 'Option can\'t be empty'
+    }   
   }
 
   removeOption(option) {
@@ -80,26 +84,24 @@ export class QuestionMasterComponent implements OnInit {
     this.isAddOptionEnable = false;
   }
 
-  setAnswer(question: Iquestion) {
-    question.options.forEach(x => x.isAnswer = x.isSelected);
+  onCancel() {
+    this._location.back();
   }
   saveAndContinue() {
 
-    this.isValidForm = this.validateOptions();
-    if (!this.isValidForm) {
-      this.alertMessage = 'Option can\'t be empty';
-    } else {
+    this.validateForm();
+    if (this.isValidForm) {     
       const hasQuestionExist = this.CheckQuestionExistOrNot();
-          if (hasQuestionExist) {
-            this.alertMessage = 'This question is already exist';
-            this.isValidForm = false;
-          } else {
-            this.showQuestionModal = true;
-          }
+      if (hasQuestionExist) {
+        this.alertMessage = 'This question is already exist';
+        this.isValidForm = false;
+      } else {
+        this.showQuestionModal = true;
+      }
     }
+
   }
   private CheckQuestionExistOrNot(): boolean {
-    debugger;
     const question = this.question.name.replace(' ', '').toLowerCase();
     const questions = this.questionList.filter(
       x => x.name.replace(' ', '').toLowerCase().indexOf(question) !== -1
@@ -107,8 +109,10 @@ export class QuestionMasterComponent implements OnInit {
     return questions && questions.length > 0;
   }
   private createQuestion() {
-    const hasAnswer = this.question.options.filter(x => x.isAnswer).length;
-    if (hasAnswer && hasAnswer > 0) {
+    debugger;
+    const hasSelected = this.question.options.filter(x => x.isSelected).length;
+    if (hasSelected && hasSelected > 0) {
+      this.question.options.forEach(x => x.isAnswer = x.isSelected);
       this.question.quizId = this.quizId;
       this.addNewQuestion();
     } else {

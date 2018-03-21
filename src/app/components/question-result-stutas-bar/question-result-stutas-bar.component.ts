@@ -9,7 +9,7 @@ import { Iquestion } from '../../models/iquestion';
 export class QuestionResultStutasBarComponent implements OnInit {
 
 
-  answer: string;
+  answer: string[];
   viewCorrectAnswer: boolean;
   @Input()
   question: Iquestion;
@@ -24,8 +24,9 @@ export class QuestionResultStutasBarComponent implements OnInit {
 
    showCorrectAnswer() {
      const buttonId = this.question.id.toString();
-     let name = document.getElementById(buttonId).innerText;
-     this.answer = this.question.options.find(x => x.isAnswer).name;
+     let name = document.getElementById(buttonId).innerText;   
+     this.answer=[]; 
+     this.question.options.filter(x=>x.isAnswer).forEach(e=>this.answer.push(e.name));   
      this.viewCorrectAnswer = !this.viewCorrectAnswer;
      name = this.viewCorrectAnswer ? 'Hide Answer' : 'Show Answer';
      document.getElementById(buttonId).innerHTML = name;

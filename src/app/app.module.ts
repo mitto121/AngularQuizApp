@@ -48,6 +48,8 @@ import { ParticipantListComponent } from './components/participant-list/particip
 import { QuestionListComponent } from './components/question-list/question-list.component';
 import { TimerComponent } from './components/shared/timer/timer.component';
 import { AppUsersComponent } from './components/app-users/app-users.component';
+import { ProfileComponent } from './components/profile/profile.component';
+import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
 
 @NgModule({
@@ -80,7 +82,9 @@ import { AppUsersComponent } from './components/app-users/app-users.component';
     ParticipantListComponent,
     TimerComponent,    
     AppUsersComponent,
-    UsersFilterPipe   
+    UsersFilterPipe,
+    ProfileComponent,
+    ChangePasswordComponent   
   ],
   imports: [
     BrowserModule,

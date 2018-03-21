@@ -1,20 +1,18 @@
 import { Injectable } from '@angular/core';
+import { UserAccount } from '../models/user-account';
 
 @Injectable()
 export class AuthService {
-  isLoggedIn: boolean;
-  name: string;
-  isAdmin:boolean;
-
+  isLoggedIn: boolean; 
+  user:UserAccount;
+  
   constructor() { }
 
   public isAuthenticated(): boolean {
-    const user = JSON.parse(localStorage.getItem('user'));
+    this.user = JSON.parse(localStorage.getItem('user'));
 
-    if (user && user.authToken) {
-      this.isLoggedIn = true;
-      this.name = user.name;
-      this.isAdmin=user.isAdmin;
+    if (this.user && this.user.authToken) {
+      this.isLoggedIn = true;    
     }
    return this.isLoggedIn;
   }
