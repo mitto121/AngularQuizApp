@@ -29,8 +29,7 @@ export class QuestionComponent implements OnInit {
     this.optionType = 'checkbox';
   }
 
-  ngOnInit() {
-    debugger;
+  ngOnInit() {   
     let hasMultipleChoice = this.question.options.filter(x => x.isAnswer).length;
     if (hasMultipleChoice && hasMultipleChoice == 1) {
       this.optionType = 'radio';

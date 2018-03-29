@@ -105,8 +105,7 @@ export class QuestionPaperComponent implements OnInit {
     this.participantId = Number(atob(decryptPId));
   }
 
-  private submitQuiz() {
-    debugger;
+  private submitQuiz() {    
     CommonUtility.removeLocalStorage('remaingTime', 'attemptedQuestion');
 
     this._quizService.submitTest(this.quiz, this.participantId)

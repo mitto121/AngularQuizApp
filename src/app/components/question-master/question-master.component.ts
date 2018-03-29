@@ -108,8 +108,7 @@ export class QuestionMasterComponent implements OnInit {
     );
     return questions && questions.length > 0;
   }
-  private createQuestion() {
-    debugger;
+  private createQuestion() {    
     const hasSelected = this.question.options.filter(x => x.isSelected).length;
     if (hasSelected && hasSelected > 0) {
       this.question.options.forEach(x => x.isAnswer = x.isSelected);

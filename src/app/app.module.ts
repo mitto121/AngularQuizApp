@@ -1,10 +1,14 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
+import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { NgModule, Pipe } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
+import {HttpClientModule} from '@angular/common/http'
 import { RouterModule } from '@angular/router';
 import { AppRouting } from './app.routing';
 import { NgxPaginationModule } from 'ngx-pagination';
+import {HTTP_INTERCEPTORS} from '@angular/common/http'
 
 //services
 import { AuthService } from './services/auth.service';
@@ -51,6 +55,11 @@ import { AppUsersComponent } from './components/app-users/app-users.component';
 import { ProfileComponent } from './components/profile/profile.component';
 import { ChangePasswordComponent } from './components/change-password/change-password.component';
 
+import { CompareValidatorDirective } from './directives/compare-validator.directive';
+import { RouteMiddleware } from './shared/RouteMiddleware';
+import { LoadingIndicatorService } from './services/loading-indicator.service';
+import { AppMaterialModule } from './app-material.module';
+import { AppKendoModule } from './app-kendo.module';
 
 @NgModule({
   declarations: [
@@ -80,29 +89,42 @@ import { ChangePasswordComponent } from './components/change-password/change-pas
     StartQuizParticipatePageComponent,
     QuizBoardComponent,
     ParticipantListComponent,
-    TimerComponent,    
+    TimerComponent,
     AppUsersComponent,
     UsersFilterPipe,
     ProfileComponent,
-    ChangePasswordComponent   
+    ChangePasswordComponent,
+    CompareValidatorDirective,    
   ],
   imports: [
-    BrowserModule,
+    BrowserModule,    
+    BrowserAnimationsModule,
+    AppMaterialModule,
+    AppKendoModule,
     FormsModule,
     ReactiveFormsModule,
     AppRouting,
+    HttpClientModule,
     HttpModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+
   ],
   providers: [
+    LoadingIndicatorService,
     AuthService,
     AuthGuardService,
     AuthenticateUserService,
     UserAccountService,
     QuizService,
     QuestionService,
-    ParticipantService
+    ParticipantService,
+    {
+      provide:HTTP_INTERCEPTORS,
+      useClass:RouteMiddleware,
+      multi:true
+    }
   ],
+  
   bootstrap: [AppComponent]
 })
 export class AppModule { }

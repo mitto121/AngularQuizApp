@@ -12,7 +12,7 @@ import { CommonUtility } from '../../shared/common-utility';
   styleUrls: ['./participant-list.component.css']
 })
 export class ParticipantListComponent implements OnInit {
-
+  public value: Date;
   quizId: number;
   participants: QuizParticipant[];
   participantsPagedItems: QuizParticipant[];
@@ -35,7 +35,7 @@ export class ParticipantListComponent implements OnInit {
   }
 
 
-  onSearch() {
+  onSearch() {    
     const name = (this.searchFilter.name) ?
       this.searchFilter.name.trim().toLowerCase() : null;
 
@@ -43,13 +43,13 @@ export class ParticipantListComponent implements OnInit {
       this.searchFilter.email.trim().toLowerCase() : null;
 
     const result = (this.searchFilter.result) ?
-      this.searchFilter.result.trim().toLowerCase() : null;
+      this.searchFilter.result.trim().toLowerCase() : null;     
 
     const dateOfBirth = (this.searchFilter.dateOfBirth) ?
-      this.searchFilter.dateOfBirth.trim().toLowerCase() : null;
+      this.searchFilter.dateOfBirth: null;
 
     const attemptDate = (this.searchFilter.attemptDate) ?
-      this.searchFilter.attemptDate.trim().toLowerCase() : null;
+      this.searchFilter.attemptDate: null;
 
     this.searchParticipant({ name, email, dateOfBirth, attemptDate, result });
   }
@@ -69,7 +69,6 @@ export class ParticipantListComponent implements OnInit {
 
   private searchParticipant(filter: ParticipantSearchFilter) {
     Object.assign(this.participantsPagedItems, this.participants);
-
     if (filter.name) {
       this.participantsPagedItems = this.participantsPagedItems.filter(
         (participant: QuizParticipant) => participant.name.toLowerCase().indexOf(filter.name) !== -1);
@@ -82,13 +81,13 @@ export class ParticipantListComponent implements OnInit {
 
     if (filter.dateOfBirth) {
       this.participantsPagedItems = this.participantsPagedItems.filter(
-        (participant: QuizParticipant) => filter.dateOfBirth == CommonUtility.formatDate(participant.dateOfBirthDisplayText)
+        (participant: QuizParticipant) => CommonUtility.formatDate(filter.dateOfBirth) == CommonUtility.formatDate(participant.dateOfBirthDisplayText)
       );
     }
 
     if (filter.attemptDate) {
       this.participantsPagedItems = this.participantsPagedItems.filter(
-        (participant: QuizParticipant) => filter.attemptDate == CommonUtility.formatDate(participant.date)
+        (participant: QuizParticipant) => CommonUtility.formatDate(filter.attemptDate) == CommonUtility.formatDate(participant.date)
       );
     }
 

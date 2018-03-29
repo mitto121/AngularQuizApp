@@ -39,15 +39,15 @@ export class LoginComponent implements OnInit {
      const userName = this.loginForm.controls['userName'].value;
      const password = this.loginForm.controls['password'].value;
 
-     this._authenticateUserService.login(userName, password)
-                   .then((res) =>  this.authenticateUser(res));
+     this._authenticateUserService.login(userName, password)                    
+                   .subscribe((res) =>  this.authenticateUser(res));
 
     } else {
        this.validateAllFormFields(this.loginForm);
     }
   }
 
-  authenticateUser(response: ApiResponse<UserAccount>) {
+  authenticateUser(response: ApiResponse<UserAccount>) {  
     if (response && response.isSucceeded) {
         localStorage.clear();
         localStorage.setItem('user', JSON.stringify(response.result));

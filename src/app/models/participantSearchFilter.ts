@@ -4,4 +4,5 @@ export class  ParticipantSearchFilter {
     result: string;
     dateOfBirth: string;
     attemptDate: string;
+ 
 }

@@ -9,7 +9,8 @@ import { UserAccountService } from '../../services/user-account.service';
 @Component({
   selector: 'app-change-password',
   templateUrl: './change-password.component.html',
-  styleUrls: ['./change-password.component.css']
+  styleUrls: ['./change-password.component.css'],
+  
 })
 export class ChangePasswordComponent implements OnInit {
 
@@ -27,7 +28,7 @@ export class ChangePasswordComponent implements OnInit {
 
   private createValidationControls(): void {
     this.changePasswordForm = new FormGroup({
-      password: new FormControl(),
+      password: new FormControl('',Validators.required),
       newPassword: new FormControl('', [Validators.required, Validators.minLength(6)]),
       confirm_Password: new FormControl('', [Validators.required])
     });

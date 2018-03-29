@@ -49,7 +49,7 @@ export class ShowValidationErrorComponent {
     'email': (params) => 'Should be vaild email.',
     'min': (params) => '##FIELD## should be minimum ' + params.min,
     'max': (params) => '##FIELD## should be less than ' + params.max,
-    'MatchPassword': (params) => 'Not match'
+ 
   };
 
 }

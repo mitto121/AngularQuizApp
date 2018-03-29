@@ -16,12 +16,20 @@
         </div>
         <div class="row form-group">
           <div class="col-md-3">Date of birth</div>
-          <div class="col-md-3">
-            <input type="date" class="form-control" [(ngModel)]="searchFilter.dateOfBirth">
+          <div class="col-md-3">          
+            <mat-form-field>
+              <input matInput [matDatepicker]="dateOfBirth" [(ngModel)]="searchFilter.dateOfBirth" >
+              <mat-datepicker-toggle matSuffix [for]="dateOfBirth"></mat-datepicker-toggle>
+              <mat-datepicker #dateOfBirth disabled="false"></mat-datepicker>
+            </mat-form-field>
           </div>
           <div class="col-md-3">Attempt Date</div>
-          <div class="col-md-3">
-            <input type="date" class="form-control" [(ngModel)]="searchFilter.attemptDate">
+          <div class="col-md-3">  
+            <mat-form-field>
+              <input matInput [matDatepicker]="attemptDate" [(ngModel)]="searchFilter.attemptDate" >
+              <mat-datepicker-toggle matSuffix [for]="attemptDate"></mat-datepicker-toggle>
+              <mat-datepicker #attemptDate disabled="false"></mat-datepicker>
+            </mat-form-field>
           </div>
         </div>
         <div class="row form-group">
